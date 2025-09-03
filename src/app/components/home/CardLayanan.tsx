@@ -132,7 +132,7 @@ const CardLayanan = () => {
             {products.map((product) => (
               <div
                 key={product.id}
-                className="flex-col flex-shrink-0 p-6 mt-5 bg-white w-[550px] h-[350px] justify-start flex rounded-2xl relative select-none"
+                className="flex-col flex-shrink-0 p-6 mt-5 bg-[#FAFAFA] w-[550px] h-[350px] justify-start flex rounded-2xl relative select-none"
               >
                 {/* Icon */}
                 <div className=" w-full h-fit">

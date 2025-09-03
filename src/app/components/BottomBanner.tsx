@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 const BottomBanner = () => {
   return (
-    <div className="w-full px-[15vh] py-[10vh] bg-gradient-to-r from-[#008080]/40 to-[#EAEAEA] font-clash">
+    <div className="w-full px-[15vh] py-[10vh] bg-[#2F4F4F]/20 font-clash">
       <div className="flex flex-row justify-between items-center w-full h-full relative ">
         {/* Teks Kanan */}
         <div className="text-left w-[54%] ">
