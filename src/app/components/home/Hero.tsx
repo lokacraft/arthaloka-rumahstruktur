@@ -4,7 +4,7 @@ import hero from "/public/landing/hero.png";
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-[100vh] -translate-y-20 flex flex-col z-0 mx-auto justify-center items-center font-clash overflow-hidden text-white">
+    <div className="relative w-full h-[100vh] mb-[5rem] flex flex-col z-0 mx-auto justify-center items-center font-clash overflow-hidden text-white">
       <Image
         src={hero}
         alt="background"

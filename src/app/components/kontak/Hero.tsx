@@ -4,7 +4,7 @@ import hero from "/public/kontak/hero.png";
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-[100vh] text-left p-[15vh] -translate-y-20 flex flex-col z-0 mx-auto justify-center items-start font-clash overflow-hidden text-white">
+    <div className="relative w-full h-[100vh] text-left p-[15vh]  flex flex-col z-0 mx-auto justify-center items-start font-clash overflow-hidden text-white">
       <Image
         src={hero}
         alt="background"
@@ -13,15 +13,12 @@ const Hero = () => {
         priority
       />
       <h1 className=" leading-none font-[500] text-[82px] text-left mt-[10vh]">
-        <span className="text-[#008080]">Mitra</span> Rekayasa <br />
-        <span className="text-[#008080]">Terpercaya</span> untuk <br />
-        Kesuksesan <span className="text-[#008080]">Proyek</span> Anda
+        <span className="text-[#008080]">Halo!</span> Apa yang Bisa Kami <br />
+        Bantu?
       </h1>
       <p className="text-left font-normal text-[30px] mt-10 text-[#FAFAFA] leading-tight">
-        Rumah Struktur Engineering adalah perusahaan konsultan <br />
-        rekayasa sipil berbadan hukum resmi (PT) yang berdedikasi untuk <br />
-        menyediakan solusi struktur dan geoteknik yang aman, efisien, dan <br />
-        andal di seluruh Indonesia.
+        Jangan ragu untuk bertanya atau diskusikan kebutuhan proyek <br />
+        Anda dengan kami!
       </p>
       <div className="px-6 py-1 border border-[#FAFAFA] rounded-2xl mt-10">
         <a

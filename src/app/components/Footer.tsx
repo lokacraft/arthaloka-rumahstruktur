@@ -1,19 +1,18 @@
 import React from "react";
 import Image from "next/image";
-import call from "/public/Footer/icons/telpon.png";
-import email from "/public/Footer/icons/email.png";
+import call from "/public/icons/telpon.png";
+import email from "/public/icons/email.png";
 
 const Footer = () => {
   return (
     <div className="w-full p-[15vh] relative bg-[#008080] flex flex-col font-clash text-white">
-      <div className="flex flex-row space-x-[5rem] w-full justify-center items-start">
-        {/* LOGO */}
-        <div className="text-xl font-bold">LOGO</div>
+      <div className="flex flex-row space-x-[5rem] w-full justify-start items-start">
         {/* ALAMAT */}
         <div className="flex flex-col gap-2 text-left justify-start items-start">
           <h2 className="text-[32px] font-semibold">Alamat</h2>
           <p className="text-[20px] font-normal leading-relaxed">
-            Jl. R.A.A Martanegara No. 56,<br /> 
+            Jl. R.A.A Martanegara No. 56,
+            <br />
             Kel. Turangga, Kec. Lengkong, <br />
             Kota Bandung
           </p>
@@ -69,16 +68,22 @@ const Footer = () => {
       </div>
       {/* KONTAK */}
       <div className="flex flex-row w-full gap-10 mt-[8rem] items-center justify-start">
+        <div className="flex flex-row w-full gap-10">
+          <div className="flex flex-row gap-3 items-center justify-start">
+            <Image src={call} alt="" width={20} height={20} />
+            <p className="text-[20px] font-normal">+62 895 322 351 532</p>
+          </div>
+          {/* EMAIL */}
+          <div className="flex flex-row gap-3 items-center justify-start">
+            <Image src={email} alt="" width={20} height={20} />
+            <p className="text-[20px] font-normal">
+              contact@rumahstruktur.co.id
+            </p>
+          </div>
+        </div>
         {/* CALL */}
-        <div className="flex flex-row gap-3 items-center justify-start">
-          <Image src={call} alt="" width={5} height={5} />
-          <p className="text-[20px] font-normal">+62 895 322 351 532</p>
-        </div>
-        {/* EMAIL */}
-        <div className="flex flex-row gap-3 items-center justify-start">
-          <Image src={email} alt="" width={5} height={5} />
-          <p className="text-[20px] font-normal">contact@rumahstruktur.co.id</p>
-        </div>
+        {/* LOGO */}
+        <div className="text-xl font-bold justify-end flex w-full">LOGO</div>
       </div>
     </div>
   );
