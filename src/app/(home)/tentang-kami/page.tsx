@@ -1,4 +1,5 @@
-import Hero from "../../components/tentang-kami/Hero";
+import Hero from "../../components/Hero";
+import heroImage from "/public/tentang-kami/hero.png";
 import RekamJejak from "@/app/components/tentang-kami/RekamJejak";
 import FondasiKerja from "@/app/components/tentang-kami/FondasiKerja";
 import TeamSection from "@/app/components/tentang-kami/TeamSection";
@@ -13,7 +14,28 @@ export default function TentangKami() {
   ];
   return (
     <div className="relative">
-      <Hero />
+      <Hero
+        imageSrc={heroImage}
+        title={
+          <>
+            <span className="text-[#008080]">Mitra</span> Rekayasa <br />
+            <span className="text-[#008080]">Terpercaya</span> untuk <br />
+            Kesuksesan <span className="text-[#008080]">Proyek</span> Anda
+          </>
+        }
+        description={
+          <>
+            Rumah Struktur Engineering adalah perusahaan konsultan <br />
+            rekayasa sipil berbadan hukum resmi (PT) yang berdedikasi untuk{" "}
+            <br />
+            menyediakan solusi struktur dan geoteknik yang aman, efisien, dan{" "}
+            <br />
+            andal di seluruh Indonesia.
+          </>
+        }
+        buttonLink=""
+        buttonText="Whatsapp Kami Sekarang!"
+      />
       <RekamJejak />
       <FondasiKerja
         title={<>Fondasi Kerja Kami</>}
@@ -106,7 +128,22 @@ export default function TentangKami() {
           },
         ]}
       />
-      <BottomBanner />
+      <BottomBanner
+        title={
+          <>
+            Siap Berkolaborasi <br />
+            dengan Kami?
+          </>
+        }
+        description={
+          <>
+            Diskusikan bagaimana keahlian kami <br />dapat membantu kesuksesan proyek <br />
+            Anda. Hubungi kami untuk memulai <br />konsultasi.
+          </>
+        }
+        buttonHref="/kontak"
+        buttonText="Hubungi Kami Sekarang!"
+      />
       <ContactForm />
     </div>
   );

@@ -19,7 +19,7 @@ const logos = [
 
 export default function PartnerShowcase() {
   return (
-    <section className="py-12 px-6 md:px-12 md:mx-[15vh] mx-[10vh] font-clash my-[15vh] md:my-[20vh] lg:my-[25vh]">
+    <section className="py-12 px-6 md:px-12 lg:mx-[15vh] mx-[4vh] font-clash my-[15vh] md:my-[20vh] lg:my-[25vh]">
       {/* Heading */}
       <div className="text-center mb-10 md:mb-16">
         <h2 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[54px] font-medium text-black leading-tight">
@@ -30,11 +30,11 @@ export default function PartnerShowcase() {
       </div>
 
       {/* Grid Logo */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 justify-center items-center mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8 justify-center items-center w-fit mx-auto">
         {logos.map((logo, index) => (
           <div
             key={index}
-            className="flex items-center justify-center border-[1.5px] border-[#008080] rounded-2xl sm:rounded-3xl w-[140px] h-[80px] sm:w-[160px] sm:h-[100px] md:w-[180px] md:h-[150px] lg:w-[200px] lg:h-[180px] xl:w-[280px] xl:h-[200px] mx-auto relative p-4 sm:p-6 md:p-8"
+            className="flex items-center justify-center border-[1.5px] border-[#008080] rounded-2xl sm:rounded-3xl min-w-[80px] min-h-[40px] w-[140px] h-[80px] sm:w-[160px] sm:h-[100px] md:w-[180px] md:h-[150px] lg:w-[200px] lg:h-[180px] xl:w-[280px] xl:h-[200px] mx-auto relative p-4 sm:p-6 md:p-8"
           >
             <div className="w-full h-full flex justify-center items-center relative">
               <Image

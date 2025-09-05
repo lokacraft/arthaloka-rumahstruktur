@@ -8,7 +8,24 @@ export default function Blogs() {
     <div className="relative">
       <HighlightBlog />
       <BlogCards />
-      <BottomBanner />
+      <BottomBanner
+        title={
+          <>
+            Siap Berkolaborasi <br />
+            dengan Kami?
+          </>
+        }
+        description={
+          <>
+            Diskusikan bagaimana keahlian kami <br />
+            dapat membantu kesuksesan proyek <br />
+            Anda. Hubungi kami untuk memulai <br />
+            konsultasi.
+          </>
+        }
+        buttonHref="/kontak"
+        buttonText="Hubungi Kami Sekarang!"
+      />
       <ContactForm />
     </div>
   );

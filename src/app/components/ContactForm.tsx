@@ -28,7 +28,6 @@ export default function ContactForm() {
     e.preventDefault();
 
     try {
-      // Kirim data ke API route Anda, misalnya ke /api/contact
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -48,89 +47,97 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="flex flex-row p-[15vh] bg-[#2F4F4F] font-clash justify-start gap-x-[5vw] w-full items-start text-left text-white">
-      <div className="flex flex-col w-[58%] relative justify-start items-center gap-y-8">
-        <h2 className="text-[44px] w-full font-medium leading-tight">
+    <div className="flex md:flex-row flex-col p-[4vh] lg:p-[15vh] bg-[#2F4F4F] font-clash gap-y-10 md:gap-x-[5vw] w-full items-start text-white">
+      {/* BAGIAN KIRI */}
+      <div className="flex flex-col w-full md:w-[55%] justify-start items-start gap-y-6 md:gap-y-8">
+        <h2 className="text-[28px] lg:text-[44px] w-full font-medium leading-tight text-left">
           Diskusikan Kebutuhan <br />
           Proyek Anda Dengan Tim <br />
           Kami
         </h2>
-        {/* Bagian Kiri */}
 
-        <p className="text-left text-[28px] leading-tight font-normal w-full">
-          Telepon kami atau tinggalkan pertanyaan di <br />
-          formulir. Kami akan merespons Anda dalam <br />
-          24 jam.
+        <p className="text-left text-[18px] lg:text-[28px] leading-snug md:leading-tight font-normal w-full">
+          Telepon kami atau tinggalkan pertanyaan di formulir. Kami akan
+          merespons Anda dalam 24 jam.
         </p>
-        <div className="w-full space-y-6">
-          <div className="flex flex-row w-full gap-4 justify-start items-center">
+
+        <div className="w-full space-y-4 md:space-y-6">
+          <div className="flex flex-row w-full gap-3 md:gap-4 items-center">
             <Image src={call} alt="call" width={20} height={20} />
-            <p className="text-[20px] font-light">+62 895 322 351 532</p>
+            <p className="text-[16px] lg:text-[20px] font-light">
+              +62 895 322 351 532
+            </p>
           </div>
-          <div className="flex flex-row w-full gap-4 justify-start items-center">
+          <div className="flex flex-row w-full gap-3 md:gap-4 items-center">
             <Image src={email} alt="email" width={20} height={20} />
-            <p className="text-[20px] font-light">
+            <p className="text-[16px] lg:text-[20px] font-light">
               contact@rumahstruktur.co.id
             </p>
           </div>
         </div>
-        <p className="text-left text-[28px] leading-tight font-medium w-full">
+
+        <p className="text-left text-[18px] lg:text-[28px] leading-snug md:leading-tight font-medium w-full">
           Ikuti Rumah Struktur Engineering di media sosial:
         </p>
-        <div className="w-full flex flex-row gap-5 justify-start items-center">
+
+        <div className="w-full flex flex-row gap-4 lg:gap-5 items-center">
           <Link href="/">
-            <Image src={instagram} alt="instagram" width={40} height={40} />
+            <Image src={instagram} alt="instagram" width={28} height={28} className="lg:w-[40px] lg:h-[40px]" />
           </Link>
           <Link href="/">
-            <Image src={facebook} alt="facebook" width={40} height={40} />
+            <Image src={facebook} alt="facebook" width={28} height={28} className="lg:w-[40px] lg:h-[40px]" />
           </Link>
           <Link href="/">
-            <Image src={twitter} alt="twitter" width={40} height={40} />
+            <Image src={twitter} alt="twitter" width={28} height={28} className="lg:w-[40px] lg:h-[40px]" />
           </Link>
         </div>
       </div>
+
       {/* BAGIAN KANAN */}
-      <div className="w-[60%] text-white">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <label className="text-[22px] font-light">Nama</label>
+      <div className="w-full md:w-[60%] text-white">
+        <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
+          <label className="text-[18px] md:text-[22px] font-light">Nama</label>
           <input
             type="text"
             name="nama"
             value={formData.nama}
             onChange={handleChange}
-            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
+            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
             required
           />
-          <label className="text-[22px] pb-4 font-light">Email</label>
+
+          <label className="text-[18px] md:text-[22px] font-light">Email</label>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
+            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
             required
           />
-          <label className="text-[22px] pb-4 font-light">Judul Pesan</label>
+
+          <label className="text-[18px] md:text-[22px] font-light">Judul Pesan</label>
           <input
             type="text"
             name="judul"
             value={formData.judul}
             onChange={handleChange}
-            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
+            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
           />
-          <label className="text-[22px] pb-4 font-light">Pesan</label>
+
+          <label className="text-[18px] md:text-[22px] font-light">Pesan</label>
           <textarea
             name="pesan"
             value={formData.pesan}
             onChange={handleChange}
             rows={4}
-            className="w-full min-h-[250px] border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
+            className="w-full min-h-[100px] lg:min-h-[250px] border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
             required
           />
 
           <button
             type="submit"
-            className="bg-[#EAEAEA] relative text-[#008080] font-instrument text-[32px] px-8 py-1 rounded-2xl hover:bg-[#008080] hover:text-[#EAEAEA] transition-all duration-300"
+            className="bg-[#EAEAEA] text-[#008080] font-instrument text-[22px] lg:text-[32px] px-6 md:px-8 py-1 rounded-lg lg:rounded-2xl hover:bg-[#008080] hover:text-[#EAEAEA] transition-all duration-300"
           >
             Kirim Pesan →
           </button>

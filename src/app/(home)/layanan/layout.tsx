@@ -20,15 +20,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${clashGrotesk.variable} ${instrumentSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
-      <body className="bg-[#EAEAEA]">
-        {children}
-        <BottomBanner />
-        <ContactForm />
-      </body>
-    </html>
+    <>
+      {children}
+      <BottomBanner
+        title={
+          <>
+            <span className="text-[#008080]">Ratusan Proyek </span>Swasta <br />
+            & Pemerintah Telah{" "}
+            <span className="text-[#008080]">Mempercayakan </span>
+            <br />
+            Strukturnya Pada Kami
+          </>
+        }
+        description={
+          <>
+            Jangan tunda kesuksesan proyek Anda. <br />
+            Wujudkan struktur yang kokoh dan <br />
+            efisien bersama kami sekarang.
+          </>
+        }
+        buttonHref="/kontak"
+        buttonText="Mulai Proyek Anda"
+      />
+      <ContactForm />
+    </>
   );
 }

@@ -13,7 +13,7 @@ const dummyProjects: Project[] = [
     id: 1,
     title: 'Pembangunan Gudang Logistik',
     tag: 'Hitung Struktur',
-    image: '/images/project1.png', // ganti sesuai aset kamu
+    image: '/images/project1.png',
   },
   {
     id: 2,
@@ -47,48 +47,42 @@ const dummyProjects: Project[] = [
   },
 ];
 
-interface PortofolioCardProps {
-  cardWidth?: string;
-  cardHeight?: string;
-  imageBoxHeight?: string;
-}
-
-const PortofolioCard: React.FC<PortofolioCardProps> = ({
-  cardWidth = 'w-[380px]',
-  cardHeight = 'h-[460px]',
-  imageBoxHeight = 'h-[200px]',
-}) => {
+export default function PortofolioCard() {
   return (
-    <section className="font-clash p-[15vh]">
+    <section className="font-clash w-full h-full relative p-[4vh] lg:p-[15vh]">
       {/* Heading */}
-      <h2 className="text-5xl font-medium text-center mb-25">
+      <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-center mb-12 lg:mb-20">
         Jelajahi Proyek Kami
       </h2>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full h-full mx-auto justify-center items-center justify-items-center">
         {dummyProjects.map((project) => (
           <div
             key={project.id}
-            className={`${cardWidth} ${cardHeight} bg-[#203E3E]/10 rounded-2xl p-8 flex flex-col`}
+            className="
+           
+              w-[100%] h-[100%] 
+              bg-[#203E3E]/10 rounded-2xl p-6 lg:p-8 flex flex-col justify-start
+            "
           >
             {/* Image Box */}
-            <div className={`relative w-full ${imageBoxHeight} mb-4`}>
+            <div className="relative w-full h-[160px] sm:h-[180px] md:h-[190px] xl:h-[200px] mb-4">
               <Image
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-contain rounded-xl border border-gray-200"
+                className="object-contain rounded-xl border bg-white border-gray-200"
               />
             </div>
 
             {/* Title */}
-            <h3 className="text-[#2F4F4F] text-[2.375rem] leading-none font-medium mb-2 mx-3">
+            <h3 className="text-[#2F4F4F] text-xl  xl:text-[2.375rem] leading-tight font-medium mb-2 mx-2 lg:mx-3">
               {project.title}
             </h3>
 
             {/* Tag */}
-            <span className="inline-block w-fit font-instrument text-[#008080] mx-3 text-sm border border-[#008080] rounded-full px-3 py-1 mt-auto">
+            <span className="inline-block w-fit font-instrument text-[#008080] mx-2 lg:mx-3 text-xs sm:text-sm border border-[#008080] rounded-full px-3 py-1 mt-auto">
               {project.tag}
             </span>
           </div>
@@ -96,6 +90,4 @@ const PortofolioCard: React.FC<PortofolioCardProps> = ({
       </div>
     </section>
   );
-};
-
-export default PortofolioCard;
+}
