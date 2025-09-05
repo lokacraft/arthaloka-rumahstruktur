@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 
-const BottomBanner = () => {
+const BottomBannerHomePage = () => {
   return (
-    <div className="w-full px-6 sm:px-10 md:px-[10vh] lg:px-[15vh] py-12 md:py-[10vh] bg-[#2F4F4F]/20 font-clash">
+    <div className="w-full px-6 sm:px-10 md:px-[10vh] lg:px-[15vh] py-12 md:py-[10vh] bg-gradient-to-r from-[#EAEAEA] to-[#008080]/40 font-clash">
       <div className="flex flex-col lg:flex-row lg:justify-between justify-center items-start lg:items-center w-full h-full gap-2 xl:gap-0 lg:gap-5">
         {/* Kiri: Judul */}
         <div className="text-left w-full lg:w-[54%]">
@@ -35,4 +35,4 @@ const BottomBanner = () => {
   );
 };
 
-export default BottomBanner;
+export default BottomBannerHomePage;

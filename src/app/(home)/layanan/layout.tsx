@@ -4,10 +4,10 @@ import {
   instrumentSans,
   geistMono,
   geistSans,
-} from "../../lib/fonts";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
-import "../globals.css";
+} from "../../../lib/fonts";
+import BottomBanner from "@/app/components/BottomBanner";
+import ContactForm from "@/app/components/ContactForm";
+import "../../globals.css";
 
 export const metadata: Metadata = {
   title: "Rumah Struktur",
@@ -25,9 +25,9 @@ export default function RootLayout({
       className={`${clashGrotesk.variable} ${instrumentSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body className="bg-[#EAEAEA]">
-        <NavBar />
         {children}
-        <Footer />
+        <BottomBanner />
+        <ContactForm />
       </body>
     </html>
   );

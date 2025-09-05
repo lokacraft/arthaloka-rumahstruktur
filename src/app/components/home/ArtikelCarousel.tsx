@@ -46,22 +46,22 @@ const artikelList: Artikel[] = [
 
 export default function ArtikelCarousel() {
   return (
-    <section className="font-clash flex justify-center items-center flex-col m-[15vh]">
+    <section className="font-clash flex flex-col justify-center items-center m-[4vh] md:m-[7vh] lg:m-[15vh]">
       {/* Judul */}
-      <h2 className="text-[54px] font-medium mb-12">
+      <h2 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[54px] font-medium mb-8 md:mb-12 text-center">
         <span className="text-[#008080]">Artikel</span> Terbaru
       </h2>
 
-      {/* Carousel */}
-
-      <div className="flex gap-6 overflow-x-auto scrollbar-hide px-4 border-none">
+      {/* Grid Artikel */}
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full px-4 md:px-8">
         {artikelList.map((artikel) => (
           <div
             key={artikel.id}
-            className="min-w-[320px] max-w-[380px] flex-shrink-0 rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden hover:shadow-md transition"
           >
             <Link href={artikel.slug}>
-              <div className="relative w-full h-54 rounded-lg bg-emerald-300 mb-4">
+              {/* Gambar */}
+              <div className="relative w-full h-[200px] sm:h-[240px] md:h-[260px] lg:h-[280px] rounded-lg bg-emerald-300 mb-4">
                 <Image
                   src={artikel.image}
                   alt={artikel.title}
@@ -70,13 +70,13 @@ export default function ArtikelCarousel() {
                 />
               </div>
 
-              <div className="p-4">
+              <div className="p-4 md:p-6">
                 {/* Kategori */}
                 <div className="flex flex-wrap gap-2 mb-3">
                   {artikel.category.map((cat, i) => (
                     <span
                       key={i}
-                      className="text-[14px] px-4 border-[1.5px] border-[#008080] text-[#008080] rounded-md font-instrument"
+                      className="text-[12px] sm:text-[13px] md:text-[14px] px-3 py-0.5 border-[1.5px] border-[#008080] text-[#008080] rounded-md font-instrument"
                     >
                       {cat}
                     </span>
@@ -84,18 +84,19 @@ export default function ArtikelCarousel() {
                 </div>
 
                 {/* Judul */}
-                <h3 className="text-[22px] font-medium mb-2 leading-none">
+                <h3 className="text-[18px] sm:text-[20px] md:text-[22px] font-medium mb-3 leading-snug">
                   {artikel.title}
                 </h3>
-                <div className="flex flex-row w-full justify-between items-center mt-8">
-                    {/* Author */}
-                  <div className="flex flex-row  gap-2 justify-start items-center w-full h-full">
-                    <div className="rounded-full size-3 bg-[#008080]" />
-                    <p className="text-[18px]  font-medium">{artikel.author}</p>
-                  </div>
 
-                  {/* Tanggal */}
-                  <p className="text-[18px] w-full text-black font-light justify-end flex items-center">
+                {/* Author + Date */}
+                <div className="flex flex-row w-full justify-between items-center mt-6">
+                  <div className="flex flex-row gap-2 items-center">
+                    <div className="rounded-full size-2.5 sm:size-3 bg-[#008080]" />
+                    <p className="text-[14px] sm:text-[16px] md:text-[18px] font-medium">
+                      {artikel.author}
+                    </p>
+                  </div>
+                  <p className="text-[14px] sm:text-[16px] md:text-[18px] text-black font-light">
                     {artikel.date}
                   </p>
                 </div>

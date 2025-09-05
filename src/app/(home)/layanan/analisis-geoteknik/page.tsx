@@ -4,6 +4,8 @@ import TeknologiSection from "@/app/components/TeknologiSection";
 import ListSection from "@/app/components/ListSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import PartnerShowcase from "@/app/components/PartnerShowcase";
+import BottomBanner from "@/app/components/BottomBanner";
+import ContactForm from "@/app/components/ContactForm";
 
 export default function Home() {
   return (

@@ -4,15 +4,21 @@ import hero from "/public/landing/hero.png";
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-[100vh] mb-[5rem] flex flex-col z-0 mx-auto justify-center items-center font-clash overflow-hidden text-white">
+    <div className="relative w-full h-[100vh] mb-[5rem] flex flex-col z-0 mx-auto justify-center md:items-center items-start md:p-[15vh] p-[5vh] font-clash overflow-hidden text-white">
       <Image
         src={hero}
         alt="background"
         fill
-        className="object-cover object-center -z-10"
+        className="object-cover object-center justify-center items-center -z-10"
         priority
       />
-      <h1 className=" leading-none font-[500] text-[82px] text-center ">
+      {/* Heading */}
+      <h1
+        className="
+          leading-none font-[500] md:text-center text-left
+          text-[40px] sm:text-[44px] md:text-[54px] lg:text-[72px] xl:text-[82px]
+        "
+      >
         Rumah Struktur Engineering: <br />
         Konsultan{" "}
         <span className="text-[#008080]">
@@ -22,16 +28,28 @@ const Hero = () => {
         </span>
         Struktur
       </h1>
-      <p className="text-center font-normal text-[30px] mt-10  leading-tight">
+
+      {/* Paragraph */}
+      <p
+        className="
+          md:text-center sm:text-left font-normal mt-10 leading-tight
+          text-[12px] sm:text-[16px] md:text-[20px] lg:text-[26px] xl:text-[30px]
+        "
+      >
         Wujudkan proyek impian Anda bersama tim ahli kami, mulai dari <br />
         perencanaan sipil hingga analisis struktur mendetail.
       </p>
-      <div className="px-6 py-1 border border-[#FAFAFA] rounded-2xl mt-10">
+
+      {/* Button */}
+      <div className="px-6 py-1 border border-[#FAFAFA] md:rounded-2xl rounded-lg mt-10">
         <a
           href=""
-          className=" text-[30px] font-normal text-center font-instrument"
+          className="
+            font-instrument font-normal text-center
+            text-[14px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[30px]
+          "
         >
-          Whatsapp Kami Sekarang
+          Whatsapp Kami Sekarang!
         </a>
       </div>
     </div>

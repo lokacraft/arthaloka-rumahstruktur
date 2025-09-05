@@ -3,10 +3,8 @@ import RekamJejak from "@/app/components/tentang-kami/RekamJejak";
 import FondasiKerja from "@/app/components/tentang-kami/FondasiKerja";
 import TeamSection from "@/app/components/tentang-kami/TeamSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
-import TestimonialCarousel from "../../components/home/TestimonialCarousel";
-import PartnerShowcase from "../../components/PartnerShowcase";
-import ArtikelCarousel from "../../components/home/ArtikelCarousel";
-
+import BottomBanner from "@/app/components/BottomBanner";
+import ContactForm from "@/app/components/ContactForm";
 export default function TentangKami() {
   const members = [
     { name: "Yasir Nadem", role: "Arsitek Muda" },
@@ -108,6 +106,8 @@ export default function TentangKami() {
           },
         ]}
       />
+      <BottomBanner />
+      <ContactForm />
     </div>
   );
 }

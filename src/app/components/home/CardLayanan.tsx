@@ -2,7 +2,6 @@
 
 import type React from "react";
 import Link from "next/link";
-// import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import ArrowRight from "/public/layanan/icons/ArrowRight.png";
@@ -37,7 +36,6 @@ const products: Product[] = [
       "Melayani jasa soil test/soil investigasi (Boring & Sondir) untuk seluruh wilayah Indonesia.",
     icon: "/layanan/icons/icon3.png",
   },
-
   {
     id: "analisis",
     name: "Analisis Perkuatan Bangunan & Audit Struktur",
@@ -99,22 +97,32 @@ const CardLayanan = () => {
     scrollContainerRef.current.scrollLeft = scrollLeft - walk;
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-  };
+  const handleMouseUp = () => setIsDragging(false);
+  const handleMouseLeave = () => setIsDragging(false);
 
   return (
     <div className="w-full py-12 pl-[8vw] font-clash">
+      {/* Header */}
       <div className="flex flex-row justify-between items-center w-full pr-[8vw]">
-        <h1 className="text-[#151515] text-[54px] my-8 font-medium">
+        <h1
+          className="
+            text-[#151515] my-8 font-medium w-[70%]
+            text-[30px] sm:text-[38px] md:text-[46px] lg:text-[54px]
+          "
+        >
           Cakupan <span className="text-[#008080]">Layanan</span> Kami
         </h1>
-        <Image src={ArrowRight} alt="arrow" />
+        <div className="relative h-[40px] w-[60px] sm:w-[90px] md:w-[120px] lg:w-[140px] xl:w-[140px]">
+          <Image
+            src={ArrowRight}
+            alt="arrow"
+            className="object-contain"
+            fill
+            sizes="(max-width: 640px) 24px, (max-width: 768px) 32px, (max-width: 1024px) 40px, 48px"
+          />
+        </div>
       </div>
+
       <div className="mx-auto relative">
         {/* Horizontal Scrollable Carousel */}
         <div
@@ -128,15 +136,24 @@ const CardLayanan = () => {
           onMouseLeave={handleMouseLeave}
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          <div className="flex w-full h-full gap-8">
+          <div
+            className="
+              flex w-full h-full gap-4 sm:gap-6 md:gap-7 lg:gap-8
+            "
+          >
             {products.map((product) => (
               <div
                 key={product.id}
-                className="flex-col flex-shrink-0 p-6 mt-5 bg-[#FAFAFA] w-[550px] h-[350px] justify-start flex rounded-2xl relative select-none"
+                className="
+                  flex-col flex-shrink-0 p-6 mt-5 bg-[#FAFAFA] 
+                  rounded-2xl relative select-none
+                  w-[280px] h-[200px] sm:w-[380px] sm:h-[260px] md:w-[460px] md:h-[310px] lg:w-[550px] lg:h-[350px]
+                  flex justify-start
+                "
               >
                 {/* Icon */}
-                <div className=" w-full h-fit">
-                  <div className="w-12 h-12 relative">
+                <div className="w-full h-fit">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 relative">
                     <Image
                       src={product.icon}
                       alt={product.name}
@@ -148,17 +165,33 @@ const CardLayanan = () => {
 
                 {/* Title & Desc */}
                 <div className="flex flex-col gap-y-1">
-                  <h3 className="text-[38px] font-medium text-black mt-10 leading-tight">
+                  <h3
+                    className="
+                      mt-6 sm:mt-8 lg:mt-10 leading-tight font-medium text-black
+                      text-[14px] sm:text-[22px] md:text-[30px] lg:text-[38px]
+                    "
+                  >
                     {product.name}
                   </h3>
-                  <p className="text-black text-[26px] font-light leading-tight">
+                  <p
+                    className="
+                      text-black font-light leading-tight
+                      text-[10px] sm:text-[18px] md:text-[22px] lg:text-[26px]
+                    "
+                  >
                     {product.description}
                   </p>
                 </div>
+
                 {/* Button */}
                 <Link
                   href="/product"
-                  className="mt-4 px-6 w-fit font-normal text-lg font-instrument border border-[#008080] text-black rounded-full hover:bg-[#008080] hover:text-white transition-all duration-300"
+                  className="
+                    mt-3 sm:mt-4 px-4 sm:px-6 w-fit font-normal rounded-full transition-all duration-300 font-instrument
+                    text-[12px] sm:text-[14px] md:text-[16px] lg:text-lg
+                    border border-[#008080] text-black 
+                    hover:bg-[#008080] hover:text-white
+                  "
                 >
                   Cek Detail
                 </Link>
@@ -167,8 +200,14 @@ const CardLayanan = () => {
           </div>
         </div>
       </div>
+
       <Link href="">
-        <h1 className="text-white text-[32px] my-10 font-normal font-instrument w-fit px-6 py-2 rounded-2xl bg-[#008080]">
+        <h1
+          className="
+            text-white my-10 font-normal font-instrument w-fit px-6 py-2 rounded-2xl bg-[#008080]
+            text-[16px] sm:text-[20px] md:text-[26px] lg:text-[32px]
+          "
+        >
           Mulai Proyek Anda
         </h1>
       </Link>
