@@ -6,6 +6,15 @@ import TeamSection from "@/app/components/tentang-kami/TeamSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import BottomBanner from "@/app/components/BottomBanner";
 import ContactForm from "@/app/components/ContactForm";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tentang Kami",
+  description:
+    "Tentang Kami - Rumah Struktur adalah tim profesional yang sudah berpengalaman menangani banyak klien di bidang teknik sipil yang berfokus pada layanan hitung struktur, analisis geoteknik, soil investigation, analisis perkuatan bangunan, analisis geometrik jalan raya, serta perencanaan mekanikal, elektrikal, dan plumbing (MEP). Dengan pengalaman dan komitmen pada ketepatan serta kecepatan pelayanan, Rumah Struktur hadir untuk memberikan solusi teknik sipil yang terjangkau, inovatif, dan terpercaya bagi setiap kebutuhan pembangunan Anda.",
+};
+
 export default function TentangKami() {
   const members = [
     { name: "Yasir Nadem", role: "Arsitek Muda" },

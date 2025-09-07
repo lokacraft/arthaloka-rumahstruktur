@@ -1,16 +1,15 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   ArrowUpCircleIcon,
-  BarChartIcon,
   FolderIcon,
   Handshake,
   Newspaper,
   Users,
-} from "lucide-react"
+} from "lucide-react";
 
-import { NavUser } from "@/app/components/nav-user"
+import { NavUser } from "@/app/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -19,16 +18,17 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/app/components/ui/sidebar"
+} from "@/app/components/ui/sidebar";
 
-import { usePathname } from "next/navigation"
+import { usePathname } from "next/navigation";
+import { useUser } from "@/lib/auth"; // 🔑 auth hook
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
+  // user: {
+  //   name: "shadcn",
+  //   email: "m@example.com",
+  //   avatar: "/avatars/shadcn.jpg",
+  // },
   navMain: [
     {
       title: "Testimoni",
@@ -51,10 +51,18 @@ const data = {
       icon: FolderIcon,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const pathname = usePathname()
+  const pathname = usePathname();
+  const user = useUser();
+
+  // handle user masih loading / belum login
+  if (user === false) return null;
+  if (user === null) return null;
+
+  // potong nama dari email
+  const displayName = user.email ? user.email.split("@")[0] : "User";
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -77,7 +85,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarMenu>
           {data.navMain.map((item) => {
-            const isActive = pathname === item.url
+            const isActive = pathname === item.url;
             return (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
@@ -94,14 +102,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </a>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-            )
+            );
           })}
         </SidebarMenu>
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser
+          user={{
+            name: displayName,
+            email: user.email || "",
+            avatar: "/icons/avatar.png", // default avatar
+          }}
+        />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

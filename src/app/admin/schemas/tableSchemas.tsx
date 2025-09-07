@@ -26,17 +26,6 @@ import { useState } from "react";
 // Tipe data umum untuk props, bisa diperluas jika perlu
 type Item = any;
 
-const numberingColumn: ColumnDef<Item> = {
-  id: "numbering",
-  header: "No", // Header sesuai permintaan
-  cell: ({ row }) => {
-    // row.index memberikan indeks baris dari keseluruhan data (sebelum di-filter/sort)
-    return <div className="text-muted-foreground">{row.index + 1}</div>;
-  },
-  enableSorting: false,
-  enableHiding: false,
-};
-
 // Helper untuk menampilkan teks panjang di dalam dialog
 const ViewTextDialog = ({
   title,

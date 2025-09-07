@@ -5,6 +5,14 @@ import PartnerShowcase from "@/app/components/PartnerShowcase";
 import BottomBanner from "@/app/components/BottomBanner";
 import ContactForm from "@/app/components/ContactForm";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Portofolio Projek",
+  description:
+    "Portofolio Rumah Struktur menampilkan berbagai hasil proyek terbaik kami, mulai dari perhitungan struktur bangunan, analisis geoteknik, soil investigation, hingga desain mekanikal, elektrikal, dan plumbing (MEP). Setiap proyek mencerminkan komitmen kami dalam memberikan solusi teknik sipil yang akurat, efisien, dan terpercaya. Dengan portofolio ini, Rumah Struktur membuktikan pengalaman dan kualitas layanan dalam mendukung pembangunan infrastruktur dengan standar tinggi.",
+};
+
 export default function Portofolio() {
   return (
     <div className="relative">

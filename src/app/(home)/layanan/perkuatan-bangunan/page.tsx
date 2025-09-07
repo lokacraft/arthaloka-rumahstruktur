@@ -4,6 +4,15 @@ import TeknologiSection from "@/app/components/TeknologiSection";
 import ListSection from "@/app/components/ListSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import PartnerShowcase from "@/app/components/PartnerShowcase";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Layanan - Perkuatan Bangunan",
+  },
+  description:
+    "Rumah Struktur menyediakan layanan perkuatan bangunan untuk menjaga dan meningkatkan kekuatan serta stabilitas konstruksi yang sudah ada. Dengan metode analisis menyeluruh dan teknologi terkini, tim kami mampu memberikan solusi tepat bagi bangunan yang mengalami penurunan kualitas, keretakan, atau membutuhkan adaptasi terhadap beban baru. Layanan ini membantu memastikan bangunan tetap aman, kokoh, dan berumur panjang, tanpa harus melakukan renovasi total.",
+};
 
 export default function Home() {
   return (

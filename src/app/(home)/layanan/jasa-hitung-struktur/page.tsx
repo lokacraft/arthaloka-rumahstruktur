@@ -5,6 +5,16 @@ import ListSection from "@/app/components/ListSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import PartnerShowcase from "@/app/components/PartnerShowcase";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Layanan - Jasa Hitung Struktur",
+  },
+  description:
+    "Rumah Struktur menawarkan layanan jasa hitung struktur untuk berbagai jenis bangunan, mulai dari rumah tinggal, gedung, hingga infrastruktur. Perhitungan dilakukan secara detail dan akurat oleh tim profesional, memastikan kekuatan, keamanan, serta efisiensi biaya konstruksi dengan pelayanan cepat dan harga yang kompetitif.",
+};
+
 export default function Home() {
   return (
     <div>

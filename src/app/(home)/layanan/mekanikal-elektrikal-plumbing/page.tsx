@@ -5,6 +5,16 @@ import ListSection from "@/app/components/ListSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import PartnerShowcase from "@/app/components/PartnerShowcase";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Layanan - Mekanikal, Elektrikal, dan Plumbing",
+  },
+  description:
+    "Rumah Struktur menyediakan layanan Mekanikal, Elektrikal, dan Plumbing (MEP) yang terintegrasi untuk mendukung kebutuhan sistem utilitas bangunan. Dengan tim ahli berpengalaman, kami memastikan setiap instalasi dirancang efisien, aman, dan sesuai standar teknis, sehingga bangunan Anda lebih fungsional, nyaman, dan hemat biaya operasional.",
+};
+
 export default function Home() {
   return (
     <div>

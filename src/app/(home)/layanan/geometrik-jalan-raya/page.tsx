@@ -4,6 +4,15 @@ import TeknologiSection from "@/app/components/TeknologiSection";
 import ListSection from "@/app/components/ListSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import PartnerShowcase from "@/app/components/PartnerShowcase";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Layanan - Geometrik Jalan Raya",
+  },
+  description:
+    "Rumah Struktur menyediakan layanan analisis geometrik jalan raya untuk mendukung perencanaan dan pembangunan infrastruktur transportasi. Kami menjamin desain jalan yang presisi, aman, dan efisien, didukung tim ahli berpengalaman, pelayanan cepat, serta harga terjangkau.",
+};
 
 export default function Home() {
   return (

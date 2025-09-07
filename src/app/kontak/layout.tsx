@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Rumah Struktur",
+  title: "Kontak",
   description: "",
 };
 

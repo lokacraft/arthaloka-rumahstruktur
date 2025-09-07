@@ -1,4 +1,6 @@
-import React, { ReactNode } from "react";
+"use client";
+
+import React, { ReactNode, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 
 interface HeroProps {
@@ -16,6 +18,8 @@ const Hero: React.FC<HeroProps> = ({
   buttonText,
   buttonLink,
 }) => {
+  const [loading, setLoading] = useState(true);
+
   return (
     <div
       className="
@@ -27,56 +31,101 @@ const Hero: React.FC<HeroProps> = ({
         font-clash overflow-hidden text-white
       "
     >
+      {/* Background image */}
       <Image
         src={imageSrc}
         alt="background"
         fill
         className="object-cover object-center -z-10"
         priority
+        onLoadingComplete={() => setLoading(false)}
       />
 
-      {/* Title */}
-      <h1
-        className="
-          leading-none font-[500] text-left
-          text-[32px] sm:text-[40px] md:text-[52px] lg:text-[82px]
-          mt-[6vh] md:mt-[8vh] lg:mt-[10vh]
-        "
-      >
-        {title}
-      </h1>
-
-      {/* Description */}
-      <p
-        className="
-          text-left font-normal text-[#FAFAFA] leading-tight
-          text-[16px] sm:text-[18px] md:text-[22px] lg:text-[30px]
-          mt-6 md:mt-8 lg:mt-10
-        "
-      >
-        {description}
-      </p>
-
-      {/* Button */}
-      {buttonText && (
-        <div
-          className="
-            px-4 py-1 md:px-5 lg:px-6 
-            border border-[#FAFAFA] 
-            rounded-xl md:rounded-2xl 
-            mt-6 md:mt-8 lg:mt-10
-          "
-        >
-          <a
-            href={buttonLink || "#"}
+      {loading ? (
+        <>
+          {/* Skeleton Title */}
+          <div
             className="
-              font-instrument font-normal text-center
-              text-[16px] sm:text-[18px] md:text-[22px] lg:text-[30px]
+              bg-gray-300/50 rounded-xl animate-pulse
+              w-[60%] h-[42px] sm:h-[50px] md:h-[66px] lg:h-[90px]
+              mt-[6vh] md:mt-[8vh] lg:mt-[10vh]
+            "
+          ></div>
+
+          {/* Skeleton Description */}
+          <div
+            className="
+              bg-gray-300/40 rounded-lg animate-pulse
+              w-[80%] h-[20px] sm:h-[24px] md:h-[28px] lg:h-[36px]
+              mt-6 md:mt-8 lg:mt-10
+            "
+          ></div>
+          <div
+            className="
+              bg-gray-300/40 rounded-lg animate-pulse
+              w-[70%] h-[20px] sm:h-[24px] md:h-[28px] lg:h-[36px]
+              mt-3
+            "
+          ></div>
+
+          {/* Skeleton Button */}
+          {buttonText && (
+            <div
+              className="
+                bg-gray-300/60 rounded-xl md:rounded-2xl animate-pulse
+                w-[160px] sm:w-[180px] md:w-[220px] lg:w-[280px]
+                h-[36px] sm:h-[40px] md:h-[48px] lg:h-[58px]
+                mt-6 md:mt-8 lg:mt-10
+              "
+            ></div>
+          )}
+        </>
+      ) : (
+        <>
+          {/* Title */}
+          <h1
+            className="
+              leading-none font-[500] text-left
+              text-[32px] sm:text-[40px] md:text-[52px] lg:text-[82px]
+              mt-[6vh] md:mt-[8vh] lg:mt-[10vh]
             "
           >
-            {buttonText}
-          </a>
-        </div>
+            {title}
+          </h1>
+
+          {/* Description */}
+          <p
+            className="
+              text-left font-normal text-[#FAFAFA] leading-tight
+              text-[16px] sm:text-[18px] md:text-[22px] lg:text-[30px]
+              mt-6 md:mt-8 lg:mt-10
+            "
+          >
+            {description}
+          </p>
+
+          {/* Button */}
+          {buttonText && (
+            <div
+              className="
+                px-4 py-1 md:px-5 lg:px-6 
+                border border-[#FAFAFA] 
+                rounded-xl md:rounded-2xl 
+                mt-6 md:mt-8 lg:mt-10
+              "
+            >
+              <a
+                href={buttonLink || "#"}
+                className="
+                  font-instrument font-normal text-center
+                  text-[16px] sm:text-[18px] md:text-[22px] lg:text-[30px]
+                "
+              >
+                {buttonText}
+              </a>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

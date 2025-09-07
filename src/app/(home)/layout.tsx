@@ -10,8 +10,12 @@ import Footer from "../components/Footer";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Rumah Struktur",
-  description: "",
+  title: {
+    default : "Rumah Struktur",
+    template : "Rumah Struktur - %s"
+  },
+  description:
+    "Rumah Struktur menyediakan layanan konstruksi, arsitektur, dan desain bangunan dengan kualitas terbaik. Solusi pembangunan rumah, renovasi, hingga perencanaan struktur untuk hunian dan komersial.",
 };
 
 export default function RootLayout({

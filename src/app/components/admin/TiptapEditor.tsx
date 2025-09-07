@@ -14,22 +14,17 @@ import {
   Bold,
   Italic,
   Strikethrough,
-  Code,
   Heading1,
   Heading2,
   Heading3,
   ListOrdered,
   List,
-  ListChecks,
-  Quote,
-  Code2,
   AlignLeft,
   AlignCenter,
   AlignRight,
   AlignJustify,
   Undo,
   Redo,
-  Minus,
 } from "lucide-react";
 
 import { Button } from "@/app/components/ui/button";

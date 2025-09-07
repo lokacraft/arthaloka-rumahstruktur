@@ -4,8 +4,15 @@ import TeknologiSection from "@/app/components/TeknologiSection";
 import ListSection from "@/app/components/ListSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import PartnerShowcase from "@/app/components/PartnerShowcase";
-import BottomBanner from "@/app/components/BottomBanner";
-import ContactForm from "@/app/components/ContactForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Layanan - Analisis Geoteknik",
+  },
+  description:
+    "Rumah Struktur menyediakan layanan analisis geoteknik untuk proyek konstruksi. Kami menjamin perhitungan tanah dan fondasi yang presisi, didukung tim ahli berpengalaman, pelayanan cepat, serta harga terjangkau.",
+};
 
 export default function Home() {
   return (
@@ -86,7 +93,12 @@ export default function Home() {
       <ListSection
         title={
           <>
-            Laporan <span className="text-[#008080]">Investigasi <br />Tanah</span> yang <span className="text-[#008080]">Lengkap</span>
+            Laporan{" "}
+            <span className="text-[#008080]">
+              Investigasi <br />
+              Tanah
+            </span>{" "}
+            yang <span className="text-[#008080]">Lengkap</span>
           </>
         }
         items={[

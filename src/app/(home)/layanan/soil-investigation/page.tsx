@@ -4,6 +4,15 @@ import TeknologiSection from "@/app/components/TeknologiSection";
 import ListSection from "@/app/components/ListSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import PartnerShowcase from "@/app/components/PartnerShowcase";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Layanan - Soil Investigation",
+  },
+  description:
+    "Rumah Struktur menawarkan layanan soil investigation (penyelidikan tanah) untuk memastikan kondisi tanah yang menjadi dasar konstruksi dapat diketahui dengan jelas dan akurat. Melalui pengujian lapangan dan laboratorium, kami memberikan data penting mengenai karakteristik tanah, daya dukung, serta potensi masalah geoteknik yang mungkin timbul. Layanan ini membantu klien mendapatkan perencanaan pondasi yang tepat, efisien, dan aman sehingga proyek dapat berjalan lancar dan minim risiko.",
+};
 
 export default function Home() {
   return (
