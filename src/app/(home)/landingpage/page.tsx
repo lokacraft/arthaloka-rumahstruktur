@@ -1,12 +1,11 @@
-import hero from "/public/landing/hero.png"
-import Hero from "../../components/home/Hero";
-import Projek from "../../components/home/Projek";
-import CardLayanan from "../../components/home/CardLayanan";
-import TestimonialCarousel from "../../components/home/TestimonialCarousel";
+import Hero from "../../components/landing-page/Hero";
+import Projek from "../../components/landing-page/Projek";
+import CardLayanan from "../../components/landing-page/CardLayanan";
+import TestimonialCarousel from "../../components/landing-page/TestimonialCarousel";
 import PartnerShowcase from "../../components/PartnerShowcase";
-import ArtikelCarousel from "../../components/home/ArtikelCarousel";
-import BottomBannerHomePage from "@/app/components/home/BottomBannerHomePage";
-import ContactFormHomePage from "@/app/components/home/ContactFormHomePage";
+import ArtikelCarousel from "../../components/landing-page/ArtikelCarousel";
+import BottomBannerHomePage from "@/app/components/landing-page/BottomBannerHomePage";
+import ContactFormHomePage from "@/app/components/landing-page/ContactFormHomePage";
 
 export default function Home() {
   return (
