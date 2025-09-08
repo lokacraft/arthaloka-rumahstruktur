@@ -3,6 +3,7 @@
 import * as React from "react";
 import {
   ArrowUpCircleIcon,
+  ChartLine,
   FolderIcon,
   Handshake,
   Newspaper,
@@ -24,11 +25,6 @@ import { usePathname } from "next/navigation";
 import { useUser } from "@/lib/auth"; // 🔑 auth hook
 
 const data = {
-  // user: {
-  //   name: "shadcn",
-  //   email: "m@example.com",
-  //   avatar: "/avatars/shadcn.jpg",
-  // },
   navMain: [
     {
       title: "Testimoni",
@@ -49,6 +45,11 @@ const data = {
       title: "Portofolio",
       url: "/admin/table/portofolio",
       icon: FolderIcon,
+    },
+    {
+      title: "SEO Analyzer",
+      url: "/admin/SEO-Analyzer",
+      icon: ChartLine,
     },
   ],
 };

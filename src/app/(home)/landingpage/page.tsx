@@ -9,7 +9,7 @@ import ContactFormHomePage from "@/app/components/landing-page/ContactFormHomePa
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Landing Page",
+  title: "Home",
   description:
     "Rumah Struktur melayani hitung struktur, analisis geoteknik, soil investigation, analisis perkuatan bangunan, analisis geometrik jalan raya, serta layanan MEP (mekanikal, elektrikal, plumbing). Harga terjangkau, pelayanan cepat, dan hasil profesional.",
 };

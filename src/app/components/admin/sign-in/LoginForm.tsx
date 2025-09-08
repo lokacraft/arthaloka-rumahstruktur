@@ -19,26 +19,27 @@ import { Eye, EyeOff } from "lucide-react";
 // import Image from "next/image"; // untuk logo
 import "../../../globals.css";
 
-export const metadata : Metadata = {
-  title: "Login Admin - RumahStruktur",
-  description: "Masuk ke dashboard admin RumahStruktur untuk mengelola konten.",
-  keywords: ["RumahStruktur", "admin login", "dashboard"],
-  openGraph: {
-    title: "Login Admin - RumahStruktur",
-    description: "Masuk ke dashboard admin RumahStruktur untuk mengelola konten.",
-    url: "https://rumahstruktur.com/auth/sign-in",
-    siteName: "RumahStruktur",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "RumahStruktur Dashboard",
-      },
-    ],
-    locale: "id_ID",
-    type: "website",
-  },
+export const metadata: Metadata = {
+  title: "Login Admin - Rumah Struktur",
+  // description: "Masuk ke dashboard admin RumahStruktur untuk mengelola konten.",
+  // keywords: ["RumahStruktur", "admin login", "dashboard"],
+  // openGraph: {
+  //   title: "Login Admin - RumahStruktur",
+  //   description:
+  //     "Masuk ke dashboard admin RumahStruktur untuk mengelola konten.",
+  //   url: "https://rumahstruktur.com/auth/sign-in",
+  //   siteName: "RumahStruktur",
+  //   images: [
+  //     {
+  //       url: "/og-image.png",
+  //       width: 1200,
+  //       height: 630,
+  //       alt: "RumahStruktur Dashboard",
+  //     },
+  //   ],
+  //   locale: "id_ID",
+  //   type: "website",
+  // },
 };
 
 export default function LoginForm() {
@@ -58,20 +59,37 @@ export default function LoginForm() {
     const rememberMe = (form.rememberMe as HTMLInputElement).checked;
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      // Proses login
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
 
+      // Pastikan user email sudah terverifikasi
+      if (!user) {
+        setError(
+          "Email Anda belum terverifikasi. Silakan cek inbox email untuk verifikasi."
+        );
+        await auth.signOut(); // logout sementara
+        return;
+      }
+
+      // Simpan rememberMe jika dipilih
       if (rememberMe) {
         localStorage.setItem("rememberMe", "true");
       } else {
         localStorage.removeItem("rememberMe");
       }
 
+      // Redirect ke dashboard setelah auth dan konfirmasi selesai
       router.replace("/admin/table/testimoni");
     } catch (e) {
       console.error(e);
-      setError("Login failed. Please check your email and password.");
+      setError("Login gagal. Silakan periksa email dan password Anda.");
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // loader berhenti setelah auth & konfirmasi selesai
     }
   }
 

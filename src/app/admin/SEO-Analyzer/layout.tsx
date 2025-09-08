@@ -1,6 +1,6 @@
 "use client";
 
-import "../../../globals.css";
+import "../../globals.css";
 import { Toaster } from "@/app/components/ui/sonner";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

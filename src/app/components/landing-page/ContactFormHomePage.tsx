@@ -137,9 +137,11 @@ export default function ContactFormHomePage() {
             type="text"
             name="nama"
             value={formData.nama}
+            aria-label="Masukkan Nama"
             onChange={handleChange}
             className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
             required
+            autoComplete="given-name"
           />
           <label className="text-[18px] sm:text-[20px] lg:text-[22px] font-light">
             Email
@@ -149,8 +151,10 @@ export default function ContactFormHomePage() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            aria-label="Masukkan Email"
             className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
             required
+            autoComplete="on"
           />
           <label className="text-[18px] sm:text-[20px] lg:text-[22px] font-light">
             Judul Pesan
@@ -159,8 +163,10 @@ export default function ContactFormHomePage() {
             type="text"
             name="judul"
             value={formData.judul}
+            aria-label="Masukkan Judul Pesan"
             onChange={handleChange}
             className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
+            autoComplete="on"
           />
           <label className="text-[18px] sm:text-[20px] lg:text-[22px] font-light">
             Pesan
@@ -169,6 +175,7 @@ export default function ContactFormHomePage() {
             name="pesan"
             value={formData.pesan}
             onChange={handleChange}
+            aria-label="Masukkan Pesan"
             rows={4}
             className="w-full min-h-[200px] border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
             required
@@ -176,6 +183,7 @@ export default function ContactFormHomePage() {
 
           <button
             type="submit"
+            aria-label="Kirim Pesan"
             className="bg-[#EAEAEA] text-[#008080] font-instrument text-[24px] sm:text-[28px] lg:text-[32px] px-8 py-2 rounded-2xl hover:bg-[#008080] hover:text-[#EAEAEA] transition-all duration-300"
           >
             Kirim Pesan →

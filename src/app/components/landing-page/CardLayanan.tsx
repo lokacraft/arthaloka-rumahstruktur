@@ -11,6 +11,7 @@ interface Product {
   name: string;
   subtitle?: string;
   description: string;
+  link: string;
   icon: string;
 }
 
@@ -20,6 +21,7 @@ const products: Product[] = [
     name: "Jasa Hitung Struktur",
     description:
       "Melayani hitung struktur gedung, rumah, jembatan, bandara, dermaga & bangunan lainnya.",
+    link: "/layanan/jasa-hitung-struktur",
     icon: "/layanan/icons/icon1.png",
   },
   {
@@ -27,6 +29,7 @@ const products: Product[] = [
     name: "Jasa Analisis Geoteknik",
     description:
       "Meneliti stabilitas tanah, kondisi bawah permukaan, dinding penahan tanah, pondasi, hingga penelitian risiko.",
+    link: "/layanan/analisis-geoteknik",
     icon: "/layanan/icons/icon2.png",
   },
   {
@@ -34,6 +37,7 @@ const products: Product[] = [
     name: "Jasa Soil Investigation",
     description:
       "Melayani jasa soil test/soil investigasi (Boring & Sondir) untuk seluruh wilayah Indonesia.",
+    link: "/layanan/soil-investigation",
     icon: "/layanan/icons/icon3.png",
   },
   {
@@ -41,6 +45,7 @@ const products: Product[] = [
     name: "Analisis Perkuatan Bangunan & Audit Struktur",
     description:
       "Jasa analisis perkuatan bangunan dan audit struktur temporary.",
+    link: "/layanan/perkuatan-bangunan",
     icon: "/layanan/icons/icon4.png",
   },
   {
@@ -48,6 +53,7 @@ const products: Product[] = [
     name: "Mekanikal, Elektrikal, dan Plumbing",
     description:
       "Berkualitas tinggi dan efisien untuk bangunan baru maupun renovasi.",
+    link: "/layanan/mekanikal-elektrikal-plumbing",
     icon: "/layanan/icons/icon5.png",
   },
   {
@@ -55,6 +61,7 @@ const products: Product[] = [
     name: "Analisis Geometrik Jalan Raya",
     description:
       "Analisis andalalin, perencanaan geometrik jalan, dan perkerasan jalan.",
+    link: "/layanan/geometrik-jalan-raya",
     icon: "/layanan/icons/icon6.png",
   },
 ];
@@ -165,14 +172,14 @@ const CardLayanan = () => {
 
                 {/* Title & Desc */}
                 <div className="flex flex-col gap-y-1">
-                  <h3
+                  <h2
                     className="
                       mt-6 sm:mt-8 lg:mt-10 leading-tight font-medium text-black
                       text-[14px] sm:text-[22px] md:text-[30px] lg:text-[38px]
                     "
                   >
                     {product.name}
-                  </h3>
+                  </h2>
                   <p
                     className="
                       text-black font-light leading-tight
@@ -185,7 +192,7 @@ const CardLayanan = () => {
 
                 {/* Button */}
                 <Link
-                  href="/product"
+                  href={product.link}
                   className="
                     mt-3 sm:mt-4 px-4 sm:px-6 w-fit font-normal rounded-full transition-all duration-300 font-instrument
                     text-[12px] sm:text-[14px] md:text-[16px] lg:text-lg

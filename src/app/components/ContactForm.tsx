@@ -81,13 +81,13 @@ export default function ContactForm() {
         </p>
 
         <div className="w-full flex flex-row gap-4 lg:gap-5 items-center">
-          <Link href="/">
+          <Link href="https://www.instagram.com" aria-label="Visit Instagram">
             <Image src={instagram} alt="instagram" width={28} height={28} className="lg:w-[40px] lg:h-[40px]" />
           </Link>
-          <Link href="/">
+          <Link href="https://www.facebook.com" aria-label="Visit Facebook">
             <Image src={facebook} alt="facebook" width={28} height={28} className="lg:w-[40px] lg:h-[40px]" />
           </Link>
-          <Link href="/">
+          <Link href="https://www.x.com" aria-label="Visit X / Twitter">
             <Image src={twitter} alt="twitter" width={28} height={28} className="lg:w-[40px] lg:h-[40px]" />
           </Link>
         </div>
@@ -104,6 +104,7 @@ export default function ContactForm() {
             onChange={handleChange}
             className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
             required
+            autoComplete="given-name"
           />
 
           <label className="text-[18px] md:text-[22px] font-light">Email</label>
@@ -114,6 +115,7 @@ export default function ContactForm() {
             onChange={handleChange}
             className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
             required
+            autoComplete="on"
           />
 
           <label className="text-[18px] md:text-[22px] font-light">Judul Pesan</label>

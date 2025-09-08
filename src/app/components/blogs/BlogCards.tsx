@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/role-supports-aria-props */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -127,6 +128,7 @@ export default function BlogCards() {
         <button
           onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
           disabled={currentPage === 1}
+          aria-label="Previous Page"
           className="flex items-center justify-center hover:bg-[#008080]/70 bg-[#008080]/50 size-8 sm:size-10 rounded-sm disabled:opacity-20"
         >
           <Image src="/icons/DoubleArrowLeft.png" alt="" width={16} height={16} />
@@ -136,6 +138,7 @@ export default function BlogCards() {
           <button
             key={i}
             onClick={() => setCurrentPage(i + 1)}
+            aria-level={i}
             className={`flex items-center justify-center border rounded-sm text-[14px] sm:text-[16px] md:text-[18px] size-8 sm:size-10 ${
               currentPage === i + 1
                 ? "bg-[#008080] text-[#FAFAFA] border-[#008080]"
@@ -149,6 +152,7 @@ export default function BlogCards() {
         <button
           onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
           disabled={currentPage === totalPages}
+          aria-label="Next Page"
           className="flex items-center justify-center hover:bg-[#008080]/70 bg-[#008080]/50 size-8 sm:size-10 rounded-sm disabled:opacity-40"
         >
           <Image src="/icons/DoubleArrowRight.png" alt="" width={16} height={16} />

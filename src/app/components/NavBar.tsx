@@ -25,15 +25,25 @@ export default function NavBar() {
     { title: "Hitung Struktur", href: "/layanan/jasa-hitung-struktur" },
     { title: "Analisis Geoteknik", href: "/layanan/analisis-geoteknik" },
     { title: "Soil Investigation", href: "/layanan/soil-investigation" },
-    { title: "Analisis Perkuatan Bangunan", href: "/layanan/perkuatan-bangunan" },
-    { title: "Analisis Geometrik Jalan Raya", href: "/layanan/geometrik-jalan-raya" },
-    { title: "Mekanikal, Elektrikal & Plumping", href: "/layanan/mekanikal-elektrikal-plumbing" },
+    {
+      title: "Analisis Perkuatan Bangunan",
+      href: "/layanan/perkuatan-bangunan",
+    },
+    {
+      title: "Analisis Geometrik Jalan Raya",
+      href: "/layanan/geometrik-jalan-raya",
+    },
+    {
+      title: "Mekanikal, Elektrikal & Plumping",
+      href: "/layanan/mekanikal-elektrikal-plumbing",
+    },
   ];
 
   const getLinkClass = (href: string) => {
     const isActive = pathname === href || pathname.startsWith(href + "/");
     return `transition-colors ${
-      isActive ? "text-[#008080]" : "text-black/70 hover:text-[#008080]"}`
+      isActive ? "text-[#008080]" : "text-black/70 hover:text-[#008080]"
+    }`;
   };
 
   // fungsi navigasi dengan loader
@@ -53,28 +63,34 @@ export default function NavBar() {
       {loading && (
         <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center backdrop-blur-md bg-black/30">
           <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-          <p className="text-white text-lg font-medium animate-pulse">Memuat Halaman...</p>
+          <p className="text-white text-lg font-medium animate-pulse">
+            Memuat Halaman...
+          </p>
         </div>
       )}
 
       {/* ========== DESKTOP NAVBAR (lg & xl) ========== */}
       <div className="hidden md:flex justify-center items-center w-full">
-        <div className="fixed top-5 w-[90%] z-60 flex items-center justify-between py-4 rounded-2xl xl:gap-26 lg:gap-24 md:gap-8 sm:gap-12 shadow-2xl px-6 font-instrument text-black/70 bg-[#FAFAFA] 
-          text-[18px] md:text-[10px] lg:text-[14px] xl:text-[22px]">
-          
+        <div
+          className="fixed top-5 w-[90%] z-60 flex items-center justify-between py-4 rounded-2xl xl:gap-26 lg:gap-24 md:gap-8 sm:gap-12 shadow-2xl px-6 font-instrument text-black/70 bg-[#FAFAFA] 
+          text-[18px] md:text-[10px] lg:text-[14px] xl:text-[22px]"
+        >
           {/* Logo */}
           <div className="text-xl font-bold">LOGO</div>
 
           {/* Menu */}
           <ul className="flex items-center space-x-8 lg:space-x-12 xl:space-x-14">
-            <Link href="/landingpage">
-              <button
-                onClick={() => handleNavigation("/landingpage")}
-                className={getLinkClass("/landingpage")}
-              >
-                Home
-              </button>
-            </Link>
+            <li>
+              <Link href="/landingpage">
+                <button
+                  onClick={() => handleNavigation("/landingpage")}
+                  className={getLinkClass("/landingpage")}
+                  aria-label="Home"
+                >
+                  Home
+                </button>
+              </Link>
+            </li>
 
             {/* Dropdown Layanan */}
             <li className="relative">
@@ -82,9 +98,22 @@ export default function NavBar() {
                 onClick={() => setOpen(!open)}
                 onBlur={() => setTimeout(() => setOpen(false), 150)}
                 className="flex items-center hover:text-[#008080]"
+                aria-label="Layanan"
               >
                 Layanan
-                {open ? <ChevronUp size={20} className="ml-1" /> : <ChevronDown size={20} className="ml-1" />}
+                {open ? (
+                  <ChevronUp
+                    size={20}
+                    className="ml-1"
+                    aria-label="Tutup Menu Dropdown Layanan"
+                  />
+                ) : (
+                  <ChevronDown
+                    size={20}
+                    className="ml-1"
+                    aria-label="Buka Menu Dropdown Layanan"
+                  />
+                )}
               </button>
 
               {open && (
@@ -94,6 +123,7 @@ export default function NavBar() {
                       <li key={i}>
                         <button
                           onClick={() => handleNavigation(item.href)}
+                          aria-label={item.title}
                           className={`flex w-full items-center justify-between rounded-md px-2 py-2 transition-all duration-300 ${
                             pathname === item.href
                               ? "text-[#008080] bg-[#008080]/10"
@@ -111,22 +141,38 @@ export default function NavBar() {
             </li>
 
             <li>
-              <button onClick={() => handleNavigation("/tentang-kami")} className={getLinkClass("/tentang-kami")}>
+              <button
+                onClick={() => handleNavigation("/tentang-kami")}
+                className={getLinkClass("/tentang-kami")}
+                aria-label="Tentang Kami"
+              >
                 Tentang Kami
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavigation("/kontak")} className={getLinkClass("/kontak")}>
+              <button
+                onClick={() => handleNavigation("/kontak")}
+                className={getLinkClass("/kontak")}
+                aria-label="Kontak"
+              >
                 Kontak
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavigation("/portofolio")} className={getLinkClass("/portofolio")}>
+              <button
+                onClick={() => handleNavigation("/portofolio")}
+                className={getLinkClass("/portofolio")}
+                aria-label="Portofolio"
+              >
                 Portfolio
               </button>
             </li>
             <li>
-              <button onClick={() => handleNavigation("/blogs")} className={getLinkClass("/blogs")}>
+              <button
+                onClick={() => handleNavigation("/blogs")}
+                className={getLinkClass("/blogs")}
+                aria-label="Blog"
+              >
                 Blog
               </button>
             </li>
@@ -136,6 +182,7 @@ export default function NavBar() {
           <button
             onClick={() => handleNavigation("/kontak")}
             className="rounded-lg border border-teal-600 px-4 py-1 hover:text-[#008080] hover:bg-teal-50"
+            aria-label="Contact Us"
           >
             Contact Us
           </button>
@@ -149,8 +196,13 @@ export default function NavBar() {
             {/* Logo */}
             <div className="text-lg font-bold">LOGO</div>
             {/* Hamburger */}
-            <button onClick={() => setMenuOpen(true)}>
-              <Image src="/icons/hamburger.png" alt="menu" width={28} height={28} />
+            <button onClick={() => setMenuOpen(true)} aria-label="Buka Navbar">
+              <Image
+                src="/icons/hamburger.png"
+                alt="menu"
+                width={28}
+                height={28}
+              />
             </button>
           </div>
 
@@ -162,7 +214,10 @@ export default function NavBar() {
           >
             {/* Close button */}
             <div className="flex w-full justify-end px-4 py-3">
-              <button onClick={() => setMenuOpen(false)}>
+              <button
+                onClick={() => setMenuOpen(false)}
+                aria-label="Tutup Navbar"
+              >
                 <CornerUpLeft size={26} className="text-white" />
               </button>
             </div>
@@ -171,6 +226,7 @@ export default function NavBar() {
             <nav className="flex flex-col justify-between w-full gap-2 px-6 font-instrument">
               <button
                 onClick={() => handleNavigation("/")}
+                aria-label="Home"
                 className="flex border-b border-[#FAFAFA] justify-between items-center text-xl py-2 text-[#FAFAFA] hover:text-white"
               >
                 Home <ArrowUpRight size={20} />
@@ -179,12 +235,16 @@ export default function NavBar() {
               {/* Dropdown Layanan */}
               <button
                 onClick={() => setLayananOpen(!layananOpen)}
+                aria-label="Layanan"
                 className="flex border-b border-[#FAFAFA] justify-between items-center w-full text-xl py-2 text-[#FAFAFA] hover:text-white"
               >
                 Layanan
                 <ArrowUpRight
                   size={20}
-                  className={`transform transition-transform duration-300 ${layananOpen ? "rotate-90" : ""}`}
+                  className={`transform transition-transform duration-300 ${
+                    layananOpen ? "rotate-90" : ""
+                  }`}
+                  aria-label="Buka Menu Layanan"
                 />
               </button>
               {layananOpen && (
@@ -193,6 +253,7 @@ export default function NavBar() {
                     <button
                       key={i}
                       onClick={() => handleNavigation(item.href)}
+                      aria-label={item.title}
                       className="flex justify-between border-b border-[#FAFAFA]/50 items-center text-base py-2 text-[#FAFAFA] hover:text-white"
                     >
                       {item.title}
@@ -204,24 +265,28 @@ export default function NavBar() {
 
               <button
                 onClick={() => handleNavigation("/tentang-kami")}
+                aria-label="Tentang Kami"
                 className="flex justify-between border-b border-[#FAFAFA] items-center text-xl py-2 text-[#FAFAFA] hover:text-white"
               >
                 Tentang Kami <ArrowUpRight size={20} />
               </button>
               <button
                 onClick={() => handleNavigation("/kontak")}
+                aria-label="Kontak"
                 className="flex justify-between border-b border-[#FAFAFA] items-center text-xl py-2 text-[#FAFAFA] hover:text-white"
               >
                 Kontak <ArrowUpRight size={20} />
               </button>
               <button
                 onClick={() => handleNavigation("/portofolio")}
+                aria-label="Portofolio"
                 className="flex justify-between border-b border-[#FAFAFA] items-center text-xl py-2 text-[#FAFAFA] hover:text-white"
               >
                 Portfolio <ArrowUpRight size={20} />
               </button>
               <button
                 onClick={() => handleNavigation("/blogs")}
+                aria-label="Blog"
                 className="flex justify-between border-b border-[#FAFAFA] items-center text-xl py-2 text-[#FAFAFA] hover:text-white"
               >
                 Blog <ArrowUpRight size={20} />
@@ -230,6 +295,7 @@ export default function NavBar() {
               {/* Contact Button */}
               <button
                 onClick={() => handleNavigation("/kontak")}
+                aria-label="Contact Us"
                 className="mt-4 rounded-lg bg-[#FAFAFA] text-[#008080] text-base px-4 py-2 hover:bg-gray-100"
               >
                 Contact Us

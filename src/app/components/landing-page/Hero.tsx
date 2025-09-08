@@ -15,7 +15,6 @@ const Hero = () => {
         alt="background"
         fill
         className="object-cover object-center justify-center items-center -z-10"
-        priority
         onLoad={() => setIsLoaded(true)}
       />
 

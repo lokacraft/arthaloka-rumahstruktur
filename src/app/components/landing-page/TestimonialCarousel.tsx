@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -134,7 +135,7 @@ export default function TestimonialCarousel() {
                             <p className="text-black font-medium text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px]">
                               {t.name}
                             </p>
-                            <p className="text-black/47 text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px]">
+                            <p className="text-black text-[12px] font-light sm:text-[14px] md:text-[15px] lg:text-[16px]">
                               {t.role}
                             </p>
                           </div>
@@ -149,7 +150,8 @@ export default function TestimonialCarousel() {
           <div className="flex gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-10 justify-end">
             <button
               onClick={() => api?.scrollPrev()}
-              disabled={!canScrollPrev}
+              // disabled={!canScrollPrev}
+              aria-label="Previous"
               className="
                 flex items-center justify-center rounded-full border-2 sm:border-[3px] border-[#EAEAEA] text-[#EAEAEA] 
                 hover:bg-[#EAEAEA] hover:text-[#0E4F56] transition disabled:opacity-40
@@ -160,7 +162,8 @@ export default function TestimonialCarousel() {
             </button>
             <button
               onClick={() => api?.scrollNext()}
-              disabled={!canScrollNext}
+              // disabled={!canScrollNext}
+              aria-label="Next"
               className="
                 flex items-center justify-center rounded-full border-2 sm:border-[3px] border-[#EAEAEA] text-[#EAEAEA] 
                 hover:bg-[#EAEAEA] hover:text-[#0E4F56] transition disabled:opacity-40

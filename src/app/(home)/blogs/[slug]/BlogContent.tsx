@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import RekomendasiArtikel from "../../../components/blogs/RekomendasiArtikel";
 import ArrowLeft from "/public/icons/ArrowLeft.png";
+import "./BlogPage.css"
 
 interface BlogDetail {
   id: string;

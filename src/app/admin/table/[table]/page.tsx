@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { AppSidebar } from "@/app/components/app-sidebar";
+// import { AppSidebar } from "@/app/components/app-sidebar";
 import { DataTable } from "@/app/components/data-table";
-import { SidebarInset, SidebarProvider } from "@/app/components/ui/sidebar";
-import { SiteHeader } from "@/app/components/site-header";
+// import { SidebarInset, SidebarProvider } from "@/app/components/ui/sidebar";
+// import { SiteHeader } from "@/app/components/site-header";
 import {
   Dialog,
   DialogContent,
@@ -137,81 +137,68 @@ export default function TablePage() {
   }
 
   return (
-    <SidebarProvider>
-      <AppSidebar variant="inset" />
-      <SidebarInset>
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <SiteHeader />
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              {/* DataTable */}
-              <DataTable
-                data={data}
-                columns={columns}
-                onAdd={() => {
-                  setEditData(null); // form kosong
-                  setIsFormOpen(true);
-                }}
-              />
+    <>
+      {/* DataTable */}
+      <DataTable
+        data={data}
+        columns={columns}
+        onAdd={() => {
+          setEditData(null); // form kosong
+          setIsFormOpen(true);
+        }}
+      />
 
-              {/* ItemForm untuk Add/Edit */}
-              <ItemForm
-                isOpen={isFormOpen}
-                onOpenChange={setIsFormOpen}
-                onSave={async (item) => {
-                  try {
-                    if (item.id) {
-                      // update
-                      await updateData(table, item.id, item);
-                    } else {
-                      // create
-                      await createData(table, item);
-                    }
+      {/* ItemForm untuk Add/Edit */}
+      <ItemForm
+        isOpen={isFormOpen}
+        onOpenChange={setIsFormOpen}
+        onSave={async (item) => {
+          try {
+            if (item.id) {
+              // update
+              await updateData(table, item.id, item);
+            } else {
+              // create
+              await createData(table, item);
+            }
 
-                    // refresh data setelah simpan
-                    const refreshed = await getAllData(table);
-                    setData(refreshed);
-                    setEditData(null);
-                  } catch (err) {
-                    console.error("Error saving:", err);
-                  } finally {
-                    setIsFormOpen(false);
-                  }
-                }}
-                category={table}
-                initialData={editData}
-              />
-              <Dialog
-                open={deleteDialogOpen}
-                onOpenChange={setDeleteDialogOpen}
-              >
-                <DialogContent className="sm:max-w-sm">
-                  <DialogHeader>
-                    <DialogTitle>Konfirmasi Hapus</DialogTitle>
-                    <p>Apakah Anda yakin ingin menghapus data ini?</p>
-                  </DialogHeader>
-                  <DialogFooter className="flex justify-end gap-2">
-                    <Button
-                      variant="outline"
-                      onClick={() => setDeleteDialogOpen(false)}
-                      disabled={isDeleting}
-                    >
-                      Batal
-                    </Button>
-                    <Button
-                      variant="destructive"
-                      onClick={handleDelete}
-                      disabled={isDeleting}
-                    >
-                      {isDeleting ? "Menghapus..." : "Hapus"}
-                    </Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </div>
-          </div>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+            // refresh data setelah simpan
+            const refreshed = await getAllData(table);
+            setData(refreshed);
+            setEditData(null);
+          } catch (err) {
+            console.error("Error saving:", err);
+          } finally {
+            setIsFormOpen(false);
+          }
+        }}
+        category={table}
+        initialData={editData}
+      />
+      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <DialogContent className="sm:max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Konfirmasi Hapus</DialogTitle>
+            <p>Apakah Anda yakin ingin menghapus data ini?</p>
+          </DialogHeader>
+          <DialogFooter className="flex justify-end gap-2">
+            <Button
+              variant="outline"
+              onClick={() => setDeleteDialogOpen(false)}
+              disabled={isDeleting}
+            >
+              Batal
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={handleDelete}
+              disabled={isDeleting}
+            >
+              {isDeleting ? "Menghapus..." : "Hapus"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
