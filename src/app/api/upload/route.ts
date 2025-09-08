@@ -47,11 +47,26 @@ export async function PUT(req: Request) {
     const formData = await req.formData();
     const file = formData.get("file") as File | null;
     const key = formData.get("key") as string | null;
+    const oldKey = formData.get("oldKey") as string | null;
 
     if (!file || !key) return NextResponse.json({ error: "File and key are required" }, { status: 400 });
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
+
+    if (oldKey) {
+      try {
+        await client.send(
+          new DeleteObjectCommand({
+            Bucket: process.env.CF_R2_BUCKET!,
+            Key: oldKey,
+          })
+        );
+        console.log(`Old file deleted: ${oldKey}`);
+      } catch (err) {
+        console.warn(`Failed to delete old file: ${oldKey}`, err);
+      }
+    }
 
     // Replace existing file (sama key)
     await client.send(

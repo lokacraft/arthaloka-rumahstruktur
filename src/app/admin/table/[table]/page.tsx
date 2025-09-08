@@ -52,6 +52,8 @@ export default function TablePage() {
       item.logoPartner ||
       item.fotoPortofolio ||
       item.fotoBlog;
+
+      
     let imageKey: string | undefined;
 
     if (imageUrl) {

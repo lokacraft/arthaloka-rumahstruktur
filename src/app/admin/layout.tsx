@@ -4,10 +4,6 @@ export const metadata: Metadata = {
   title: {
     absolute: "Rumah Struktur - Dashboard",
   },
-  robots: {
-    index: false,
-    follow: true,
-  },
 };
 
 export default function RootLayout({

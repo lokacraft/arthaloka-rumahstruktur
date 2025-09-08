@@ -18,8 +18,8 @@ import { Textarea } from "@/app/components/ui/textarea";
 import { DatePicker } from "@/app/components/ui/date-picker";
 import { Timestamp } from "firebase/firestore";
 import TiptapEditor from "@/app/components/admin/TiptapEditor";
-import { showToast } from "@/app/components/ui/sonner"
-import { CheckCircle, XCircle } from "lucide-react" 
+import { showToast } from "@/app/components/ui/sonner";
+import { CheckCircle, XCircle } from "lucide-react";
 
 import {
   Select,
@@ -223,27 +223,31 @@ export const ItemForm = ({
           case "image":
             if (val instanceof File) {
               if (isEditMode) {
-                const key =
+                const oldKey =
                   editData?.imageKey ||
                   getKeyFromUrl(initialData?.[field.name]);
 
-                if (key) {
-                  // --- REPLACE FILE LAMA ---
-                  const formDataUpload = new FormData();
-                  formDataUpload.append("file", val);
-                  formDataUpload.append("key", key);
+                const newKey = `${Date.now()}-${val.name}`;
 
-                  const res = await fetch("/api/upload", {
-                    method: "PUT",
-                    body: formDataUpload,
-                  });
+                const formDataUpload = new FormData();
+                formDataUpload.append("file", val);
+                formDataUpload.append("key", newKey);
 
-                  if (!res.ok)
-                    throw new Error("Gagal mengganti file di Cloudflare");
+                if (oldKey) {
+                  formDataUpload.append("oldKey", oldKey);
+                }
 
-                  const data = await res.json();
-                  payload[field.name] = data.url; // update URL di Firebase
-                } else {
+                const res = await fetch("/api/upload", {
+                  method: "PUT",
+                  body: formDataUpload,
+                });
+
+                if (!res.ok)
+                  throw new Error("Gagal mengganti file di Cloudflare");
+
+                const data = await res.json();
+                payload[field.name] = data.url; // update URL di Firebase
+                if (!oldKey) {
                   // kalau key tidak tersedia, upload baru saja
                   const formDataUpload = new FormData();
                   formDataUpload.append("file", val);
@@ -291,14 +295,14 @@ export const ItemForm = ({
       // langsung kirim ke parent (TablePage → firebaseApi)
       await onSave(payload);
 
-      showToast("Data berhasil disimpan!", "success", <CheckCircle />)
+      showToast("Data berhasil disimpan!", "success", <CheckCircle />);
 
       // tutup dialog
       onOpenChange(false);
     } catch (err) {
       console.error(err);
       alert(`Error saving ${category}`);
-      showToast("Gagal menyimpan data!", "error", <XCircle />)
+      showToast("Gagal menyimpan data!", "error", <XCircle />);
     } finally {
       setIsSaving(false); // hentikan loader
     }

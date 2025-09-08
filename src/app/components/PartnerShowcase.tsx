@@ -82,7 +82,7 @@ function LogoCard({ logo }: { logo: Partnership }) {
           className={`object-contain transition-opacity duration-500 ${
             loaded ? "opacity-100" : "opacity-0"
           }`}
-          onLoadingComplete={() => setLoaded(true)}
+          onLoad={() => setLoaded(true)}
         />
       </div>
     </div>
