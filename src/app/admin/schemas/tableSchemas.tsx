@@ -72,7 +72,7 @@ const ViewHtmlDialog = ({ title, html }: { title: string; html: string }) => {
           variant="link"
           className="p-0 h-auto text-left text-blue-600 hover:underline"
         >
-          Preview Konten
+          Preview
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-3xl max-h-[90%] overflow-auto">
@@ -124,6 +124,57 @@ const ViewImageDialog = ({ src, alt }: { src: string; alt: string }) => {
                 "https://via.placeholder.com/400x300?text=Image+Not+Found";
             }}
           />
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+// Helper untuk menampilkan banyak gambar di dalam dialog (scrollable)
+const ViewImageArrayDialog = ({
+  images,
+  alt,
+}: {
+  images: string[];
+  alt: string;
+}) => {
+  const [loading, setLoading] = useState(true);
+
+  if (!images || images.length === 0) return <div>No Images</div>;
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">
+          Open All Images
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogTitle className="hidden" />
+        <div className="flex flex-col gap-6 py-4">
+          {images.map((src, i) => (
+            <div key={i} className="relative aspect-video w-full">
+              {loading && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-neutral-50 dark:bg-neutral-900">
+                  <div className="w-10 h-10 border-4 border-neutral-400 border-t-transparent rounded-full animate-spin" />
+                  <p className="text-sm text-neutral-600 dark:text-neutral-300">
+                    Loading konten...
+                  </p>
+                </div>
+              )}
+              <Image
+                src={src}
+                alt={`${alt} - ${i + 1}`}
+                fill
+                className="object-contain"
+                onLoadingComplete={() => setLoading(false)}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src =
+                    "https://via.placeholder.com/400x300?text=Image+Not+Found";
+                }}
+              />
+            </div>
+          ))}
         </div>
       </DialogContent>
     </Dialog>
@@ -226,7 +277,6 @@ const getTestimoniColumns = (
   },
 ];
 
-// tabel achievements
 const getPortofolioColumns = (
   onEdit: (item: Item) => void,
   onDelete: (item: Item) => void
@@ -239,21 +289,54 @@ const getPortofolioColumns = (
     ),
   },
   {
-    accessorKey: "tag",
-    header: "Tags",
-    cell: ({ row }) => {
-      const arr = row.getValue("tag") as string[] | string | undefined;
-      if (!arr) return "-";
-      if (Array.isArray(arr)) return <div>{arr.join(", ")}</div>;
-      return <div>{String(arr)}</div>;
-    },
+    accessorKey: "slug",
+    header: "Slug",
+    cell: ({ row }) => <div>{row.getValue("slug") || "-"}</div>,
+  },
+  {
+    accessorKey: "description",
+    header: "Description",
+    cell: ({ row }) => (
+      <ViewTextDialog
+        title={row.getValue("title")}
+        content={row.getValue("description")}
+      />
+    ),
+  },
+  {
+    accessorKey: "tipePekerjaan",
+    header: "Tipe Pekerjaan",
+    cell: ({ row }) => <div>{row.getValue("tipePekerjaan") || "-"}</div>,
+  },
+  {
+    accessorKey: "pekerjaan",
+    header: "Pekerjaan",
+    cell: ({ row }) => <div>{row.getValue("pekerjaan") || "-"}</div>,
+  },
+  {
+    accessorKey: "lokasi",
+    header: "Lokasi",
+    cell: ({ row }) => <div>{row.getValue("lokasi") || "-"}</div>,
   },
   {
     accessorKey: "fotoPortofolio",
-    header: "Image",
+    header: "Thumbnail",
     cell: ({ row }) => {
       const fileName = row.getValue("fotoPortofolio") as string;
       return <ViewImageDialog src={fileName} alt={row.getValue("title")} />;
+    },
+  },
+  {
+    accessorKey: "fotoDokumentasi",
+    header: "Additional Images",
+    cell: ({ row }) => {
+      const imgs = row.getValue("fotoDokumentasi") as string[] | undefined;
+      if (!imgs || imgs.length === 0) return "-";
+      return (
+        <div className="flex gap-2">
+            <ViewImageArrayDialog images={imgs} alt="Foto Dokumentasi" />
+        </div>
+      );
     },
   },
   {
@@ -265,8 +348,6 @@ const getPortofolioColumns = (
   },
 ];
 
-// tabel projek
-// ganti fungsi getProjectsColumns dengan yang ini
 const getBlogsColumns = (
   onEdit: (item: any) => void,
   onDelete: (item: any) => void

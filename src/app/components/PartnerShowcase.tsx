@@ -93,7 +93,7 @@ function LogoCard({ logo }: { logo: Partnership }) {
 function LogoSkeleton() {
   return (
     <div className="flex items-center justify-center border-[1.5px] border-[#008080] rounded-2xl sm:rounded-3xl min-w-[80px] min-h-[40px] w-[140px] h-[80px] sm:w-[160px] sm:h-[100px] md:w-[180px] md:h-[150px] lg:w-[200px] lg:h-[180px] xl:w-[280px] xl:h-[200px] mx-auto relative overflow-hidden">
-      <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%] rounded-2xl" />
+      <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%] rounded-2xl" />
     </div>
   );
 }

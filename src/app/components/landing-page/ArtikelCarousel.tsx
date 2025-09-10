@@ -85,7 +85,7 @@ function BlogCard({ blog }: { blog: Blog }) {
     <div className="rounded-2xl overflow-hidden hover:shadow-xl hover:scale-105 transition">
       <Link href={`/blogs/${blog.slug}`}>
         {/* Gambar */}
-        <div className="relative w-full h-[200px] sm:h-[240px] md:h-[260px] lg:h-[280px] rounded-lg bg-emerald-300 mb-4">
+        <div className="relative w-full h-[200px] sm:h-[240px] md:h-[260px] lg:h-[280px] rounded-lg mb-4">
           <Image
             src={blog.fotoBlog}
             alt={blog.title}
@@ -136,7 +136,7 @@ function BlogCardSkeleton() {
     <div className="rounded-2xl overflow-hidden border border-neutral-300 hover:shadow-md transition">
       {/* Gambar shimmer */}
       <div className="relative w-full h-[200px] sm:h-[240px] md:h-[260px] lg:h-[280px] bg-neutral-300 overflow-hidden">
-        <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+        <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
       </div>
 
       {/* Konten shimmer */}
@@ -144,28 +144,28 @@ function BlogCardSkeleton() {
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-3">
           <div className="h-5 w-16 rounded bg-neutral-300 relative overflow-hidden">
-            <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
           </div>
           <div className="h-5 w-20 rounded bg-neutral-300 relative overflow-hidden">
-            <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
           </div>
         </div>
 
         {/* Judul */}
         <div className="h-6 sm:h-7 md:h-8 w-3/4 rounded bg-neutral-300 relative overflow-hidden">
-          <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
         </div>
         <div className="h-6 sm:h-7 md:h-8 w-1/2 rounded bg-neutral-300 relative overflow-hidden">
-          <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
         </div>
 
         {/* Author + Date */}
         <div className="flex justify-between items-center mt-6">
           <div className="h-5 sm:h-6 w-24 rounded bg-neutral-300 relative overflow-hidden">
-            <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
           </div>
           <div className="h-5 sm:h-6 w-16 rounded bg-neutral-300 relative overflow-hidden">
-            <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
           </div>
         </div>
       </div>

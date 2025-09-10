@@ -95,7 +95,7 @@ export default function BlogCards() {
       )}
 
       {/* Tabs kategori */}
-      <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-6 justify-start mb-8 lg:mb-10 font-instrument text-lg sm:text-2xl md:text-3xl lg:text-4xl">
+      <div className="flex flex-wrap gap-3 md:gap-4 justify-start mb-8 lg:mb-10 font-instrument text-lg md:text-2xl xl:text-3xl">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -175,7 +175,7 @@ function BlogCard({
       onClick={() => onNavigate(artikel.slug)}
       className="w-full h-full flex-shrink-0 rounded-2xl overflow-hidden relative hover:scale-105 transition-transform border cursor-pointer"
     >
-      <div className="relative w-full h-[160px] sm:h-[180px] md:h-[200px] lg:h-[220px] rounded-2xl mb-4">
+      <div className="relative w-full min-w-[200px] min-h-[220px] max-h-[280px] justify-center items-center flex-1 rounded-2xl overflow-hidden mb-4">
         <Image src={artikel.image} alt={artikel.title} fill className="object-cover rounded-2xl" />
       </div>
 
@@ -184,14 +184,14 @@ function BlogCard({
           {artikel.category.map((cat, i) => (
             <span
               key={i}
-              className="text-[12px] sm:text-[14px] px-2 sm:px-4 border border-[#008080] text-[#008080] rounded-sm font-instrument"
+              className="lg:text-md text-sm px-4 border border-[#008080] text-[#008080] rounded-md font-instrument"
             >
               {cat}
             </span>
           ))}
         </div>
 
-        <h3 className="text-[16px] md:text-[20px] xl:text-[22px] font-medium mb-2 leading-snug">
+        <h3 className="xl:text-2xl md:text-xl text-2xl font-medium mb-4 leading-tight">
           {artikel.title}
         </h3>
 

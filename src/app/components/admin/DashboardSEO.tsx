@@ -44,8 +44,12 @@ import {
   CheckCircle,
   Loader2,
   ExternalLink,
+  Download,
 } from "lucide-react";
 import { Badge } from "@/app/components/ui/badge";
+
+// ✅ import xlsx
+import * as XLSX from "xlsx";
 
 interface AuditPoint {
   description: string;
@@ -120,6 +124,56 @@ export default function DashboardSEO() {
     }
   };
 
+  // ✅ Fungsi Export ke Excel
+  const handleExportExcel = () => {
+    if (!seoResult) return;
+
+    const summaryData = [
+      { Metric: "Performance", Score: seoResult.performance },
+      { Metric: "Accessibility", Score: seoResult.accessibility },
+      { Metric: "Best Practices", Score: seoResult.bestPractices },
+      { Metric: "SEO", Score: seoResult.seo },
+    ];
+
+    const auditData = Object.entries(seoResult.audits).map(([key, audit]) => ({
+      Key: key,
+      Description: audit.description,
+      Advice: audit.advice || "-",
+      Score:
+        typeof audit.score === "number" ? Math.round(audit.score * 100) : "-",
+    }));
+
+    const wb = XLSX.utils.book_new();
+    const ws1 = XLSX.utils.json_to_sheet(summaryData);
+    const ws2 = XLSX.utils.json_to_sheet(auditData);
+
+    XLSX.utils.book_append_sheet(wb, ws1, "Summary");
+    XLSX.utils.book_append_sheet(wb, ws2, "Audits");
+
+    // ✅ Buat nama file dengan format Indonesia
+    const dateString = new Date(seoResult.timestamp).toLocaleDateString(
+      "id-ID",
+      {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }
+    );
+
+    const timeString = new Date(seoResult.timestamp).toLocaleTimeString(
+      "id-ID",
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }
+    );
+
+    const fileName = `SEO-Analysis-Rumah-Struktur-${dateString}-${timeString}.xlsx`;
+
+    XLSX.writeFile(wb, fileName);
+  };
+
   // Data untuk Charts - menampilkan 0 jika belum ada data
   const chartData = seoResult
     ? [
@@ -187,15 +241,30 @@ export default function DashboardSEO() {
                 SEO Dashboard
               </CardTitle>
               <CardDescription className="mt-1">
-                Menganalisa Performa SEO website menggunakan Lighthouse
+                Menganalisa Performa SEO Website Anda
               </CardDescription>
             </div>
-            {seoResult && (
-              <Badge variant="outline" className="flex items-center gap-1">
-                <Clock className="h-3 w-3" />
-                {formatTimestamp(seoResult.timestamp)}
-              </Badge>
-            )}
+
+            <div className="flex items-center gap-2">
+              {seoResult && (
+                <>
+                  <Badge variant="outline" className="flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    {formatTimestamp(seoResult.timestamp)}
+                  </Badge>
+                  {/* ✅ Export Button */}
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={handleExportExcel}
+                    className="flex items-center gap-1"
+                  >
+                    <Download className="h-4 w-4" />
+                    Export to Excel
+                  </Button>
+                </>
+              )}
+            </div>
           </div>
         </CardHeader>
 
@@ -211,7 +280,7 @@ export default function DashboardSEO() {
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Analyzing... {progress > 0 && `${Math.round(progress)}%`}
+                  Menganalisa... {progress > 0 && `${Math.round(progress)}%`}
                 </>
               ) : (
                 "Mulai Analisis SEO"
@@ -478,14 +547,14 @@ export default function DashboardSEO() {
       {/* Footer - Only show after analysis */}
       {seoResult && (
         <Card>
-          <CardFooter className="flex-col gap-2 text-sm">
+          <CardFooter className="flex-col gap-2 text-sm p-4">
             <div className="flex items-center gap-2 leading-none font-medium">
               SEO analysis completed successfully
               <TrendingUp className="h-4 w-4" />
             </div>
             <p className="text-muted-foreground text-center">
-              This analysis was performed using Google Cloud. Scores are
-              based on lab data and may not reflect real user experience.
+              This analysis was performed using Google Cloud. Scores are based
+              on lab data and may not reflect real user experience.
             </p>
           </CardFooter>
         </Card>

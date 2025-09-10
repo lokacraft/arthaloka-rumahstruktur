@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   },
   description:
     "Rumah Struktur menyediakan layanan konstruksi, arsitektur, dan desain bangunan dengan kualitas terbaik. Solusi pembangunan rumah, renovasi, hingga perencanaan struktur untuk hunian dan komersial.",
+  twitter : {
+    card: "summary_large_image"
+  }
 };
 
 export default function RootLayout({

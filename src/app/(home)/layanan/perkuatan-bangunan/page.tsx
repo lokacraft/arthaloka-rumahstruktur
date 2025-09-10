@@ -42,8 +42,8 @@ export default function Home() {
           { src: "/images/img3.png", alt: "Diskusi tim" },
         ]}
         whatsappLink="https://wa.me/6281234567890"
-        leftWidth="80%"
-        rightWidth="40%"
+        // leftWidth="80%"
+        // rightWidth="40%"
       />
       <InfoSection
         title={

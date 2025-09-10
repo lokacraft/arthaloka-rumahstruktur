@@ -8,43 +8,40 @@ import email from "../../../public/icons/email.png";
 import instagram from "../../../public/icons/instagram.png";
 import facebook from "../../../public/icons/facebook.png";
 import twitter from "../../../public/icons/twitter.png";
+import { FormData } from "@/types/mail-form";
+import formDataSchema from "@/utils/validation/mail-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import ErrorDialog from "./ErrorDialog";
+import SuccessDialog from "./SuccessDialog";
+import { useForm } from "react-hook-form";
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    nama: "",
-    email: "",
-    judul: "",
-    pesan: "",
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(formDataSchema),
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (res.ok) {
-        alert("Pesan berhasil dikirim!");
-        setFormData({ nama: "", email: "", judul: "", pesan: "" });
-      } else {
-        alert("Gagal mengirim pesan.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Terjadi kesalahan.");
+  const onSubmit = async (formData: FormData) => {
+    const res = await fetch("/api/sendEmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+    // const result = await res.json();
+    if (res.ok) {
+      setShowSuccess(true);
+      reset();
+    } else {
+      setShowError(true);
     }
   };
+
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   return (
     <div className="flex md:flex-row flex-col p-[4vh] lg:p-[15vh] bg-[#2F4F4F] font-clash gap-y-10 md:gap-x-[5vw] w-full items-start text-white">
@@ -82,69 +79,114 @@ export default function ContactForm() {
 
         <div className="w-full flex flex-row gap-4 lg:gap-5 items-center">
           <Link href="https://www.instagram.com" aria-label="Visit Instagram">
-            <Image src={instagram} alt="instagram" width={28} height={28} className="lg:w-[40px] lg:h-[40px]" />
+            <Image
+              src={instagram}
+              alt="instagram"
+              width={28}
+              height={28}
+              className="lg:w-[40px] lg:h-[40px]"
+            />
           </Link>
           <Link href="https://www.facebook.com" aria-label="Visit Facebook">
-            <Image src={facebook} alt="facebook" width={28} height={28} className="lg:w-[40px] lg:h-[40px]" />
+            <Image
+              src={facebook}
+              alt="facebook"
+              width={28}
+              height={28}
+              className="lg:w-[40px] lg:h-[40px]"
+            />
           </Link>
           <Link href="https://www.x.com" aria-label="Visit X / Twitter">
-            <Image src={twitter} alt="twitter" width={28} height={28} className="lg:w-[40px] lg:h-[40px]" />
+            <Image
+              src={twitter}
+              alt="twitter"
+              width={28}
+              height={28}
+              className="lg:w-[40px] lg:h-[40px]"
+            />
           </Link>
         </div>
       </div>
 
       {/* BAGIAN KANAN */}
       <div className="w-full md:w-[60%] text-white">
-        <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-3 md:space-y-4"
+        >
           <label className="text-[18px] md:text-[22px] font-light">Nama</label>
-          <input
-            type="text"
-            name="nama"
-            value={formData.nama}
-            onChange={handleChange}
-            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
-            required
-            autoComplete="given-name"
-          />
+          <div>
+            <input
+              type="text"
+              placeholder="Masukkan Nama Anda"
+              {...register("nama")}
+              aria-label="Masukkan Nama Anda"
+              className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
+              required
+              autoComplete="given-name"
+            />
+            {errors.nama && (
+              <span className="text-red-500">{errors.nama.message}</span>
+            )}
+          </div>
 
           <label className="text-[18px] md:text-[22px] font-light">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
-            required
-            autoComplete="on"
-          />
+          <div>
+            <input
+              type="email"
+              placeholder="Masukkan Email Anda"
+              {...register("email")}
+              aria-label="Masukkan Email"
+              className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
+              required
+              autoComplete="on"
+            />
+            {errors.email && (
+              <span className="text-red-500">{errors.email.message}</span>
+            )}
+          </div>
 
-          <label className="text-[18px] md:text-[22px] font-light">Judul Pesan</label>
-          <input
-            type="text"
-            name="judul"
-            value={formData.judul}
-            onChange={handleChange}
-            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
-          />
+          <label className="text-[18px] md:text-[22px] font-light">
+            Judul / Subjek Pesan
+          </label>
+          <div>
+            <input
+              type="text"
+              placeholder="Masukkan Subjek Pesan"
+              aria-label="Masukkan Judul Pesan"
+              {...register("judul")}
+              className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
+            />
+            {errors.judul && (
+              <span className="text-red-500">{errors.judul.message}</span>
+            )}
+          </div>
 
           <label className="text-[18px] md:text-[22px] font-light">Pesan</label>
-          <textarea
-            name="pesan"
-            value={formData.pesan}
-            onChange={handleChange}
-            rows={4}
-            className="w-full min-h-[100px] lg:min-h-[250px] border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
-            required
-          />
+          <div>
+            <textarea
+              placeholder="Masukkan Pesan Anda"
+              {...register("pesan")}
+              aria-label="Masukkan Pesan"
+              rows={4}
+              className="w-full min-h-[100px] lg:min-h-[250px] border border-white bg-transparent rounded-md px-3 py-2 mt-1 md:mt-2 focus:outline-none"
+              required
+            />
+            {errors.pesan && (
+              <span className="text-red-500">{errors.pesan.message}</span>
+            )}
+          </div>
 
           <button
             type="submit"
             className="bg-[#EAEAEA] text-[#008080] font-instrument text-[22px] lg:text-[32px] px-6 md:px-8 py-1 rounded-lg lg:rounded-2xl hover:bg-[#008080] hover:text-[#EAEAEA] transition-all duration-300"
           >
-            Kirim Pesan →
+            {isSubmitting ? "Mengirim Pesan..." : "Kirim Pesan →"}
           </button>
         </form>
       </div>
+      <SuccessDialog open={showSuccess} onClose={() => setShowSuccess(false)} />
+      <ErrorDialog open={showError} onClose={() => setShowError(false)} />
     </div>
   );
 }

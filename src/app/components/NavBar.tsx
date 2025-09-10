@@ -48,8 +48,14 @@ export default function NavBar() {
 
   // fungsi navigasi dengan loader
   const handleNavigation = (href: string) => {
-    setLoading(true);
-    router.push(href);
+    if (href === pathname){
+      setLoading(false);
+      router.push(href);
+    }else{
+      setLoading(true)
+      setMenuOpen(false)
+      router.push(href);
+    }
   };
 
   // hilangkan loader setelah halaman berpindah

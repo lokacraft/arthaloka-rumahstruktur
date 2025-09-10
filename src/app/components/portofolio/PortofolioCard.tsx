@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
+import { useRouter, usePathname } from "next/navigation";
 import { db } from "@/lib/firebase";
 
 type Project = {
   id: string;
+  slug: string;
   title: string;
   tag: string;
   fotoPortofolio: string;
@@ -15,6 +16,10 @@ type Project = {
 export default function PortofolioCard() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const [navigating, setNavigating] = useState(false);
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -24,6 +29,7 @@ export default function PortofolioCard() {
           const docData = doc.data();
           return {
             id: doc.id,
+            slug: docData.slug || "",
             title: docData.title || "",
             tag: docData.tag || "",
             fotoPortofolio: docData.fotoPortofolio || "",
@@ -40,6 +46,11 @@ export default function PortofolioCard() {
     fetchProjects();
   }, []);
 
+  // Reset loader ketika route berubah (halaman baru sudah aktif)
+  useEffect(() => {
+    setNavigating(false);
+  }, [pathname]);
+
   return (
     <section className="font-clash w-full h-full relative p-[4vh] lg:p-[15vh]">
       {/* Heading */}
@@ -47,16 +58,29 @@ export default function PortofolioCard() {
         Jelajahi Proyek Kami
       </h2>
 
+      {/* Loader Overlay */}
+      {navigating && (
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center backdrop-blur-md bg-black/30">
+          <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+          <p className="text-white text-lg font-medium animate-pulse">
+            Memuat Halaman...
+          </p>
+        </div>
+      )}
+
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 w-full h-full mx-auto justify-center items-center justify-items-center">
         {loading
           ? // Skeleton Cards
             Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
           : projects.map((project) => (
-              <Link
+              <button
                 key={project.id}
-                href="" // sementara kosong
-                className="w-full h-full"
+                onClick={() => {
+                  setNavigating(true);
+                  router.push(`/portofolio/${project.slug}`);
+                }}
+                className="w-full h-full text-left"
               >
                 <div
                   className="
@@ -89,7 +113,7 @@ export default function PortofolioCard() {
                     {project.tag}
                   </span>
                 </div>
-              </Link>
+              </button>
             ))}
       </div>
     </section>

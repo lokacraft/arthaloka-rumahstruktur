@@ -1,47 +1,45 @@
 "use client";
 
-import { useState } from "react";
+// import { useState } from "react";
+import { useForm } from "react-hook-form";
 import Image from "next/image";
 import konsultasi from "../../../../public/contactform/konsultasi.png";
 import dukungan from "../../../../public/contactform/dukungan.png";
 import presisi from "../../../../public/contactform/presisi.png";
+import { FormData } from "@/types/mail-form";
+import formDataSchema from "@/utils/validation/mail-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import ErrorDialog from "../ErrorDialog";
+import SuccessDialog from "../SuccessDialog";
+import { useState } from "react";
 
 export default function ContactFormHomePage() {
-  const [formData, setFormData] = useState({
-    nama: "",
-    email: "",
-    judul: "",
-    pesan: "",
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting},
+  } = useForm<FormData>({
+    resolver: zodResolver(formDataSchema),
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (res.ok) {
-        alert("Pesan berhasil dikirim!");
-        setFormData({ nama: "", email: "", judul: "", pesan: "" });
-      } else {
-        alert("Gagal mengirim pesan.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Terjadi kesalahan.");
+  const onSubmit = async (formData: FormData) => {
+    const res = await fetch("/api/sendEmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+    // const result = await res.json();
+    if (res.ok){
+      setShowSuccess(true)
+      reset()
+    }else{
+      setShowError(true)
     }
   };
+
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   return (
     <div className="flex flex-col lg:flex-col p-[8vh] sm:p-[6vh] bg-[#2F4F4F] font-clash gap-y-10 w-full items-start text-left text-white">
@@ -127,69 +125,87 @@ export default function ContactFormHomePage() {
 
         {/* Form (turun ke bawah saat small) */}
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="order-2 lg:order-1 space-y-4 w-full lg:w-[50%]"
         >
           <label className="text-[18px] sm:text-[20px] lg:text-[22px] font-light">
             Nama
           </label>
-          <input
-            type="text"
-            name="nama"
-            value={formData.nama}
-            aria-label="Masukkan Nama"
-            onChange={handleChange}
-            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
-            required
-            autoComplete="given-name"
-          />
+          <div>
+            <input
+              type="text"
+              placeholder="Masukkan Nama Anda"
+              {...register("nama")}
+              aria-label="Masukkan Nama Anda"
+              className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
+              required
+              autoComplete="given-name"
+            />
+            {errors.nama && (
+              <span className="text-red-500">{errors.nama.message}</span>
+            )}
+          </div>
           <label className="text-[18px] sm:text-[20px] lg:text-[22px] font-light">
             Email
           </label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            aria-label="Masukkan Email"
-            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
-            required
-            autoComplete="on"
-          />
+          <div>
+            <input
+              type="email"
+              placeholder="Masukkan Email Anda"
+              {...register("email")}
+              aria-label="Masukkan Email"
+              className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
+              required
+              autoComplete="on"
+            />
+            {errors.email && (
+              <span className="text-red-500">{errors.email.message}</span>
+            )}
+          </div>
           <label className="text-[18px] sm:text-[20px] lg:text-[22px] font-light">
-            Judul Pesan
+            Judul / Subjek Pesan
           </label>
-          <input
-            type="text"
-            name="judul"
-            value={formData.judul}
-            aria-label="Masukkan Judul Pesan"
-            onChange={handleChange}
-            className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
-            autoComplete="on"
-          />
+          <div>
+            <input
+              type="text"
+              placeholder="Masukkan Subjek Pesan"
+              aria-label="Masukkan Judul Pesan"
+              {...register("judul")}
+              className="w-full border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
+              autoComplete="on"
+            />
+            {errors.judul && (
+              <span className="text-red-500">{errors.judul.message}</span>
+            )}
+          </div>
           <label className="text-[18px] sm:text-[20px] lg:text-[22px] font-light">
             Pesan
           </label>
-          <textarea
-            name="pesan"
-            value={formData.pesan}
-            onChange={handleChange}
-            aria-label="Masukkan Pesan"
-            rows={4}
-            className="w-full min-h-[200px] border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
-            required
-          />
+          <div>
+            <textarea
+              placeholder="Masukkan Pesan Anda"
+              {...register("pesan")}
+              aria-label="Masukkan Pesan"
+              rows={4}
+              className="w-full min-h-[200px] border border-white bg-transparent rounded-md px-3 py-2 mt-2 focus:outline-none"
+              required
+            />
+            {errors.pesan && (
+              <span className="text-red-500">{errors.pesan.message}</span>
+            )}
+          </div>
 
           <button
             type="submit"
             aria-label="Kirim Pesan"
-            className="bg-[#EAEAEA] text-[#008080] font-instrument text-[24px] sm:text-[28px] lg:text-[32px] px-8 py-2 rounded-2xl hover:bg-[#008080] hover:text-[#EAEAEA] transition-all duration-300"
+            className="bg-[#EAEAEA] cursor-pointer text-[#008080] font-instrument text-[24px] sm:text-[28px] lg:text-[32px] px-8 py-2 rounded-2xl hover:bg-[#008080] hover:text-[#EAEAEA] transition-all duration-300"
           >
-            Kirim Pesan →
+            {isSubmitting ? "Mengirim Pesan..." : "Kirim Pesan →"}
           </button>
         </form>
       </div>
+      <SuccessDialog open={showSuccess} onClose={() => setShowSuccess(false)} />
+      <ErrorDialog open={showError} onClose={() => setShowError(false)} />
     </div>
   );
 }

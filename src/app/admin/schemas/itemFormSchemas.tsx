@@ -12,6 +12,12 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/app/components/ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/app/components/ui/tooltip";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { Textarea } from "@/app/components/ui/textarea";
@@ -19,7 +25,8 @@ import { DatePicker } from "@/app/components/ui/date-picker";
 import { Timestamp } from "firebase/firestore";
 import TiptapEditor from "@/app/components/admin/TiptapEditor";
 import { showToast } from "@/app/components/ui/sonner";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle, XCircle, ImagePlus, Trash2, Eye } from "lucide-react";
+import Image from "next/image";
 
 import {
   Select,
@@ -52,6 +59,7 @@ type FieldType =
   | "boolean"
   | "tags"
   | "image"
+  | "imageArray"
   | "tiptap";
 
 interface FieldSchema {
@@ -73,7 +81,6 @@ const categorySchemas: Record<string, FieldSchema[]> = {
     { name: "logoPartner", label: "Logo Partner", type: "image" },
   ],
   portofolio: [
-    // <-- Diperbarui dari 'products1' menjadi 'products'
     {
       name: "title",
       label: "Title",
@@ -81,12 +88,51 @@ const categorySchemas: Record<string, FieldSchema[]> = {
       placeholder: "Judul Portofolio...",
     },
     {
+      name: "slug",
+      label: "Slug",
+      type: "text",
+      placeholder: "slug-portofolio...",
+    },
+    {
+      name: "description",
+      label: "Description",
+      type: "textarea",
+      placeholder: "Deskripsi portofolio...",
+    },
+    {
+      name: "tipePekerjaan",
+      label: "Tipe Pekerjaan",
+      type: "text",
+      placeholder: "Contoh: Arsitektur, Konstruksi",
+    },
+    {
+      name: "pekerjaan",
+      label: "Pekerjaan",
+      type: "text",
+      placeholder: "Jenis pekerjaan...",
+    },
+    {
+      name: "lokasi",
+      label: "Lokasi",
+      type: "text",
+      placeholder: "Lokasi proyek...",
+    },
+    {
       name: "tag",
       label: "Tags (pisahkan koma)",
       type: "tags",
       placeholder: "Konstruksi, Hitung Struktur",
     },
-    { name: "fotoPortofolio", label: "Foto Portofolio", type: "image" }, // Input akan berupa upload file
+    {
+      name: "fotoPortofolio",
+      label: "Foto Thumbnail",
+      type: "image",
+    },
+    {
+      name: "fotoDokumentasi",
+      label: "Foto Dokumentasi",
+      type: "imageArray", // untuk multiple images
+    },
   ],
   testimoni: [
     {
@@ -219,6 +265,39 @@ export const ItemForm = ({
               if (!url) return undefined;
               return url.split("/").pop(); // ambil bagian terakhir dari URL
             }
+
+          case "imageArray":
+            if (Array.isArray(val)) {
+              const urls: string[] = [];
+
+              for (const fileOrUrl of val) {
+                if (fileOrUrl instanceof File) {
+                  // Upload baru
+                  const newKey = `${Date.now()}-${fileOrUrl.name}`;
+                  const formDataUpload = new FormData();
+                  formDataUpload.append("file", fileOrUrl);
+                  formDataUpload.append("key", newKey);
+
+                  const res = await fetch("/api/upload", {
+                    method: "POST",
+                    body: formDataUpload,
+                  });
+
+                  if (!res.ok) throw new Error("Upload gagal");
+
+                  const data = await res.json();
+                  urls.push(data.url);
+                } else if (typeof fileOrUrl === "string") {
+                  // sudah berupa url → biarkan
+                  urls.push(fileOrUrl);
+                }
+              }
+
+              payload[field.name] = urls;
+            } else {
+              payload[field.name] = [];
+            }
+            break;
 
           case "image":
             if (val instanceof File) {
@@ -517,7 +596,7 @@ export const ItemForm = ({
                     />
                     <label htmlFor={field.name}>
                       <span className="inline-flex items-center px-4 py-2 rounded-lg border cursor-pointer">
-                        Browse file
+                        Upload file
                       </span>
                     </label>
                   </div>
@@ -548,6 +627,146 @@ export const ItemForm = ({
                   </button>
                 </div>
               )}
+            </div>
+          </div>
+        );
+      }
+
+      case "imageArray": {
+        const files = Array.isArray(value) ? value : [];
+
+        const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
+          e.preventDefault();
+          setIsDragging(false);
+          const newFiles = Array.from(e.dataTransfer.files);
+          if (newFiles.length > 0) {
+            handleChange(field.name, [...files, ...newFiles]);
+          }
+        };
+
+        const onBrowseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+          const newFiles = e.target.files ? Array.from(e.target.files) : [];
+          if (newFiles.length > 0) {
+            handleChange(field.name, [...files, ...newFiles]);
+          }
+        };
+
+        const prevent = (e: React.DragEvent<HTMLDivElement>) => {
+          e.preventDefault();
+          setIsDragging(true);
+        };
+
+        const handleDragLeave = () => setIsDragging(false);
+
+        const handleRemove = (index: number) => {
+          const updated = [...files];
+          updated.splice(index, 1);
+          handleChange(field.name, updated);
+        };
+
+        return (
+          <div className="col-span-3">
+            <div
+              onDrop={onDrop}
+              onDragOver={prevent}
+              onDragEnter={prevent}
+              onDragLeave={handleDragLeave}
+              className={`w-full border-2 border-dashed rounded-xl p-4 text-center transition relative overflow-hidden
+          ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"} 
+        `}
+            >
+              <p className="text-sm text-muted-foreground">
+                Drag & drop gambar ke sini, atau klik untuk pilih file
+              </p>
+              <div className="mt-2">
+                <input
+                  id={field.name}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={onBrowseChange}
+                  className="hidden"
+                />
+                <label htmlFor={field.name}>
+                  <span className="inline-flex items-center px-4 py-2 rounded-lg border cursor-pointer">
+                    Browse file
+                  </span>
+                </label>
+              </div>
+
+              {/* Daftar file yang sudah ditambahkan */}
+              <div className="mt-4 space-y-2 text-left">
+                {files.map((f, idx) => {
+                  const name = f instanceof File ? f.name : f.split("/").pop();
+                  const imgUrl = f instanceof File ? URL.createObjectURL(f) : f;
+
+                  return (
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between bg-gray-100 px-3 py-2 rounded-md relative group"
+                    >
+                      <div className="flex flex-row justify-center items-center gap-3">
+                        <ImagePlus
+                          className="stroke-1"
+                          aria-label="Image File"
+                        />
+                        <span className="truncate text-sm">{name}</span>
+                      </div>
+
+                      <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition ml-2">
+                        {/* Tombol Lihat */}
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Dialog>
+                                <DialogTrigger asChild>
+                                  <button
+                                    type="button"
+                                    className="text-blue-600 hover:text-blue-800"
+                                  >
+                                    <Eye className="stroke-1" />
+                                  </button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-xl">
+                                  <div className="relative w-full aspect-video">
+                                    <Image
+                                      src={imgUrl}
+                                      alt={name || "Preview"}
+                                      fill
+                                      className="object-contain rounded-lg"
+                                    />
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Lihat gambar</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+
+                        {/* Tombol Hapus */}
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <button
+                                type="button"
+                                onClick={() => handleRemove(idx)}
+                                className="text-red-600 hover:text-red-800"
+                              >
+                                <Trash2 className="stroke-1" />
+                              </button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Hapus gambar</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         );

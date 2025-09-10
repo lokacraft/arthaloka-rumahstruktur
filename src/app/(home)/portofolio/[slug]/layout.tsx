@@ -3,12 +3,16 @@ import { ReactNode } from "react";
 import { db } from "@/lib/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 
-interface BlogData {
-  title: string;
-  isiBlog: string;
-  fotoBlog: string;
-  ringkasan: string;
+interface PortofolioData {
+  id: string;
   slug: string;
+  title: string;
+  description: string;
+  tipePekerjaan: string;
+  pekerjaan: string;
+  lokasi: string;
+  fotoPortofolio: string;
+  fotoDokumentasi?: string[];
 }
 
 // build-safe generateMetadata tanpa mendeklarasikan tipe params manual
@@ -17,25 +21,25 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
   const slug = params.slug;
 
   try {
-    const q = query(collection(db, "blogs"), where("slug", "==", slug));
+    const q = query(collection(db, "portofolio"), where("slug", "==", slug));
     const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
-      const docData = snapshot.docs[0].data() as BlogData;
+      const docData = snapshot.docs[0].data() as PortofolioData;
 
       return {
         title: {
-          absolute: `Blog Post - ${docData.title}`,
+          absolute: `Portofolio - ${docData.title}`,
         },
         description:
-          docData.ringkasan.replace(/<[^>]+>/g, "").slice(0, 150) + "...",
+          docData.description.replace(/<[^>]+>/g, "").slice(0, 150) + "...",
         openGraph: {
           title: `${docData.title} | Rumah Struktur`,
           description:
-            docData.ringkasan.replace(/<[^>]+>/g, "").slice(0, 200) + "...",
+            docData.description.replace(/<[^>]+>/g, "").slice(0, 200) + "...",
           images: [
             {
-              url: docData.fotoBlog,
+              url: docData.fotoPortofolio,
             },
           ],
         },
@@ -43,8 +47,8 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
           card: "summary_large_image",
           title: `${docData.title} | Rumah Struktur`,
           description:
-            docData.ringkasan.replace(/<[^>]+>/g, "").slice(0, 200) + "...",
-          images: [docData.fotoBlog],
+            docData.description.replace(/<[^>]+>/g, "").slice(0, 200) + "...",
+          images: [docData.fotoPortofolio],
         },
       };
     }
@@ -54,9 +58,9 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 
   // fallback jika data tidak ditemukan
   return {
-    title: "Blog | Rumah Struktur",
+    title: "Portofolio | Rumah Struktur",
     description:
-      "Temukan artikel menarik seputar konstruksi, analisis struktur, geoteknik, soil investigation, hingga teknologi bangunan hanya di Rumah Struktur.",
+      "Temukan hasil karya Rumah Struktur: mulai dari konstruksi, analisis struktur, geoteknik, soil investigation, hingga teknologi bangunan.",
   };
 }
 

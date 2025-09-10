@@ -4,10 +4,18 @@ import { collection, getDocs } from "firebase/firestore";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Ambil slug dari collection blogs
-  const snapshot = await getDocs(collection(db, "blogs"));
-  const blogUrls : MetadataRoute.Sitemap = snapshot.docs.map((doc) => ({
+  const blogSnapshot = await getDocs(collection(db, "blogs"));
+  const blogUrls: MetadataRoute.Sitemap = blogSnapshot.docs.map((doc) => ({
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/blogs/${doc.data().slug}`,
   }));
+
+  // Ambil slug dari collection portofolio
+  const portofolioSnapshot = await getDocs(collection(db, "portofolio"));
+  const portofolioUrls: MetadataRoute.Sitemap = portofolioSnapshot.docs.map(
+    (doc) => ({
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/portofolio/${doc.data().slug}`,
+    })
+  );
 
   return [
     // URL statis
@@ -24,5 +32,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${process.env.NEXT_PUBLIC_BASE_URL}/blogs` },
     // Tambahkan URL blog dinamis
     ...blogUrls,
+    ...portofolioUrls
   ];
 }

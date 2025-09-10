@@ -192,27 +192,27 @@ function TestimonialSkeleton() {
       {/* Quote shimmer */}
       <div className="space-y-3 flex-grow">
         <div className="h-5 sm:h-6 w-5/6 bg-neutral-300 rounded overflow-hidden relative">
-          <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
         </div>
         <div className="h-5 sm:h-6 w-4/6 bg-neutral-300 rounded overflow-hidden relative">
-          <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
         </div>
         <div className="h-5 sm:h-6 w-3/6 bg-neutral-300 rounded overflow-hidden relative">
-          <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
         </div>
       </div>
 
       {/* Footer shimmer */}
       <div className="flex items-center gap-3 mt-6">
         <div className="rounded-full bg-neutral-300 w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 lg:w-12 lg:h-12 relative overflow-hidden">
-          <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%] rounded-full" />
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%] rounded-full" />
         </div>
         <div className="space-y-2 flex-1">
           <div className="h-4 sm:h-5 w-1/2 bg-neutral-300 rounded relative overflow-hidden">
-            <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
           </div>
           <div className="h-3 sm:h-4 w-1/3 bg-neutral-300 rounded relative overflow-hidden">
-            <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
+            <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-300 via-neutral-100 to-neutral-300 bg-[length:200%_100%]" />
           </div>
         </div>
       </div>

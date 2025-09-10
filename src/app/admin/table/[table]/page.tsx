@@ -53,7 +53,6 @@ export default function TablePage() {
       item.fotoPortofolio ||
       item.fotoBlog;
 
-      
     let imageKey: string | undefined;
 
     if (imageUrl) {
@@ -79,32 +78,46 @@ export default function TablePage() {
     try {
       const item = deletingItem;
 
-      const imageUrl: string | undefined =
-        item.fotoProfil ||
-        item.logoPartner ||
-        item.fotoPortofolio ||
-        item.fotoBlog;
+      // ambil semua kemungkinan url gambar
+      const allImages: string[] = [];
 
-      if (imageUrl) {
-        const urlObj = new URL(imageUrl);
-        const key = urlObj.pathname.split("/").pop();
-        if (key) {
-          const res = await fetch(`/api/upload?key=${key}`, {
-            method: "DELETE",
-          });
-          if (!res.ok) throw new Error("Gagal menghapus file dari server");
+      if (item.fotoProfil) allImages.push(item.fotoProfil);
+      if (item.logoPartner) allImages.push(item.logoPartner);
+      if (item.fotoPortofolio) allImages.push(item.fotoPortofolio);
+      if (item.fotoBlog) allImages.push(item.fotoBlog);
+      if (Array.isArray(item.fotoDokumentasi)) {
+        allImages.push(...item.fotoDokumentasi);
+      }
+
+      // delete semua file image
+      for (const imageUrl of allImages) {
+        try {
+          const urlObj = new URL(imageUrl);
+          const key = urlObj.pathname.split("/").pop();
+          if (key) {
+            const res = await fetch(`/api/upload?key=${key}`, {
+              method: "DELETE",
+            });
+            if (!res.ok) {
+              console.warn(`Gagal hapus file: ${key}`);
+            }
+          }
+        } catch (err) {
+          console.error("Error parsing image url:", imageUrl, err);
         }
       }
 
+      // delete data utama
       await deleteData(table, item.id);
 
+      // refresh data
       const refreshed = await getAllData(table);
       setData(refreshed);
 
       setDeleteDialogOpen(false);
       showToast("Data berhasil dihapus!", "success");
-    } catch (err) {
-      console.error("Error deleting:", err);
+    } catch {
+      // console.error("Error deleting:", err);
       showToast("Gagal menghapus data!", "error");
     } finally {
       setIsDeleting(false);

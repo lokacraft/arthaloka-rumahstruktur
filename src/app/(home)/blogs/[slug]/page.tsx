@@ -32,6 +32,8 @@ export default async function BlogPage({
   if (snapshot.empty) return <p>Blog tidak ditemukan</p>;
 
   const docData = snapshot.docs[0].data();
+
+  
   let tanggalStr = "";
   if (docData.tanggal instanceof Timestamp) {
     tanggalStr = docData.tanggal.toDate().toLocaleDateString("id-ID", {

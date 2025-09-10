@@ -63,9 +63,9 @@ export default function HighlightBlog() {
   }, []);
 
   return (
-    <section className="px-[15vh] pt-[25vh] w-full h-full font-clash">
+    <section className="lg:px-[15vh] px-[4vh] pt-[25vh] w-full h-full font-clash">
       {/* Heading selalu tampil */}
-      <h2 className="text-[82px] text-left font-medium mb-6">Blog</h2>
+      <h2 className="lg:text-[82px] md:text-[62px] text-[42px] text-left font-medium mb-6">Blog</h2>
 
       {/* Konten highlight */}
       {loading ? <HighlightSkeleton /> : artikel && <HighlightContent artikel={artikel} />}
@@ -78,15 +78,15 @@ function HighlightContent({ artikel }: { artikel: Artikel }) {
   return (
     <Link
       href={artikel.slug}
-      className="flex flex-col md:flex-row gap-6 items-start bg-transparent"
+      className="flex flex-col md:flex-row lg:gap-6 gap-2 items-start"
     >
       {/* Gambar */}
-      <div className="relative w-full md:w-[500px] h-[280px] md:h-[250px] rounded-2xl overflow-hidden flex-shrink-0">
+      <div className="relative w-full min-w-[200px] min-h-[220px] max-h-[280px] justify-center items-center flex-1 rounded-2xl overflow-hidden">
         <Image
           src={artikel.image}
           alt={artikel.title}
           fill
-          className="object-cover rounded-2xl"
+          className="object-cover object-center rounded-2xl flex-1"
         />
       </div>
 
@@ -97,7 +97,7 @@ function HighlightContent({ artikel }: { artikel: Artikel }) {
           {artikel.category.map((cat, i) => (
             <span
               key={i}
-              className="text-[14px] px-4 border border-[#008080] text-[#008080] rounded-md font-instrument"
+              className="lg:text-md text-sm px-4 border border-[#008080] text-[#008080] rounded-md font-instrument"
             >
               {cat}
             </span>
@@ -105,13 +105,13 @@ function HighlightContent({ artikel }: { artikel: Artikel }) {
         </div>
 
         {/* Judul */}
-        <h3 className="text-[48px] font-medium mb-4 leading-tight">{artikel.title}</h3>
+        <h3 className="xl:text-4xl md:text-3xl text-2xl font-medium mb-4 leading-tight">{artikel.title}</h3>
 
         {/* Tanggal & Author */}
-        <div className="flex flex-row gap-6 items-center text-[20px] font-light">
-          <p>{artikel.date}</p>
+        <div className="flex flex-row gap-6 items-center lg:text-xl md:text-md font-light">
+          <p className='text-[14px] sm:text-[16px] xl:text-[18px] text-black font-light'>{artikel.date}</p>
           <div className="flex flex-row gap-2 items-center font-medium">
-            <div className="rounded-full size-3 bg-[#008080] text-[20px]" />
+            <div className="rounded-full lg:size-3 size-2 bg-[#008080] lg:text-[20px] text-[14px]" />
             {artikel.author}
           </div>
         </div>
