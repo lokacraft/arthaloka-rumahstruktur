@@ -7,10 +7,10 @@ import ArtikelCarousel from "../../components/landing-page/ArtikelCarousel";
 import BottomBannerHomePage from "@/app/components/landing-page/BottomBannerHomePage";
 import ContactFormHomePage from "@/app/components/landing-page/ContactFormHomePage";
 import { Metadata } from "next";
-import nodemailer from "nodemailer";
-import { FormData } from "@/types/mail-form";
-import { success } from "zod";
-import { error } from "console";
+// import nodemailer from "nodemailer";
+// import { FormData } from "@/types/mail-form";
+// import { success } from "zod";
+// import { error } from "console";
 
 export const metadata: Metadata = {
   title: "Home",

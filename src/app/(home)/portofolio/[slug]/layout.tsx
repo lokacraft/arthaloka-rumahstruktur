@@ -18,7 +18,7 @@ interface PortofolioData {
 // build-safe generateMetadata tanpa mendeklarasikan tipe params manual
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function generateMetadata({ params }: any): Promise<Metadata> {
-  const slug = params.slug;
+  const { slug } = await params;
 
   try {
     const q = query(collection(db, "portofolio"), where("slug", "==", slug));

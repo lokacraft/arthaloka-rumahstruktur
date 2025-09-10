@@ -25,7 +25,14 @@ import { DatePicker } from "@/app/components/ui/date-picker";
 import { Timestamp } from "firebase/firestore";
 import TiptapEditor from "@/app/components/admin/TiptapEditor";
 import { showToast } from "@/app/components/ui/sonner";
-import { CheckCircle, XCircle, ImagePlus, Trash2, Eye } from "lucide-react";
+import {
+  CheckCircle,
+  XCircle,
+  ImagePlus,
+  Trash2,
+  Eye,
+  CornerUpLeft,
+} from "lucide-react";
 import Image from "next/image";
 
 import {
@@ -67,6 +74,7 @@ interface FieldSchema {
   label: string;
   type: FieldType;
   placeholder?: string;
+  required?: boolean;
 }
 
 // --- SKEMA BARU YANG SUDAH DISESUAIKAN DENGAN COLUMNS.TSX ANDA ---
@@ -212,6 +220,16 @@ export const ItemForm = ({
   const [isDragging, setIsDragging] = React.useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  const [deletedKeys, setDeletedKeys] = useState<string[]>([]);
+
+  function markForRemove(name: string) {
+    setDeletedKeys((prev) => [...prev, name]);
+  }
+
+  function undoRemove(name: string) {
+    setDeletedKeys((prev) => prev.filter((k) => k !== name));
+  }
+
   useEffect(() => {
     if (initialData) {
       setFormData(initialData);
@@ -224,6 +242,11 @@ export const ItemForm = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  function getKeyFromUrl(url: string | undefined) {
+    if (!url) return undefined;
+    return url.split("/").pop(); // ambil bagian terakhir dari URL
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true); // mulai loader
@@ -232,6 +255,34 @@ export const ItemForm = ({
       // ambil schema untuk kategori ini
       const schema = categorySchemas[category] || [];
       const payload: Record<string, any> = {};
+
+      // === VALIDASI FIELD WAJIB ===
+      for (const field of schema) {
+        const val = formData[field.name];
+        const isRequired = field.required !== false;
+
+        if (field.type === "imageArray" && isRequired) {
+          if (!Array.isArray(val) || val.length === 0) {
+            setIsSaving(false);
+            showToast(
+              `Field "${field.label}" harus berisi minimal 1 gambar!`,
+              "error",
+              <XCircle />
+            );
+            return;
+          }
+        }
+
+        if (isRequired && (val === undefined || val === "" || val === null)) {
+          setIsSaving(false);
+          showToast(
+            `Field "${field.label}" tidak boleh kosong!`,
+            "error",
+            <XCircle />
+          );
+          return;
+        }
+      }
 
       for (const field of schema) {
         const val = formData[field.name];
@@ -261,18 +312,48 @@ export const ItemForm = ({
             }
             break;
 
-            function getKeyFromUrl(url: string | undefined) {
-              if (!url) return undefined;
-              return url.split("/").pop(); // ambil bagian terakhir dari URL
-            }
-
           case "imageArray":
             if (Array.isArray(val)) {
               const urls: string[] = [];
 
+              // === 1. Hapus file yang ditandai ===
+              if (isEditMode && deletedKeys.length > 0) {
+                for (const key of deletedKeys) {
+                  try {
+                    // pastikan tipe datanya string
+                    const normalizedKey = Array.isArray(key) ? key[0] : key;
+
+                    console.log("Deleting key:", normalizedKey);
+
+                    // Gunakan DELETE method untuk menghapus file
+                    const res = await fetch(
+                      `/api/upload?key=${encodeURIComponent(normalizedKey)}`,
+                      {
+                        method: "DELETE",
+                      }
+                    );
+
+                    if (!res.ok) {
+                      const errorData = await res.json();
+                      console.error("Delete error:", errorData);
+                      throw new Error(
+                        `Gagal menghapus file ${normalizedKey} di Cloudflare: ${errorData.error}`
+                      );
+                    }
+
+                    console.log(`File ${normalizedKey} berhasil dihapus`);
+                  } catch (error) {
+                    console.error(`Error deleting file ${key}:`, error);
+                    // Anda bisa memilih untuk melanjutkan atau throw error
+                    // throw error; // uncomment jika ingin stop process ketika ada error
+                  }
+                }
+              }
+
+              // === 2. Process existing URLs and new files ===
               for (const fileOrUrl of val) {
                 if (fileOrUrl instanceof File) {
-                  // Upload baru
+                  // Upload file baru
                   const newKey = `${Date.now()}-${fileOrUrl.name}`;
                   const formDataUpload = new FormData();
                   formDataUpload.append("file", fileOrUrl);
@@ -283,17 +364,28 @@ export const ItemForm = ({
                     body: formDataUpload,
                   });
 
-                  if (!res.ok) throw new Error("Upload gagal");
+                  if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(`Upload gagal: ${errorData.error}`);
+                  }
 
                   const data = await res.json();
                   urls.push(data.url);
                 } else if (typeof fileOrUrl === "string") {
-                  // sudah berupa url → biarkan
-                  urls.push(fileOrUrl);
+                  // File yang sudah ada (URL)
+                  const key = getKeyFromUrl(fileOrUrl);
+
+                  // Hanya tambahkan ke urls jika tidak ditandai untuk dihapus
+                  if (!deletedKeys.includes(key || "")) {
+                    urls.push(fileOrUrl);
+                  }
                 }
               }
 
               payload[field.name] = urls;
+
+              // Reset deletedKeys setelah berhasil
+              setDeletedKeys([]);
             } else {
               payload[field.name] = [];
             }
@@ -658,12 +750,6 @@ export const ItemForm = ({
 
         const handleDragLeave = () => setIsDragging(false);
 
-        const handleRemove = (index: number) => {
-          const updated = [...files];
-          updated.splice(index, 1);
-          handleChange(field.name, updated);
-        };
-
         return (
           <div className="col-span-3">
             <div
@@ -672,8 +758,8 @@ export const ItemForm = ({
               onDragEnter={prevent}
               onDragLeave={handleDragLeave}
               className={`w-full border-2 border-dashed rounded-xl p-4 text-center transition relative overflow-hidden
-          ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"} 
-        `}
+    ${isDragging ? "border-blue-500 bg-blue-50" : "border-gray-300"} 
+  `}
             >
               <p className="text-sm text-muted-foreground">
                 Drag & drop gambar ke sini, atau klik untuk pilih file
@@ -699,66 +785,81 @@ export const ItemForm = ({
                 {files.map((f, idx) => {
                   const name = f instanceof File ? f.name : f.split("/").pop();
                   const imgUrl = f instanceof File ? URL.createObjectURL(f) : f;
+                  const isDeleted = deletedKeys.includes(name || "");
 
                   return (
                     <div
                       key={idx}
-                      className="flex items-center justify-between bg-gray-100 px-3 py-2 rounded-md relative group"
+                      className="flex items-center justify-between bg-gray-100 px-2 py-2 rounded-md relative group"
                     >
-                      <div className="flex flex-row justify-center items-center gap-3">
+                      <div className="flex flex-row overflow-clip w-[70%] justify-start items-center gap-1 ">
                         <ImagePlus
-                          className="stroke-1"
+                          className={`stroke-1 w-[15%]  ${
+                            isDeleted ? "line-through text-gray-400" : ""
+                          }`}
                           aria-label="Image File"
                         />
-                        <span className="truncate text-sm">{name}</span>
+                        <span
+                          className={`truncate text-sm w-[70%]  ${
+                            isDeleted ? "line-through text-gray-400" : ""
+                          }`}
+                        >
+                          {name}
+                        </span>
                       </div>
 
                       <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition ml-2">
-                        {/* Tombol Lihat */}
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Dialog>
-                                <DialogTrigger asChild>
-                                  <button
-                                    type="button"
-                                    className="text-blue-600 hover:text-blue-800"
-                                  >
-                                    <Eye className="stroke-1" />
-                                  </button>
-                                </DialogTrigger>
-                                <DialogContent className="sm:max-w-xl">
-                                  <div className="relative w-full aspect-video">
-                                    <Image
-                                      src={imgUrl}
-                                      alt={name || "Preview"}
-                                      fill
-                                      className="object-contain rounded-lg"
-                                    />
-                                  </div>
-                                </DialogContent>
-                              </Dialog>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Lihat gambar</p>
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
+                        <Dialog>
+                          <DialogTitle className="hidden">Image</DialogTitle>
+                          <DialogTrigger asChild>
+                            <button
+                              type="button"
+                              className="text-blue-600 hover:text-blue-800"
+                            >
+                              <Eye className="stroke-1" />
+                            </button>
+                          </DialogTrigger>
+                          <DialogContent className="w-[75vw] md:w-[95vw] max-w-3xl h-[40vh] md:h-[60vh] max-h-[600px] p-2 md:p-8">
+                            <div className="relative w-full h-full flex items-center justify-center p-8">
+                              <Image
+                                src={imgUrl}
+                                alt={name || "Preview"}
+                                fill
+                                className="object-contain rounded-lg"
+                                sizes="(max-width: 768px) 95vw, (max-width: 1200px) 80vw, 70vw"
+                              />
+                            </div>
+                          </DialogContent>
+                        </Dialog>
 
-                        {/* Tombol Hapus */}
+                        {/* Hapus / Undo */}
                         <TooltipProvider>
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <button
                                 type="button"
-                                onClick={() => handleRemove(idx)}
-                                className="text-red-600 hover:text-red-800"
+                                onClick={() =>
+                                  isDeleted
+                                    ? undoRemove(name || "")
+                                    : markForRemove(name || "")
+                                }
+                                className={
+                                  isDeleted
+                                    ? "text-green-600 hover:text-green-800"
+                                    : "text-red-600 hover:text-red-800"
+                                }
                               >
-                                <Trash2 className="stroke-1" />
+                                {isDeleted ? (
+                                  <CornerUpLeft className="stroke-1" />
+                                ) : (
+                                  <Trash2 className="stroke-1" />
+                                )}
                               </button>
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Hapus gambar</p>
+                              <p>
+                                {isDeleted ? "Batalkan hapus" : "Hapus gambar"}
+                              </p>
                             </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>

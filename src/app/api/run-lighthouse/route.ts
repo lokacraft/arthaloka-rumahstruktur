@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     // Validasi URL
     try {
       new URL(targetUrl);
-    } catch (err) {
+    } catch {
       return NextResponse.json(
         { error: 'Invalid URL provided' },
         { status: 400 }

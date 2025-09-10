@@ -2,7 +2,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, FileEdit, Trash2 } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import {
   DropdownMenu,
@@ -197,13 +197,16 @@ const ActionsCell: React.FC<{
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel className="hidden">Actions</DropdownMenuLabel>
-        <DropdownMenuItem onClick={() => onEdit(item)}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onEdit(item)} className="justify-between">
+          Edit <FileEdit className="stroke-1 text-black" />
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => onDelete(item)}
-          className="text-red-600"
+          className="text-red-600 justify-between"
         >
           Delete
+          <Trash2 className="stroke-1 text-red-600"/>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -334,7 +337,7 @@ const getPortofolioColumns = (
       if (!imgs || imgs.length === 0) return "-";
       return (
         <div className="flex gap-2">
-            <ViewImageArrayDialog images={imgs} alt="Foto Dokumentasi" />
+          <ViewImageArrayDialog images={imgs} alt="Foto Dokumentasi" />
         </div>
       );
     },
