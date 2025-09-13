@@ -21,17 +21,17 @@ interface BlogDetail {
 export default function BlogContent({ blog }: { blog: BlogDetail }) {
 
   return (
-    <section className="px-6 md:p-[4vh] lg:p-[15vh] font-clash my-12 md:my-16 text-black">
+    <section className="px-6 md:p-[4vh] lg:p-[15vh] font-clash my-20 md:my-16 text-black">
       <Link
         href="/blogs"
-        className="flex flex-row justify-start items-center space-x-6 mb-20 px-6 md:px-[4vh] lg:px-[15vh]"
+        className="flex flex-row justify-start items-center space-x-6 my-10 px-6 md:px-[4vh] lg:px-[15vh]"
       >
-        <Image src={ArrowLeft} alt="Arrow Left" />
-        <p className="text-[28px] lg:text-[44px] font-medium">Kembali ke Blog</p>
+        <Image src={ArrowLeft} width={50} height={10} alt="Arrow Left" />
+        <p className="text-[20px] md:text-[36px] xl:text-[40px] font-medium">Kembali ke Blog</p>
       </Link>
 
       {/* Tanggal + Author */}
-      <div className="flex justify-start xl:gap-6 text-black mb-4 text-[14px] lg:text-[20px] px-6 md:px-[4vh] lg:px-[15vh]">
+      <div className="flex justify-start xl:gap-6 gap-3 text-black mb-4 text-[14px] lg:text-[20px] px-6 md:px-[4vh] lg:px-[15vh]">
         <span>{blog.tanggal}</span>
         <div className="flex flex-row gap-2 justify-center items-center">
           <div className="rounded-full size-2.5 sm:size-3 bg-[#008080]" />
@@ -40,7 +40,7 @@ export default function BlogContent({ blog }: { blog: BlogDetail }) {
       </div>
 
       {/* Title */}
-      <h1 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[54px] font-medium mb-4 w-[70%] px-6 md:px-[4vh] lg:px-[15vh]">
+      <h1 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-medium mb-4 w-full px-6 md:px-[4vh] lg:px-[15vh]">
         {blog.title}
       </h1>
 
@@ -49,7 +49,7 @@ export default function BlogContent({ blog }: { blog: BlogDetail }) {
         {blog.tags.map((tag, i) => (
           <span
             key={i}
-            className="text-[12px] sm:text-[13px] md:text-[14px] px-3 py-1 border-[1.5px] border-[#008080] text-[#008080] rounded-md font-instrument"
+            className="text-[12px] cursor-default sm:text-[13px] md:text-[14px] px-3 py-1 border-[1.5px] border-[#008080] text-[#008080] rounded-md font-instrument"
           >
             {tag}
           </span>
@@ -63,7 +63,7 @@ export default function BlogContent({ blog }: { blog: BlogDetail }) {
 
       {/* Isi Blog */}
       <div
-        className="blogContent ml-10 md:ml-[7vh] lg:ml-[20vh] w-[70%] justify-self-end mt-24"
+        className="blogContent ml-10 md:ml-[7vh] lg:ml-[20vh] w-[70%] justify-self-end xl:mt-24 mt-10"
         dangerouslySetInnerHTML={{ __html: blog.isiBlog }}
       />
 

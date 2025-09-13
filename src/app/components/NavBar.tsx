@@ -48,12 +48,12 @@ export default function NavBar() {
 
   // fungsi navigasi dengan loader
   const handleNavigation = (href: string) => {
-    if (href === pathname){
+    if (href === pathname) {
       setLoading(false);
       router.push(href);
-    }else{
-      setLoading(true)
-      setMenuOpen(false)
+    } else {
+      setLoading(true);
+      setMenuOpen(false);
       router.push(href);
     }
   };
@@ -127,18 +127,20 @@ export default function NavBar() {
                   <ul className="flex flex-col p-4 space-y-2">
                     {layanan.map((item, i) => (
                       <li key={i}>
-                        <button
-                          onClick={() => handleNavigation(item.href)}
-                          aria-label={item.title}
-                          className={`flex w-full items-center justify-between rounded-md px-2 py-2 transition-all duration-300 ${
-                            pathname === item.href
-                              ? "text-[#008080] bg-[#008080]/10"
-                              : "text-black/70 hover:bg-[#008080]/20"
-                          }`}
-                        >
-                          {item.title}
-                          <ChevronRight size={18} />
-                        </button>
+                        <Link href={item.href}>
+                          <button
+                            onClick={() => handleNavigation(item.href)}
+                            aria-label={item.title}
+                            className={`flex w-full items-center justify-between rounded-md px-2 py-2 transition-all duration-300 ${
+                              pathname === item.href
+                                ? "text-[#008080] bg-[#008080]/10"
+                                : "text-black/70 hover:bg-[#008080]/20"
+                            }`}
+                          >
+                            {item.title}
+                            <ChevronRight size={18} />
+                          </button>
+                        </Link>
                       </li>
                     ))}
                   </ul>
