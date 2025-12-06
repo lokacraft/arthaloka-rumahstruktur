@@ -123,7 +123,7 @@ export default function NavBar() {
               </button>
 
               {open && (
-                <div className="absolute left-0 mt-8 w-[26rem] rounded-xl shadow-lg bg-[#EAEAEA]">
+                <div className="z-50 absolute left-0 mt-8 w-[26rem] rounded-xl shadow-lg bg-[#EAEAEA]">
                   <ul className="flex flex-col p-4 space-y-2">
                     {layanan.map((item, i) => (
                       <li key={i}>
