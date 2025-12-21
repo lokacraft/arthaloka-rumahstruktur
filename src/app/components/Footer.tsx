@@ -1,11 +1,58 @@
 "use client";
 
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Image from "next/image";
 import call from "/public/icons/telpon.png";
 import email from "/public/icons/email.png";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import Link from "next/link";
+import Logo from "../../../public/images/logoFooter.png"
+interface ContactData {
+  whatsAppNumber: string;
+  emailAddress: string;
+  instagramAccount?: string;
+  facebookAccount?: string;
+  xAccount?: string;
+}
 
 const Footer = () => {
+  const [contactData, setContactData] = useState<ContactData | null>(null);
+  const [loadingContact, setLoadingContact] = useState(true);
+  
+useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const contactsRef = collection(db, "contacts");
+        const q = query(contactsRef, where("isActive", "==", true));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          const docData = querySnapshot.docs[0].data() as ContactData;
+          setContactData(docData);
+        }
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
+      } finally {
+        setLoadingContact(false);
+      }
+    };
+
+    fetchContactData();
+  }, []);
+
+
+  const numberFormatter = (number: string)  => {
+    if (contactData) {
+      let whatsappNumber = contactData.whatsAppNumber.replace(/\D/g, "");
+            if (whatsappNumber.startsWith("0")) {
+              whatsappNumber = "62" + whatsappNumber.slice(1);
+            }
+      return whatsappNumber;
+    }
+
+  }
+
   return (
     <div className="w-full relative bg-[#008080] font-clash text-white">
       {/* ========== DESKTOP (lg & xl) ========== */}
@@ -72,29 +119,33 @@ const Footer = () => {
         </div>
 
         {/* KONTAK */}
-        <div className="flex flex-row w-full gap-10 mt-[8rem] items-center justify-between">
-          <div className="flex flex-row gap-10">
-            <div className="flex flex-row gap-3 items-center">
-              <Image src={call} alt="" width={20} height={20} />
-              <p className="text-[20px] font-normal">+62 895 322 351 532</p>
+        {contactData && (
+          <div className="flex flex-row w-full gap-10 mt-[8rem] items-center justify-between">
+            <div className="flex flex-row gap-10">
+              <Link target="_blank" href={`https://wa.me/${numberFormatter(contactData.whatsAppNumber)}`} className="flex flex-row gap-3 items-center">
+                <Image src={call} alt="" width={20} height={20} />
+                <p className="text-[20px] font-normal">+{contactData.whatsAppNumber}</p>
+              </Link>
+              <Link target="_blank" href={`mailto:${contactData.emailAddress}`} className="flex flex-row gap-3 items-center">
+                <Image src={email} alt="" width={20} height={20} />
+                <p className="text-[20px] font-normal">
+                  {contactData.emailAddress}
+                </p>
+              </Link>
             </div>
-            <div className="flex flex-row gap-3 items-center">
-              <Image src={email} alt="" width={20} height={20} />
-              <p className="text-[20px] font-normal">
-                contact@rumahstruktur.co.id
-              </p>
+            {/* LOGO */}
+            <div className="text-xl font-bold">
+              <Image src={Logo} alt="Rumah Struktur Logo" width={1500} height={750} className="w-[150px]" />
             </div>
           </div>
-          {/* LOGO */}
-          <div className="text-xl font-bold">LOGO</div>
-        </div>
+        )}
       </div>
 
       {/* ========== MOBILE & TABLET (md, sm, xs) ========== */}
       <div className="flex lg:hidden flex-col p-[4vh] gap-10">
         {/* LOGO */}
         <div className="flex justify-start">
-          <div className="w-[80px] h-[40px] bg-gray-300" />{" "}
+          <Image src={Logo} alt="Rumah Struktur Logo" width={1500} height={750} className="w-[150px]" />
           {/* placeholder logo */}
         </div>
         <div className="flex flex-row w-full justify-between gap-20 items-start">
@@ -163,18 +214,20 @@ const Footer = () => {
         </div>
 
         {/* KONTAK */}
-        <div className="flex flex-col gap-4 mt-6">
-          <div className="flex flex-row gap-3 items-center">
-            <Image src={call} alt="" width={18} height={18} />
-            <p className="text-[18px] font-normal">+62 895 322 351 532</p>
+        {contactData && (
+          <div className="flex flex-col gap-4 mt-6">
+            <Link target="_blank" href={`https://wa.me/${numberFormatter(contactData.whatsAppNumber)}`} className="flex flex-row gap-3 items-center">
+                <Image src={call} alt="" width={20} height={20} />
+                <p className="text-[20px] font-normal">+{contactData.whatsAppNumber}</p>
+              </Link>
+              <Link target="_blank" href={`mailto:${contactData.emailAddress}`} className="flex flex-row gap-3 items-center">
+                <Image src={email} alt="" width={20} height={20} />
+                <p className="text-[20px] font-normal">
+                  {contactData.emailAddress}
+                </p>
+              </Link>
           </div>
-          <div className="flex flex-row gap-3 items-center">
-            <Image src={email} alt="" width={18} height={18} />
-            <p className="text-[18px] font-normal">
-              contact@rumahstruktur.co.id
-            </p>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ import BottomBanner from "@/app/components/BottomBanner";
 import ContactForm from "@/app/components/ContactForm";
 
 import { Metadata } from "next";
+import ContactDiskusiPesan from "@/app/components/landing-page/ContactDiskusiPesan";
+import TimSection from "@/app/components/TimSection";
 
 export const metadata: Metadata = {
   title: "Tentang Kami",
@@ -75,15 +77,7 @@ export default function TentangKami() {
           },
         ]}
       />
-      <TeamSection
-        title={
-          <>
-            Didukung oleh Tim <br />
-            Engineer Profesional
-          </>
-        }
-        members={members}
-      />
+      <TimSection />
       <MengapaMemilihSection
         title={
           <>
@@ -153,7 +147,7 @@ export default function TentangKami() {
         buttonHref="/kontak"
         buttonText="Hubungi Kami Sekarang!"
       />
-      <ContactForm />
+      <ContactDiskusiPesan />
     </div>
   );
 }

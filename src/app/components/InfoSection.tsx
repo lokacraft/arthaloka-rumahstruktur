@@ -17,7 +17,7 @@ export default function InfoSection({ title, description }: InfoSectionProps) {
 
       {/* Description */}
       <div className="w-full md:w-[60%] h-full mt-2 md:mt-4 flex justify-start items-start">
-        <p className="text-[14px] sm:text-[14px] md:text-[18px] lg:text-[22px] font-normal leading-tight text-left">
+        <p className="text-md md:text-lg 2xl:text-xl font-normal leading-tight text-left">
           {description}
         </p>
       </div>

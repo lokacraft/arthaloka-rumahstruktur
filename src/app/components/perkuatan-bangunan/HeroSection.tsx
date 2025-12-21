@@ -142,17 +142,17 @@ export default function HeroSection({
           <div
             className="absolute flex-1 bottom-1 lg:top-0 lg:left-0 lg:w-[70%] z-40 h-fit text-left lg:mt-20 xl:mt-8"
           >
-            <h1 className="text-[40px] sm:text-[48px] md:text-[54px] xl:text-[84px] font-medium leading-none mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-6xl 2xl:text-6xl font-medium leading-none mb-4">
               {title}
             </h1>
-            <p className="text-black text-[16px] sm:text-[20px] md:text-[24px] xl:text-[32px] font-normal leading-tight mb-6">
+            <p className="text-black text-md md:text-xl 2xl:text-2xl font-normal leading-tight mb-6 lg:w-[80%]">
               {description}
             </p>
             <a
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block border text-[16px] sm:text-[20px] md:text-[24px] xl:text-[32px] border-black rounded-2xl px-6 py-1 transition font-instrument"
+              className="inline-block border text-lg md:text-xl 2xl:text-2xl border-black rounded-2xl px-6 py-1 transition font-instrument"
             >
               Whatsapp Kami Sekarang
             </a>

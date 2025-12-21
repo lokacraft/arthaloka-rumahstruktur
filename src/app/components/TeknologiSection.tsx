@@ -43,10 +43,10 @@ export default function TeknologiSection({
               />
             </div>
             <div className="flex flex-col justify-start h-[60%]">
-              <h3 className="text-[#008080] font-medium leading-none text-[20px] sm:text-[26px] xl:text-[30px] mb-2">
+              <h3 className="text-[#008080] h-20 font-medium leading-none text-[20px] sm:text-[26px] xl:text-[30px] mb-2">
                 {item.title}
               </h3>
-              <p className="text-black text-[14px] sm:text-[18px] xl:text-[24px] font-light leading-tight">
+              <p className="text-black text-md md:text-lg 2xl:text-xl font-light leading-tight">
                 {item.description}
               </p>
             </div>

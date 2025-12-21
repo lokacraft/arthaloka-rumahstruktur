@@ -12,6 +12,7 @@ import {
   CornerUpLeft,
 } from "lucide-react";
 import Image from "next/image";
+import Logo from "../../../public/images/logoMain.png"
 
 export default function NavBar() {
   const [open, setOpen] = useState(false); // dropdown desktop
@@ -76,13 +77,21 @@ export default function NavBar() {
       )}
 
       {/* ========== DESKTOP NAVBAR (lg & xl) ========== */}
-      <div className="hidden md:flex justify-center items-center w-full">
+      <div className="hidden lg:flex justify-center items-center w-full">
         <div
           className="fixed top-5 w-[90%] z-60 flex items-center justify-between py-4 rounded-2xl xl:gap-26 lg:gap-24 md:gap-8 sm:gap-12 shadow-2xl px-6 font-instrument text-black/70 bg-[#FAFAFA] 
-          text-[18px] md:text-[10px] lg:text-[14px] xl:text-[22px]"
+          text-md  xl:text-lg"
         >
           {/* Logo */}
-          <div className="text-xl font-bold">LOGO</div>
+          <div className="text-xl font-bold">
+            <Image
+            src={Logo}
+            alt="logo"
+            width={1200}
+            height={900}
+            className="w-[140px]"
+            />
+          </div>
 
           {/* Menu */}
           <ul className="flex items-center space-x-8 lg:space-x-12 xl:space-x-14">
@@ -90,7 +99,7 @@ export default function NavBar() {
               <Link href="/landingpage">
                 <button
                   onClick={() => handleNavigation("/landingpage")}
-                  className={getLinkClass("/landingpage")}
+                  className={`cursor-pointer ${getLinkClass("/landingpage")}`}
                   aria-label="Home"
                 >
                   Home
@@ -151,7 +160,7 @@ export default function NavBar() {
             <li>
               <button
                 onClick={() => handleNavigation("/tentang-kami")}
-                className={getLinkClass("/tentang-kami")}
+                className={`cursor-pointer ${getLinkClass("/tentang-kami")}`}
                 aria-label="Tentang Kami"
               >
                 Tentang Kami
@@ -159,17 +168,8 @@ export default function NavBar() {
             </li>
             <li>
               <button
-                onClick={() => handleNavigation("/kontak")}
-                className={getLinkClass("/kontak")}
-                aria-label="Kontak"
-              >
-                Kontak
-              </button>
-            </li>
-            <li>
-              <button
                 onClick={() => handleNavigation("/portofolio")}
-                className={getLinkClass("/portofolio")}
+                className={`cursor-pointer ${getLinkClass("/portofolio")}`}
                 aria-label="Portofolio"
               >
                 Portfolio
@@ -178,7 +178,7 @@ export default function NavBar() {
             <li>
               <button
                 onClick={() => handleNavigation("/blogs")}
-                className={getLinkClass("/blogs")}
+                className={`cursor-pointer ${getLinkClass("/blogs")}`}
                 aria-label="Blog"
               >
                 Blog
@@ -189,7 +189,7 @@ export default function NavBar() {
           {/* Tombol Contact Us */}
           <button
             onClick={() => handleNavigation("/kontak")}
-            className="rounded-lg border border-teal-600 px-4 py-1 hover:text-[#008080] hover:bg-teal-50"
+            className="cursor-pointer rounded-lg border border-teal-600 px-4 py-1 hover:text-[#008080] hover:bg-teal-50"
             aria-label="Contact Us"
           >
             Contact Us
@@ -198,11 +198,21 @@ export default function NavBar() {
       </div>
 
       {/* ========== MOBILE NAVBAR (sm & md ke bawah) ========== */}
-      <div className="md:hidden flex items-center justify-center w-full">
+      <div className="lg:hidden flex items-center justify-center w-full">
         <div className="fixed top-5 rounded-lg w-[92%] bg-[#FAFAFA] z-50 shadow-md">
           <div className="flex items-center justify-between px-4 py-2 text-black">
             {/* Logo */}
-            <div className="text-lg font-bold">LOGO</div>
+            <div className="text-lg font-bold">
+            <Image
+            src={Logo}
+            alt="logo"
+            width={2000}
+            height={1200}
+            quality={100}
+            priority
+            className="w-[120px]"
+            />
+            </div>
             {/* Hamburger */}
             <button onClick={() => setMenuOpen(true)} aria-label="Buka Navbar">
               <Image

@@ -4,6 +4,7 @@ import BottomBanner from "@/app/components/BottomBanner";
 import ContactForm from "@/app/components/ContactForm";
 
 import { Metadata } from "next";
+import ContactDiskusiPesan from "@/app/components/landing-page/ContactDiskusiPesan";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -34,7 +35,7 @@ export default function Blogs() {
         buttonHref="/kontak"
         buttonText="Hubungi Kami Sekarang!"
       />
-      <ContactForm />
+      <ContactDiskusiPesan />
     </div>
   );
 }

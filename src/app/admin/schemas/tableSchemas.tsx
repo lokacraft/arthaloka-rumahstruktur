@@ -223,7 +223,7 @@ const getPartnershipsColumns = (
   { accessorKey: "namaPartner", header: "Partner Name" },
   {
     accessorKey: "logoPartner",
-    header: "Image",
+    header: "Gambar",
     cell: ({ row }) => {
       const fileName = row.getValue("logoPartner") as string;
       return (
@@ -351,6 +351,64 @@ const getPortofolioColumns = (
   },
 ];
 
+//table kategori portofolio
+const getPortofolioCategoryColumns = (
+  onEdit: (item: Item) => void,
+  onDelete: (item: Item) => void
+): ColumnDef<Item>[] => [
+  {
+    accessorKey: "name",
+    header: "Nama Kategori",
+  },
+  {
+    accessorKey: "slug",
+    header: "Slug",
+  },
+  {
+    id: "actions",
+    header: "Action",
+    cell: ({ row }) => (
+      <ActionsCell item={row.original} onEdit={onEdit} onDelete={onDelete} />
+    ),
+  },
+];
+
+//table engineer
+const getTeamColumns = (
+  onEdit: (item: Item) => void,
+  onDelete: (item: Item) => void
+): ColumnDef<Item>[] => [
+  {
+    accessorKey: "imageUrl",
+    header: "Avatar",
+    cell: ({ row }) => {
+      const fileName = row.getValue("imageUrl") as string;
+      return (
+        <ViewImageDialog src={fileName} alt={row.getValue("name")} />
+      );
+    },
+  },
+  {
+    accessorKey: "name",
+    header: "Nama",
+  },
+  {
+    accessorKey: "role",
+    header: "Role",
+  },
+  {
+    accessorKey: "layananId",
+    header: "Kategori Layanan",
+  },
+  {
+    id: "actions",
+    header: "Action",
+    cell: ({ row }) => (
+      <ActionsCell item={row.original} onEdit={onEdit} onDelete={onDelete} />
+    ),
+  },
+];
+
 const getBlogsColumns = (
   onEdit: (item: any) => void,
   onDelete: (item: any) => void
@@ -447,7 +505,9 @@ const columnsFunctionsMap: Record<
   partnerships: getPartnershipsColumns,
   blogs: getBlogsColumns,
   portofolio: getPortofolioColumns,
+  portofolioCategory: getPortofolioCategoryColumns,
   testimoni: getTestimoniColumns,
+  teams: getTeamColumns,
 };
 
 // Fungsi utama untuk mendapatkan kolom yang benar

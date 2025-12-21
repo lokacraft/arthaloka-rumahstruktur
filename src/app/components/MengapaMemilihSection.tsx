@@ -50,7 +50,7 @@ export default function MengapaMemilihSection({
               </h3>
 
               {/* Description */}
-              <p className="text-black font-light leading-tight text-[16px]  xl:text-[24px]">
+              <p className="text-black font-light leading-tight text-md md:text-lg 2xl:text-xl">
                 {item.description}
               </p>
             </div>

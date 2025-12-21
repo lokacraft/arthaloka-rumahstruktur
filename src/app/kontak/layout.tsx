@@ -9,6 +9,7 @@ import NavBar from "../components/NavBar";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
 import "../globals.css";
+import ContactDiskusiPesan from "../components/landing-page/ContactDiskusiPesan";
 
 export const metadata: Metadata = {
   title: "Kontak",
@@ -28,7 +29,7 @@ export default function RootLayout({
       <body className="bg-[#EAEAEA]">
         <NavBar />
         {children}
-        <ContactForm />
+        <ContactDiskusiPesan />
         <Footer />
       </body>
     </html>

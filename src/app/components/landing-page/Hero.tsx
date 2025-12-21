@@ -46,7 +46,7 @@ const Hero = () => {
         <h1
           className="
           leading-none font-[500] md:text-center text-left
-          text-[40px] sm:text-[44px] md:text-[54px] lg:text-[72px] xl:text-[82px]
+          text-3xl md:text-4xl lg:text-5xl 2xl:text-5xl
         "
         >
           Rumah Struktur Engineering: <br />
@@ -63,7 +63,7 @@ const Hero = () => {
         <p
           className="
           md:text-center sm:text-left font-normal mt-10 leading-tight
-          text-[12px] sm:text-[16px] md:text-[20px] lg:text-[26px] xl:text-[30px]
+          text-md md:text-xl 2xl:text-2xl
         "
         >
           Wujudkan proyek impian Anda bersama tim ahli kami, mulai dari <br />
@@ -76,7 +76,7 @@ const Hero = () => {
             href=""
             className="
             font-instrument font-normal text-center
-            text-[14px] sm:text-[20px] md:text-[24px] lg:text-[26px] xl:text-[30px]
+            text-lg md:text-xl 2xl:text-2xl
           "
           >
             Whatsapp Kami Sekarang!

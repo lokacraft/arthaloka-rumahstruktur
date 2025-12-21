@@ -22,7 +22,7 @@ import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { Textarea } from "@/app/components/ui/textarea";
 import { DatePicker } from "@/app/components/ui/date-picker";
-import { Timestamp } from "firebase/firestore";
+import { collection, getDocs, query, Timestamp } from "firebase/firestore";
 import TiptapEditor from "@/app/components/admin/TiptapEditor";
 import { showToast } from "@/app/components/ui/sonner";
 import {
@@ -42,6 +42,7 @@ import {
   SelectItem,
   SelectContent,
 } from "@/app/components/ui/select";
+import { db } from "@/lib/firebase";
 
 interface ItemData {
   id?: string;
@@ -67,7 +68,10 @@ type FieldType =
   | "tags"
   | "image"
   | "imageArray"
-  | "tiptap";
+  | "tiptap"
+  | "status"
+  | "selectPortofolioKategori"
+  | "selectTeamKategori";
 
 interface FieldSchema {
   name: string;
@@ -108,6 +112,25 @@ const categorySchemas: Record<string, FieldSchema[]> = {
       placeholder: "Deskripsi portofolio...",
     },
     {
+      name: "portofolioCategoryId",
+      label: "Kategori Portofolio",
+      type: "selectPortofolioKategori",
+      placeholder: "Deskripsi portofolio...",
+      required: true,
+    },
+    {
+      name: "klien",
+      label: "Nama Klien",
+      type: "text",
+      placeholder: "Nama Klien...",
+    },
+    {
+      name: "tahun",
+      label: "Tahun Proyek",
+      type: "number",
+      placeholder: "tahun...",
+    },
+    {
       name: "tipePekerjaan",
       label: "Tipe Pekerjaan",
       type: "text",
@@ -141,6 +164,32 @@ const categorySchemas: Record<string, FieldSchema[]> = {
       label: "Foto Dokumentasi",
       type: "imageArray", // untuk multiple images
     },
+    {
+      name: "status",
+      label: "Status Proyek",
+      type: "status",
+      required: true,
+    },
+    {
+      name: "isProjectFeatured",
+      label: "Tampilkan di Halaman Utama",
+      type: "boolean",
+    },
+  ],
+  portofolioCategory: [
+    {
+      name: "name",
+      label: "Nama Kategori",
+      type: "text",
+      placeholder: "Nama Kategori...",
+      required: true,
+    },
+    {
+      name: "slug",
+      label: "Slug",
+      type: "text",
+      placeholder: "Nama slug unik(tanpa huruf kapital) ..."
+    }
   ],
   testimoni: [
     {
@@ -206,7 +255,35 @@ const categorySchemas: Record<string, FieldSchema[]> = {
       type: "image",
     },
   ],
+  teams: [
+    {
+      name: "name",
+      label: "Nama",
+      type: "text",
+      placeholder: "Nama...",
+      required: true,
+    },
+    {
+      name: "role",
+      label: "Role",
+      type: "text",
+      placeholder: "Nama role / jobdesk..."
+    },
+    {
+      name: "imageUrl",
+      label: "Foto",
+      type: "image",
+      placeholder: "gambar foto profil..."
+    },
+    {
+      name: "layananId",
+      label: "Kategori Layanan",
+      type: "selectTeamKategori",
+      placeholder: "Kategori layanan..."
+    },
+  ],
 };
+
 
 export const ItemForm = ({
   isOpen,
@@ -221,6 +298,17 @@ export const ItemForm = ({
   const [isSaving, setIsSaving] = useState(false);
 
   const [deletedKeys, setDeletedKeys] = useState<string[]>([]);
+  const [portfolioCategories, setPortfolioCategories] = useState<{id: string, name: string}[]>([]);
+
+// Fetch data kategori saat komponen dimount
+useEffect(() => {
+  const fetchCats = async () => {
+    const q = query(collection(db, "portofolioCategory"));
+    const snapshot = await getDocs(q);
+    setPortfolioCategories(snapshot.docs.map(doc => ({ id: doc.id, name: doc.data().name })));
+  };
+  fetchCats();
+}, []);
 
   function markForRemove(name: string) {
     setDeletedKeys((prev) => [...prev, name]);
@@ -486,10 +574,76 @@ export const ItemForm = ({
     const value = formData[field.name];
 
     switch (field.type) {
+      case "status":
+        return(
+          <Select
+            value={value || ""}
+            onValueChange={(val) => handleChange(field.name, val)}
+          >
+            <SelectTrigger id={field.name} className="col-span-3">
+              <SelectValue placeholder="Select status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Selesai">Selesai</SelectItem>
+              <SelectItem value="Sedang Dikerjakan">Sedang Dikerjakan</SelectItem>
+            </SelectContent>
+          </Select>
+        )
+      case "selectTeamKategori":
+        return (
+          <div key={field.name} className="space-y-2">
+            <Select
+              onValueChange={(val) => {
+                // Update state form Anda di sini
+                setFormData((prev: any) => ({ ...prev, [field.name]: val }));
+              }}
+              value={formData[field.name] || ""}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Pilih Kategori..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="show-landing">Tampilkan di halaman Utama</SelectItem>
+                <SelectItem value="Soil Investigation">Soil Investigation</SelectItem>
+                <SelectItem value="Perkuatan Bangunan">Perkuatan Bangunan</SelectItem>
+                <SelectItem value="Mekanikal Elektrikal Plumbing">Mekanikal Elektrikal Plumbing</SelectItem>
+                <SelectItem value="Jasa Hitung Struktur">Jasa Hitung Struktur</SelectItem>
+                <SelectItem value="Geometrik Jalan Raya">Geometrik Jalan Raya</SelectItem>
+                <SelectItem value="Analisis Geoteknik">Analisis Geoteknik</SelectItem>
+                
+              </SelectContent>
+            </Select>
+          </div>
+        );
+      
+      case "selectPortofolioKategori":
+        return (
+          <div key={field.name} className="space-y-2">
+            <Select
+              onValueChange={(val) => {
+                // Update state form Anda di sini
+                setFormData((prev: any) => ({ ...prev, [field.name]: val }));
+              }}
+              value={formData[field.name] || ""}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Pilih Kategori..." />
+              </SelectTrigger>
+              <SelectContent>
+                {portfolioCategories.map((cat) => (
+                  <SelectItem key={cat.id} value={cat.id}>
+                    {cat.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        );
+      
       case "boolean": // <-- KASUS BARU UNTUK DROPDOWN BOOLEAN
         return (
           <Select
-            value={value === true ? "true" : value === false ? "false" : ""}
+            value={value === true ? "true" : value === false ? "false" : "false"}
             onValueChange={(val) => handleChange(field.name, val === "true")}
           >
             <SelectTrigger id={field.name} className="col-span-3">

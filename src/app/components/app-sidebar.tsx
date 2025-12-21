@@ -8,6 +8,8 @@ import {
   Handshake,
   Newspaper,
   Users,
+  ListPlus,
+  Contact,
 } from "lucide-react";
 
 import { NavUser } from "@/app/components/nav-user";
@@ -42,9 +44,24 @@ const data = {
       icon: Newspaper,
     },
     {
+      title: "Kategori",
+      url: "/admin/table/portofolioCategory",
+      icon: ListPlus,
+    },
+    {
       title: "Portofolio",
       url: "/admin/table/portofolio",
       icon: FolderIcon,
+    },
+    {
+      title: "Tim",
+      url: "/admin/table/teams",
+      icon: Users,
+    },
+    {
+      title: "Contact",
+      url: "/admin/contacts",
+      icon: Contact,
     },
     {
       title: "SEO Analyzer",

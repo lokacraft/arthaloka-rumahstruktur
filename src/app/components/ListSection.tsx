@@ -25,7 +25,7 @@ export default function ListSection({ title, items }: ListSectionProps) {
                 <div className="">
                   <div className="size-4 lg:size-5 rounded-full bg-[#008080]" />
                 </div>
-                <div className="ml-6 lg:ml-8 text-[20px] sm:text-[24px] lg:text-[38px] font-medium">
+                <div className="ml-6 lg:ml-8 text-md md:text-2xl 2xl:text-2xl font-medium">
                   {item}
                 </div>
               </div>

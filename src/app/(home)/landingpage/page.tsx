@@ -1,5 +1,5 @@
 import Hero from "../../components/landing-page/Hero";
-import Projek from "../../components/landing-page/Projek";
+import HomeProject from "../../components/landing-page/Projek";
 import CardLayanan from "../../components/landing-page/CardLayanan";
 import TestimonialCarousel from "../../components/landing-page/TestimonialCarousel";
 import PartnerShowcase from "../../components/PartnerShowcase";
@@ -7,10 +7,12 @@ import ArtikelCarousel from "../../components/landing-page/ArtikelCarousel";
 import BottomBannerHomePage from "@/app/components/landing-page/BottomBannerHomePage";
 import ContactFormHomePage from "@/app/components/landing-page/ContactFormHomePage";
 import { Metadata } from "next";
-// import nodemailer from "nodemailer";
-// import { FormData } from "@/types/mail-form";
-// import { success } from "zod";
-// import { error } from "console";
+import HomeKeunggulanKami from "@/app/components/landing-page/HomeKeunggulanKami";
+import HomeTeamLegalitas from "@/app/components/landing-page/HomeTimLegalitas";
+import HomeCakupanLayanan from "@/app/components/landing-page/HomeCakupanLayanan";
+import HomeJelajahiProyek from "@/app/components/landing-page/HomeJelajahiProyek";
+import HomeSecondBanner from "@/app/components/landing-page/HomeSecondBanner";
+import HomeDiskusiPesan from "@/app/components/landing-page/HomeDiskusiPesan";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -19,47 +21,18 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  // const sendMail = async (formData: FormData) => {
-  //   'use server'
-
-  //   try {
-  //     const transporter = nodemailer.createTransport({
-  //       service: "gmail",
-  //       auth: {
-  //         user: process.env.SMTP_USERNAME,
-  //         pass: process.env.SMTP_PASSWORD,
-  //       },
-  //     });
-  //     const mailOptions = {
-  //       from: formData.email,
-  //       to: process.env.MAIL_RECEIVER_ADDRESS,
-  //       subject: formData.judul,
-  //       text: formData.pesan,
-  //       html: '',
-  //     };
-  //     await transporter.sendMail(mailOptions);
-  //     return {
-  //       success: true,
-  //       error: null,
-  //     };
-  //   } catch (error) {
-  //     return {
-  //       success: false,
-  //       error: "Terjadi Eror",
-  //     };
-  //   }
-  // };
-
   return (
     <div className="relative">
       <Hero />
-      <Projek />
-      <CardLayanan />
+      <HomeProject />
+      <HomeKeunggulanKami />
+      <HomeTeamLegalitas />
+      <HomeCakupanLayanan />
+      <HomeJelajahiProyek />
       <TestimonialCarousel />
-      <PartnerShowcase />
       <ArtikelCarousel />
-      <BottomBannerHomePage />
-      <ContactFormHomePage />
+      <HomeSecondBanner />
+      <HomeDiskusiPesan />
     </div>
   );
 }

@@ -5,6 +5,9 @@ import ListSection from "@/app/components/ListSection";
 import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import PartnerShowcase from "@/app/components/PartnerShowcase";
 import { Metadata } from "next";
+import TimSection from "@/app/components/TimSection";
+import LayananDiskusiPesan from "@/app/components/landing-page/LayananDiskusiPesan";
+import BottomBanner from "@/app/components/BottomBanner";
 
 export const metadata: Metadata = {
   title: {
@@ -105,6 +108,8 @@ export default function Home() {
           "Desain Perkerasan Kaku (Rigid Pavement)",
         ]}
       />
+       {/* team */}
+       <TimSection layananId="Geometrik Jalan Raya" />
       <MengapaMemilihSection
         title={
           <>
@@ -159,6 +164,27 @@ export default function Home() {
         ]}
       />
       <PartnerShowcase />
+      <BottomBanner
+        title={
+          <>
+            <span className="text-[#008080]">Ratusan Proyek </span>Swasta <br />
+            & Pemerintah Telah{" "}
+            <span className="text-[#008080]">Mempercayakan </span>
+            <br />
+            Strukturnya Pada Kami
+          </>
+        }
+        description={
+          <>
+            Jangan tunda kesuksesan proyek Anda. <br />
+            Wujudkan struktur yang kokoh dan <br />
+            efisien bersama kami sekarang.
+          </>
+        }
+        buttonHref="/kontak"
+        buttonText="Mulai Proyek Anda"
+      />
+      <LayananDiskusiPesan namaLayanan="Geometrik Jalan Raya" />
     </div>
   );
 }

@@ -16,27 +16,7 @@ export default function RootLayout({
   return (
     <>
       {children}
-      <BottomBanner
-        title={
-          <>
-            <span className="text-[#008080]">Ratusan Proyek </span>Swasta <br />
-            & Pemerintah Telah{" "}
-            <span className="text-[#008080]">Mempercayakan </span>
-            <br />
-            Strukturnya Pada Kami
-          </>
-        }
-        description={
-          <>
-            Jangan tunda kesuksesan proyek Anda. <br />
-            Wujudkan struktur yang kokoh dan <br />
-            efisien bersama kami sekarang.
-          </>
-        }
-        buttonHref="/kontak"
-        buttonText="Mulai Proyek Anda"
-      />
-      <ContactForm />
+      
     </>
   );
 }

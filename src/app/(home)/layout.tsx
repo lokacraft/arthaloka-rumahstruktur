@@ -8,6 +8,7 @@ import {
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import "../globals.css";
+import CTAWhatsAppButton from "../components/landing-page/CTAWhatsAppButton";
 
 export const metadata: Metadata = {
   title: {
@@ -35,6 +36,7 @@ export default function RootLayout({
         <NavBar />
         {children}
         <Footer />
+        <CTAWhatsAppButton />
       </body>
     </html>
   );

@@ -6,6 +6,9 @@ import MengapaMemilihSection from "@/app/components/MengapaMemilihSection";
 import PartnerShowcase from "@/app/components/PartnerShowcase";
 
 import { Metadata } from "next";
+import TimSection from "@/app/components/TimSection";
+import HomeDiskusiPesan from "@/app/components/landing-page/HomeDiskusiPesan";
+import BottomBanner from "@/app/components/BottomBanner";
 
 export const metadata: Metadata = {
   title: {
@@ -106,6 +109,8 @@ export default function Home() {
           "Perencanaan Struktur Baja",
         ]}
       />
+      {/* team */}
+      <TimSection layananId="Jasa Hitung Struktur" />
       <MengapaMemilihSection
         title={
           <>
@@ -160,6 +165,27 @@ export default function Home() {
         ]}
       />
       <PartnerShowcase />
+      <BottomBanner
+        title={
+          <>
+            <span className="text-[#008080]">Ratusan Proyek </span>Swasta <br />
+            & Pemerintah Telah{" "}
+            <span className="text-[#008080]">Mempercayakan </span>
+            <br />
+            Strukturnya Pada Kami
+          </>
+        }
+        description={
+          <>
+            Jangan tunda kesuksesan proyek Anda. <br />
+            Wujudkan struktur yang kokoh dan <br />
+            efisien bersama kami sekarang.
+          </>
+        }
+        buttonHref="/kontak"
+        buttonText="Mulai Proyek Anda"
+      />
+      <HomeDiskusiPesan />
     </div>
   );
 }

@@ -20,19 +20,19 @@ const BottomBanner: React.FC<BottomBannerProps> = ({
         
         {/* Kiri: Title */}
         <div className="text-left w-full lg:w-[54%]">
-          <h1 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[46px] xl:text-[54px] leading-tight font-medium">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl 2xl:text-5xl leading-tight font-medium">
             {title}
           </h1>
         </div>
 
         {/* Kanan: Description + Button */}
         <div className="text-left w-full lg:w-[47%] flex flex-col gap-y-6 md:gap-y-8 items-start mt-6 lg:mt-0">
-          <p className="text-[18px] sm:text-[22px] md:text-[28px] lg:text-[30px] xl:text-[34px] text-black leading-tight">
+          <p className="text-md md:text-xl 2xl:text-xl text-black leading-tight">
             {description}
           </p>
           <Link
             href={buttonHref}
-            className="font-instrument font-light text-[16px] sm:text-[20px] md:text-[26px] lg:text-[34px] text-center bg-[#008080] text-[#EAEAEA] px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl w-fit"
+            className="font-instrument font-light text-lg md:text-xl 2xl:text-2xl text-center bg-[#008080] text-[#EAEAEA] px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl w-fit"
           >
             {buttonText}
           </Link>

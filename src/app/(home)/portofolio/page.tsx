@@ -6,6 +6,9 @@ import BottomBanner from "@/app/components/BottomBanner";
 import ContactForm from "@/app/components/ContactForm";
 
 import { Metadata } from "next";
+import HomeJelajahiProyek from "@/app/components/landing-page/HomeJelajahiProyek";
+import PortofolioRekamJejak from "@/app/components/landing-page/PortofolioRekamJejak";
+import ContactDiskusiPesan from "@/app/components/landing-page/ContactDiskusiPesan";
 
 export const metadata: Metadata = {
   title: "Portofolio Projek",
@@ -37,7 +40,8 @@ export default function Portofolio() {
         buttonLink=""
         buttonText="Whatsapp Kami Sekarang!"
       />
-      <PortofolioCard />
+      <HomeJelajahiProyek />
+      <PortofolioRekamJejak />
       <PartnerShowcase />
       <BottomBanner
         title={
@@ -57,7 +61,7 @@ export default function Portofolio() {
         buttonHref="/kontak"
         buttonText="Hubungi Kami Sekarang!"
       />
-      <ContactForm />
+      <ContactDiskusiPesan />
     </div>
   );
 }

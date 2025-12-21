@@ -25,7 +25,7 @@ const Hero: React.FC<HeroProps> = ({
       className="
         relative w-full min-h-[80vh] lg:h-[100vh] text-left 
         p-[4vh] md:p-[10vh] lg:p-[15vh] 
-        mb-[3rem] lg:mb-[5rem] 
+        
         flex flex-col z-0 mx-auto 
         justify-center items-start 
         font-clash overflow-hidden text-white
@@ -86,7 +86,7 @@ const Hero: React.FC<HeroProps> = ({
           <h1
             className="
               leading-none font-[500] text-left
-              text-[32px] sm:text-[40px] md:text-[52px] lg:text-[82px]
+              text-3xl md:text-4xl lg:text-6xl 2xl:text-6xl
               mt-[6vh] md:mt-[8vh] lg:mt-[10vh]
             "
           >
@@ -97,7 +97,7 @@ const Hero: React.FC<HeroProps> = ({
           <p
             className="
               text-left font-normal text-[#FAFAFA] leading-tight
-              text-[16px] sm:text-[18px] md:text-[22px] lg:text-[30px]
+              text-md md:text-xl 2xl:text-2xl
               mt-6 md:mt-8 lg:mt-10
             "
           >
@@ -118,7 +118,7 @@ const Hero: React.FC<HeroProps> = ({
                 href={buttonLink || "#"}
                 className="
                   font-instrument font-normal text-center
-                  text-[16px] sm:text-[18px] md:text-[22px] lg:text-[30px]
+                  text-lg md:text-xl 2xl:text-2xl
                 "
               >
                 {buttonText}
