@@ -39,7 +39,7 @@ export default function Home() {
           { src: "/images/img2.png", alt: "Struktur bangunan" },
           { src: "/images/img3.png", alt: "Diskusi tim" },
         ]}
-        whatsappLink="https://wa.me/6281234567890"
+        // whatsappLink="https://wa.me/6281234567890"
       />
       <InfoSection
         title={

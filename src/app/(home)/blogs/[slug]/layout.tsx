@@ -5,9 +5,9 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 
 interface BlogData {
   title: string;
-  isiBlog: string;
-  fotoBlog: string;
-  ringkasan: string;
+  content: string;
+  heroImage: string;
+  subtitle: string;
   slug: string;
 }
 
@@ -28,14 +28,14 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
           absolute: `Blog Post - ${docData.title}`,
         },
         description:
-          docData.ringkasan.replace(/<[^>]+>/g, "").slice(0, 150) + "...",
+          docData.subtitle.replace(/<[^>]+>/g, "").slice(0, 150) + "...",
         openGraph: {
           title: `${docData.title} | Rumah Struktur`,
           description:
-            docData.ringkasan.replace(/<[^>]+>/g, "").slice(0, 200) + "...",
+            docData.subtitle.replace(/<[^>]+>/g, "").slice(0, 200) + "...",
           images: [
             {
-              url: docData.fotoBlog,
+              url: docData.heroImage,
             },
           ],
         },
@@ -43,8 +43,8 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
           card: "summary_large_image",
           title: `${docData.title} | Rumah Struktur`,
           description:
-            docData.ringkasan.replace(/<[^>]+>/g, "").slice(0, 200) + "...",
-          images: [docData.fotoBlog],
+            docData.subtitle.replace(/<[^>]+>/g, "").slice(0, 200) + "...",
+          images: [docData.heroImage],
         },
       };
     }

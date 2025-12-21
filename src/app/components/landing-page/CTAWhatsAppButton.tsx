@@ -57,7 +57,7 @@ export default function CTAWhatsAppButton() {
 
   return (
     <motion.div
-      className="fixed right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-50"
+      className="fixed right-4 md:right-6 lg:right-8 toop-1/2 bottom-4 md:bottom-6  z-50"
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 1 }}

@@ -11,6 +11,7 @@ import {
   ListPlus,
   Contact,
 } from "lucide-react";
+import { LuNewspaper } from "react-icons/lu";
 
 import { NavUser } from "@/app/components/nav-user";
 import {
@@ -40,7 +41,7 @@ const data = {
     },
     {
       title: "Blogs",
-      url: "/admin/table/blogs",
+      url: "/admin/kelola-blog",
       icon: Newspaper,
     },
     {

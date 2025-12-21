@@ -289,13 +289,6 @@ export default function NavBar() {
                 Tentang Kami <ArrowUpRight size={20} />
               </button>
               <button
-                onClick={() => handleNavigation("/kontak")}
-                aria-label="Kontak"
-                className="flex justify-between border-b border-[#FAFAFA] items-center text-xl py-2 text-[#FAFAFA] hover:text-white"
-              >
-                Kontak <ArrowUpRight size={20} />
-              </button>
-              <button
                 onClick={() => handleNavigation("/portofolio")}
                 aria-label="Portofolio"
                 className="flex justify-between border-b border-[#FAFAFA] items-center text-xl py-2 text-[#FAFAFA] hover:text-white"

@@ -71,42 +71,42 @@ useEffect(() => {
           {/* INFORMASI */}
           <div className="flex flex-col text-left gap-2 items-start">
             <h2 className="text-[32px] font-semibold">Informasi</h2>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/tentang-kami" className="hover:underline text-[20px] font-normal">
               Tentang Kami
             </a>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/kontak" className="hover:underline text-[20px] font-normal">
               Hubungi Kami
             </a>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/portofolio" className="hover:underline text-[20px] font-normal">
               Portofolio
             </a>
           </div>
           {/* LAYANAN */}
           <div className="flex flex-col text-left gap-2 items-start">
             <h2 className="text-[32px] font-semibold">Layanan</h2>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/layanan/jasa-hitung-struktur" className="hover:underline text-[20px] font-normal">
               Jasa Hitung Struktur
             </a>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/layanan/analisis-geoteknik" className="hover:underline text-[20px] font-normal">
               Jasa Analisis Geoteknik
             </a>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/layanan/soil-investigation" className="hover:underline text-[20px] font-normal">
               Jasa Soil Investigation
             </a>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/layanan/perkuatan-bangunan" className="hover:underline text-[20px] font-normal">
               Analisis Perkuatan Struktur
             </a>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/layanan/mekanikal-elektrikal-plumbing" className="hover:underline text-[20px] font-normal">
               Mekanikal, Elektrikal, dan Plumbing
             </a>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/layanan/geometrik-jalan-raya" className="hover:underline text-[20px] font-normal">
               Analisis Geometrik Jalan Raya
             </a>
           </div>
           {/* DUKUNGAN */}
           <div className="flex flex-col text-left gap-2 items-start">
             <h2 className="text-[32px] font-semibold">Dukungan</h2>
-            <a href="" className="hover:underline text-[20px] font-normal">
+            <a href="/blogs" className="hover:underline text-[20px] font-normal">
               Blog
             </a>
             <a href="" className="hover:underline text-[20px] font-normal">
@@ -151,8 +151,8 @@ useEffect(() => {
         <div className="flex flex-row w-full justify-between gap-20 items-start">
           {/* ALAMAT */}
           <div className="flex flex-col gap-2 text-left">
-            <h2 className="text-[24px] font-semibold">Alamat</h2>
-            <p className="text-[18px] font-normal leading-relaxed">
+            <h2 className="text-[20px] font-semibold">Alamat</h2>
+            <p className="text-[16px] font-normal leading-relaxed">
               Jl. R.A.A Martanegara No. 56,
               <br />
               Kel. Turangga, Kec. Lengkong, <br />
@@ -161,14 +161,14 @@ useEffect(() => {
           </div>
           {/* INFORMASI */}
           <div className="flex flex-col gap-2 text-left w-[40%]">
-            <h2 className="text-[24px] font-semibold">Informasi</h2>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <h2 className="text-[20px] font-semibold">Informasi</h2>
+            <a href="/tentang-kami" className="hover:underline text-[16px] font-normal">
               Tentang Kami
             </a>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <a href="/kontak" className="hover:underline text-[16px] font-normal">
               Hubungi Kami
             </a>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <a href="/portofolio" className="hover:underline text-[16px] font-normal">
               Portofolio
             </a>
           </div>
@@ -177,37 +177,37 @@ useEffect(() => {
         <div className="flex flex-row w-full justify-between gap-20 items-start">
           {/* LAYANAN */}
           <div className="flex flex-col gap-2 text-left">
-            <h2 className="text-[24px] font-semibold">Layanan</h2>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <h2 className="text-[20px] font-semibold">Layanan</h2>
+            <a href="/layanan/jasa-hitung-struktur" className="hover:underline text-[16px] font-normal">
               Jasa Hitung Struktur
             </a>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <a href="/layanan/analisis-geoteknik" className="hover:underline text-[16px] font-normal">
               Jasa Analisis Geoteknik
             </a>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <a href="/layanan/soil-investigation" className="hover:underline text-[16px] font-normal">
               Jasa Soil Investigation
             </a>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <a href="/layanan/perkuatan-bangunan" className="hover:underline text-[16px] font-normal">
               Analisis Perkuatan Struktur
             </a>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <a href="/layanan/mekanikal-elektrikal-plumbing" className="hover:underline text-[16px] font-normal">
               Mekanikal, Elektrikal, dan Plumbing
             </a>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <a href="/layanan/geometrik-jalan-raya" className="hover:underline text-[16px] font-normal">
               Analisis Geometrik Jalan Raya
             </a>
           </div>
 
           {/* DUKUNGAN */}
           <div className="flex flex-col gap-2 text-left w-[40%]">
-            <h2 className="text-[24px] font-semibold">Dukungan</h2>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <h2 className="text-[20px] font-semibold">Dukungan</h2>
+            <a href="/blogs" className="hover:underline text-[16px] font-normal">
               Blog
             </a>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <a href="" className="hover:underline text-[16px] font-normal">
               FAQ
             </a>
-            <a href="" className="hover:underline text-[18px] font-normal">
+            <a href="" className="hover:underline text-[16px] font-normal">
               Kebijakan Privasi
             </a>
           </div>

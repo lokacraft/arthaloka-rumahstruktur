@@ -3,9 +3,13 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import hero from "/public/landing/hero.png";
+import { useContact } from "@/contexts/ContactContext";
+import Link from "next/link";
 
 const Hero = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const { contactData, isLoading } = useContact();
+
 
   return (
     <div className="relative w-full h-[100vh] mb-[5rem] flex flex-col z-0 mx-auto justify-center md:items-center items-start md:p-[15vh] p-[5vh] font-clash overflow-hidden text-white">
@@ -72,15 +76,28 @@ const Hero = () => {
 
         {/* Button */}
         <div className="px-6 py-1 w-fit md:justify-self-center border border-[#FAFAFA] md:rounded-2xl rounded-lg mt-10">
-          <a
-            href=""
+          {contactData && !isLoading ? (
+          <Link
+            href={`https://wa.me/${contactData.whatsAppNumber}`}
             className="
             font-instrument font-normal text-center
             text-lg md:text-xl 2xl:text-2xl
           "
           >
             Whatsapp Kami Sekarang!
-          </a>
+          </Link>
+
+          ) : (
+          <Link
+            href={`#`}
+            className="
+            font-instrument font-normal text-center
+            text-lg md:text-xl 2xl:text-2xl
+          "
+          >
+            Whatsapp Kami Sekarang!
+          </Link>
+          )}
         </div>
       </div>
     </div>

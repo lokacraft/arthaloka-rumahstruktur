@@ -2,6 +2,7 @@
 
 import React, { ReactNode, useState } from "react";
 import Image, { StaticImageData } from "next/image";
+import { useContact } from "@/contexts/ContactContext";
 
 interface HeroProps {
   imageSrc: StaticImageData | string;
@@ -19,6 +20,7 @@ const Hero: React.FC<HeroProps> = ({
   buttonLink,
 }) => {
   const [loading, setLoading] = useState(true);
+  const { contactData, isLoading } = useContact();
 
   return (
     <div
@@ -114,6 +116,18 @@ const Hero: React.FC<HeroProps> = ({
                 mt-6 md:mt-8 lg:mt-10
               "
             >
+              {contactData && !isLoading ? (
+              <a
+                href={`https://wa.me/${contactData.whatsAppNumber}`}
+                className="
+                  font-instrument font-normal text-center
+                  text-lg md:text-xl 2xl:text-2xl
+                "
+              >
+                {buttonText}
+              </a>
+                
+              ) : (
               <a
                 href={buttonLink || "#"}
                 className="
@@ -123,6 +137,7 @@ const Hero: React.FC<HeroProps> = ({
               >
                 {buttonText}
               </a>
+              )}
             </div>
           )}
         </>

@@ -1,60 +1,80 @@
+import React from "react";
+import { notFound } from "next/navigation";
+import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { collection, getDocs, query, where, Timestamp } from "firebase/firestore";
-import BlogContent from "./BlogContent";
+import BlogDetailClient, { BlogPost } from "@/app/components/landing-page/BlogDetailClient";
+import { Metadata } from "next";
 
-interface BlogDetail {
-  id: string;
-  slug: string;
-  title: string;
-  author: string;
-  tanggal: string;
-  tags: string[];
-  fotoBlog: string;
-  isiBlog: string;
+// Fungsi Fetch Data
+async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
+  try {
+    // 1. Coba cari berdasarkan field 'slug'
+    const q = query(collection(db, "blogs"), where("slug", "==", slug), limit(1));
+    const snapshot = await getDocs(q);
+
+    // 2. Fallback: Jika tidak ditemukan, coba cari berdasarkan ID (jika slug yang dikirim sebenarnya adalah ID)
+    if (snapshot.empty) {
+       // Opsional: Implementasi pencarian by ID jika diperlukan
+       // const docRef = doc(db, "blogs", slug); ...
+    }
+
+    if (snapshot.empty) return null;
+
+    const doc = snapshot.docs[0];
+    const data = doc.data();
+
+    // Format Data
+    return {
+      id: doc.id,
+      title: data.title,
+      subtitle: data.subtitle || "",
+      category: data.category || "Umum",
+      authorName: data.authorName || "Admin",
+      authorRole: data.authorRole || "Editor",
+      authorAvatar: data.authorAvatar || "",
+      publishedAt: data.createdAt?.toDate().toLocaleDateString('id-ID', { 
+        day: 'numeric', month: 'long', year: 'numeric' 
+      }) || "Baru saja",
+      readTime: data.readTime || "3 min read",
+      likes: data.likes || 0,
+      heroImage: data.heroImage || "/images/placeholder.jpg",
+      content: data.content || "",
+    };
+
+  } catch (error) {
+    console.error("Error fetching blog:", error);
+    return null;
+  }
 }
 
-// generateStaticParams untuk SEO
-export async function generateStaticParams() {
-  const snapshot = await getDocs(collection(db, "blogs"));
-  return snapshot.docs.map((doc) => ({ slug: doc.data().slug as string }));
-}
-
-export default async function BlogPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+// Generate Metadata untuk SEO
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
+  const post = await getBlogBySlug(slug);
 
-  const q = query(collection(db, "blogs"), where("slug", "==", slug));
-  const snapshot = await getDocs(q);
-
-  if (snapshot.empty) return <p>Blog tidak ditemukan</p>;
-
-  const docData = snapshot.docs[0].data();
-
-  
-  let tanggalStr = "";
-  if (docData.tanggal instanceof Timestamp) {
-    tanggalStr = docData.tanggal.toDate().toLocaleDateString("id-ID", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  } else if (typeof docData.tanggal === "string") {
-    tanggalStr = docData.tanggal;
+  if (!post) {
+    return { title: "Artikel Tidak Ditemukan - RumahStruktur" };
   }
 
-  const blog: BlogDetail = {
-    id: snapshot.docs[0].id,
-    slug: docData.slug,
-    title: docData.title,
-    author: docData.author,
-    tanggal: tanggalStr,
-    tags: docData.tag || [],
-    fotoBlog: docData.fotoBlog,
-    isiBlog: docData.isiBlog,
+  return {
+    title: `${post.title} - Blog RumahStruktur`,
+    description: post.subtitle || post.content.substring(0, 150),
+    openGraph: {
+      images: [post.heroImage],
+    },
   };
+}
 
-  return <BlogContent blog={blog} />;
+// Komponen Halaman Utama
+export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getBlogBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  return (
+    <BlogDetailClient post={post} />
+  );
 }

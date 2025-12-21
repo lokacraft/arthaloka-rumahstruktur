@@ -2,6 +2,7 @@
 
 import React, { ReactNode, useState } from "react";
 import Image from "next/image";
+import { useContact } from "@/contexts/ContactContext";
 
 interface HeroSectionProps {
   title: ReactNode;
@@ -22,6 +23,8 @@ export default function HeroSection({
   whatsappLink = "https://wa.me/6281234567890",
 }: HeroSectionProps) {
   const [loadedCount, setLoadedCount] = useState(0);
+  
+  const { contactData, isLoading } = useContact();
 
   const allLoaded = loadedCount >= Math.min(images.length, 3);
 
@@ -131,6 +134,16 @@ export default function HeroSection({
             <p className="text-black text-md md:text-xl 2xl:text-2xl font-normal leading-tight mb-6">
               {description}
             </p>
+            {contactData && !isLoading ? (
+            <a
+              href={`https://wa.me/${contactData.whatsAppNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block border text-lg md:text-xl 2xl:text-2xl border-black rounded-2xl px-6 py-1 transition font-instrument"
+            >
+              Whatsapp Kami Sekarang
+            </a>
+            ) : (
             <a
               href={whatsappLink}
               target="_blank"
@@ -139,6 +152,8 @@ export default function HeroSection({
             >
               Whatsapp Kami Sekarang
             </a>
+              
+            )}
           </div>
         </div>
       </div>

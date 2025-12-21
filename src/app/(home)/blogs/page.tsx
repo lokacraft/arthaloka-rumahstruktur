@@ -5,6 +5,7 @@ import ContactForm from "@/app/components/ContactForm";
 
 import { Metadata } from "next";
 import ContactDiskusiPesan from "@/app/components/landing-page/ContactDiskusiPesan";
+import BlogList from "@/app/components/landing-page/BlogList";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -16,7 +17,8 @@ export default function Blogs() {
   return (
     <div className="relative">
       <HighlightBlog />
-      <BlogCards />
+      <BlogList />
+      {/* <BlogCards /> */}
       <BottomBanner
         title={
           <>

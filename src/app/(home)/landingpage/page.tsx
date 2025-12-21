@@ -30,7 +30,7 @@ export default function Home() {
       <HomeCakupanLayanan />
       <HomeJelajahiProyek />
       <TestimonialCarousel />
-      <ArtikelCarousel />
+      {/* <ArtikelCarousel /> */}
       <HomeSecondBanner />
       <HomeDiskusiPesan />
     </div>

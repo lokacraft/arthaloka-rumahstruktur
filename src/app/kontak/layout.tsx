@@ -10,6 +10,8 @@ import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
 import "../globals.css";
 import ContactDiskusiPesan from "../components/landing-page/ContactDiskusiPesan";
+import { ContactProvider } from "@/contexts/ContactContext";
+import CTAWhatsAppButton from "../components/landing-page/CTAWhatsAppButton";
 
 export const metadata: Metadata = {
   title: "Kontak",
@@ -27,10 +29,13 @@ export default function RootLayout({
       className={`${clashGrotesk.variable} ${instrumentSans.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body className="bg-[#EAEAEA]">
+      <ContactProvider>
         <NavBar />
         {children}
         <ContactDiskusiPesan />
         <Footer />
+        <CTAWhatsAppButton />
+      </ContactProvider>
       </body>
     </html>
   );

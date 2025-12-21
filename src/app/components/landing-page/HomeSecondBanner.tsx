@@ -23,7 +23,7 @@ const HomeSecondBanner = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden flex items-center"
+      className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden flex items-center mt-20"
     >
       {/* --- PARALLAX BACKGROUND --- */}
       <motion.div

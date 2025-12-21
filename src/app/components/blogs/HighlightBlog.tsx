@@ -40,11 +40,11 @@ export default function HighlightBlog() {
           return {
             id: doc.id,
             slug: docData.slug || `/artikel/${doc.id}`,
-            image: docData.fotoBlog || '/placeholder.png',
+            image: docData.heroImage || '/placeholder.png',
             title: docData.title || '',
-            author: docData.author || '',
+            author: docData.authorName || '',
             date: dateStr,
-            category: docData.tag || [],
+            category: docData.category || [],
           };
         });
 
@@ -94,14 +94,11 @@ function HighlightContent({ artikel }: { artikel: Artikel }) {
       <div className="flex flex-col justify-center flex-1 m-5">
         {/* Kategori */}
         <div className="flex flex-wrap gap-2 mb-3">
-          {artikel.category.map((cat, i) => (
             <span
-              key={i}
               className="lg:text-md text-sm px-4 border border-[#008080] text-[#008080] rounded-md font-instrument"
             >
-              {cat}
+              {artikel.category}
             </span>
-          ))}
         </div>
 
         {/* Judul */}
