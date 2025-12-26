@@ -18,6 +18,8 @@ import React, { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 // import Image from "next/image"; // untuk logo
 import "../../../globals.css";
+import Image from "next/image";
+import Logo from "../../../../../public/images/logoMain.png"
 
 export const metadata: Metadata = {
   title: "Login Admin - Rumah Struktur",
@@ -106,19 +108,20 @@ export default function LoginForm() {
         <CardHeader className="flex flex-col items-center gap-2 relative">
           <div className="flex flex-row justify-center items-center gap-2 w-full">
             {/* Logo + Nama perusahaan */}
-            {/* <Image
-              src="/logo-rumahstruktur.png" // ganti dengan path logo kamu di /public
+            <Image
+              src={Logo}// ganti dengan path logo kamu di /public
               alt="RumahStruktur Logo"
-              width={40}
-              height={40}
+              width={1000}
+              height={1000}
               priority
-            /> */}
-            <h2 className="text-lg font-bold tracking-wide text-gray-800 rounded-2xl border border-black p-2">
+              className="w-[120px]"
+            />
+            {/* <h2 className="text-lg font-bold tracking-wide text-gray-800 rounded-2xl border border-black p-2">
               LOGO
-            </h2>
-            <h2 className="text-lg font-semibold tracking-wide text-gray-800">
+            </h2> */}
+            {/* <h2 className="text-lg font-semibold tracking-wide text-gray-800">
               Rumah Struktur
-            </h2>
+            </h2> */}
           </div>
 
           <CardTitle className="text-2xl text-center mt-4">
