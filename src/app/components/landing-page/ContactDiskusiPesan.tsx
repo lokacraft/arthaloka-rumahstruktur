@@ -187,10 +187,10 @@ export default function ContactDiskusiPesan() {
       const message = `
 *Halo Rumah Struktur, Saya ingin diskusi mengenai proyek.*
 
-👤 *Nama:* ${formData.nama}
-📍 *Lokasi:* ${formData.lokasiProyek}
-🏗️ *Proyek:* ${formData.namaProyek}
-📋 *Tipe:* ${formData.tipeProyek}
+ *Nama:* ${formData.nama}
+ *Lokasi:* ${formData.lokasiProyek}
+ *Proyek:* ${formData.namaProyek}
+ *Tipe:* ${formData.tipeProyek}
 
 *Pesan Detail:*
 ${formData.pesan}

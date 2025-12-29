@@ -153,9 +153,9 @@ export default function LayananDiskusiPesan({ namaLayanan }: LayananDiskusiPesan
       const message = `
 *Pertanyaan tentang ${namaLayanan}*
 
-👤 *Nama:* ${formData.name}
-📧 *Email:* ${formData.email}
-📌 *Judul:* ${formData.judulPesan}
+ *Nama:* ${formData.name}
+ *Email:* ${formData.email}
+ *Judul:* ${formData.judulPesan}
 
 *Pesan:*
 ${formData.pesan}

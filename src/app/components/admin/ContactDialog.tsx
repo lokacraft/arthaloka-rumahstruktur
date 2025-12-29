@@ -14,7 +14,8 @@ import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import { Switch } from "@/app/components/ui/switch"; // Pastikan Anda sudah install switch: npx shadcn@latest add switch
 import { toast } from "sonner";
-import { AtSign, Instagram, Phone, Youtube, Smartphone } from "lucide-react";
+import { AtSign, Instagram, Phone, Youtube, Smartphone, Mail } from "lucide-react";
+import { BsFacebook, BsTwitterX } from "react-icons/bs";
 
 // Tipe Data Kontak
 export interface ContactData {
@@ -111,7 +112,7 @@ export function ContactDialog({
         <form onSubmit={handleSubmit} className="py-4 space-y-5">
           {/* EmailAddress */}
           <div className="space-y-2">
-            <Label className="flex items-center gap-2"><AtSign className="w-4 h-4" /> Email Resmi</Label>
+            <Label className="flex items-center gap-2"><Mail className="w-4 h-4" /> Email Resmi</Label>
             <Input name="emailAddress" type="email" value={formData.emailAddress} onChange={handleChange} placeholder="info@rumahstruktur.com" />
           </div>
 
@@ -125,7 +126,7 @@ export function ContactDialog({
 
             {/* Telepon Kantor (Opsional) */}
             <div className="space-y-2">
-                <Label className="flex items-center gap-2"><Phone className="w-4 h-4" /> Facebook (opsional)</Label>
+                <Label className="flex items-center gap-2"><BsFacebook className="w-4 h-4" /> Facebook (opsional)</Label>
                 <Input name="facebookAccount" type="text" value={formData.facebookAccount} onChange={handleChange} placeholder="(0274) ..." />
             </div>
           </div>
@@ -137,7 +138,7 @@ export function ContactDialog({
                 <Input name="instagramAccount" value={formData.instagramAccount} onChange={handleChange} placeholder="https://instagramAccount.com/..." />
             </div>
             <div className="space-y-2">
-                <Label className="flex items-center gap-2"><Youtube className="w-4 h-4" /> Link X/Twitter (Opsional)</Label>
+                <Label className="flex items-center gap-2"><BsTwitterX className="w-4 h-4" /> Link X/Twitter (Opsional)</Label>
                 <Input name="xAccount" value={formData.xAccount} onChange={handleChange} placeholder="https://x.com/..." />
             </div>
           </div>
