@@ -21,7 +21,7 @@ import { TbRoad } from "react-icons/tb";
 const layananData = [
   {
     id: 1,
-    url: "/layanan/#",
+    url: "/layanan/jasa-hitung-struktur",
     title: "Jasa audit struktur dan penyelidikan tanah",
     description:
       "",
@@ -30,7 +30,7 @@ const layananData = [
   },
   {
     id: 2,
-    url: "/layanan/#",
+    url: "/layanan/jasa-hitung-struktur",
     title: "Jasa perencanaan struktur pendukung konstruksi dan struktur sementara",
     description:
       "",
@@ -39,7 +39,7 @@ const layananData = [
   },
   {
     id: 3,
-    url: "/layanan/#",
+    url: "/layanan/jasa-hitung-struktur",
     title: "Jasa perencanaan struktur hunian",
     description:
       "Supervisi ketat di lapangan untuk memastikan pelaksanaan konstruksi sesuai dengan gambar desain dan spesifikasi teknis.",
@@ -48,7 +48,7 @@ const layananData = [
   },
   {
     id: 4,
-    url: "/layanan/#",
+    url: "/layanan/jasa-hitung-struktur",
     title: "Jasa perencanaan struktur fasilitas umum",
     description:
       "Solusi teknis (retrofitting) untuk memperbaiki kerusakan struktur atau meningkatkan kapasitas beban bangunan lama.",
@@ -57,7 +57,7 @@ const layananData = [
   },
   {
     id: 5,
-    url: "/layanan/#",
+    url: "/layanan/jasa-hitung-struktur",
     title: "Jasa perencanaan struktur industri",
     description:
       "Layanan konsultasi ahli untuk memecahkan masalah sipil, sengketa konstruksi, atau kajian kelayakan proyek.",
@@ -66,7 +66,7 @@ const layananData = [
   },
   {
     id: 6,
-    url: "/layanan/#",
+    url: "/layanan/geometrik-jalan-raya",
     title: "Jasa perencanaan infrastruktur",
     description:
       "Pemodelan Informasi Bangunan (3D) untuk visualisasi yang akurat, deteksi konflik, dan efisiensi estimasi material.",
@@ -75,7 +75,7 @@ const layananData = [
   },
   {
     id: 7,
-    url: "/layanan/#",
+    url: "/layanan/analisis-geoteknik",
     title: "Jasa perencanaan geoteknik",
     description:
       "Pemodelan Informasi Bangunan (3D) untuk visualisasi yang akurat, deteksi konflik, dan efisiensi estimasi material.",
@@ -84,7 +84,7 @@ const layananData = [
   },
   {
     id: 8,
-    url: "/layanan/#",
+    url: "/layanan/soil-investigation",
     title: "Jasa perencanaan struktur kawasan industri pertambangan",
     description:
       "Pemodelan Informasi Bangunan (3D) untuk visualisasi yang akurat, deteksi konflik, dan efisiensi estimasi material.",
