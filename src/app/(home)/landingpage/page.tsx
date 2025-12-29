@@ -29,8 +29,8 @@ export default function Home() {
       <HomeTeamLegalitas />
       <HomeCakupanLayanan />
       <HomeJelajahiProyek />
-      <TestimonialCarousel />
-      {/* <ArtikelCarousel /> */}
+      <PartnerShowcase />
+      {/* <TestimonialCarousel /> */}
       <HomeSecondBanner />
       <HomeDiskusiPesan />
     </div>

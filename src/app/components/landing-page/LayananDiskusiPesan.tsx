@@ -14,7 +14,7 @@ import {
   Facebook,
   Twitter
 } from "lucide-react";
-import { BsTwitterX } from "react-icons/bs";
+import { BsTwitterX, BsWhatsapp } from "react-icons/bs";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Button } from "@/app/components/ui/button";
@@ -29,6 +29,7 @@ import {
   DialogTitle,
 } from "@/app/components/ui/dialog";
 import { toast } from "sonner";
+import { IconBrandWhatsapp } from "@tabler/icons-react";
 
 interface LayananDiskusiPesanProps {
   namaLayanan: string;
@@ -254,9 +255,8 @@ ${formData.pesan}
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="text-slate-200 text-sm md:text-base leading-relaxed"
                 >
-                  Telepon kami atau tinggalkan pertanyaan di<br/>
-                  formulir! Kami akan merespons Anda dalam<br/>
-                  24 jam.
+                  
+                  Isi formulir ini dan pesan Anda akan otomatis diarahkan ke chat WhatsApp admin kami untuk respons instan.
                 </motion.p>
               </div>
 
@@ -493,7 +493,7 @@ ${formData.pesan}
                   <Button 
                     onClick={handleSubmit}
                     disabled={loading}
-                    className="w-full sm:w-auto h-11 md:h-12 px-6 md:px-8 bg-[#4db8ae] hover:bg-[#45a89f] text-white font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group shadow-lg shadow-teal-900/20"
+                    className="w-full cursor-pointer sm:w-auto h-11 md:h-12 px-6 md:px-8 bg-[#4db8ae] hover:bg-[#45a89f] text-white font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group shadow-lg shadow-teal-900/20"
                   >
                     {loading ? (
                       <>
@@ -502,7 +502,8 @@ ${formData.pesan}
                       </>
                     ) : (
                       <>
-                        Kirim Pesan
+                        <BsWhatsapp className="mr-4 h-12 w-12 group-hover:scale-[1.4] transition-all duration-200" />
+                        Kirim Pesan ke WhatsApp
                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}

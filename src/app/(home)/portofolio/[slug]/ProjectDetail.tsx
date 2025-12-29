@@ -42,7 +42,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
   };
 
   return (
-    <section className="px-6 md:p-[4vh] lg:p-[15vh] font-clash my-12 md:my-16 text-black">
+    <section className="px-6 p-[4vh] lg:p-[15vh] font-clash my-12 md:my-16 text-black">
       {/* Loader overlay */}
       {loading && (
         <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center backdrop-blur-md bg-black/30">

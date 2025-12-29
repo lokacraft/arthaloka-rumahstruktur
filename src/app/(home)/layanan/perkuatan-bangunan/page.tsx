@@ -48,6 +48,8 @@ export default function Home() {
         // leftWidth="80%"
         // rightWidth="40%"
       />
+      {/* team */}
+            <TimSection layananId="Mekanikal Elekrikal Plumbing" />
       <InfoSection
         title={
           <>

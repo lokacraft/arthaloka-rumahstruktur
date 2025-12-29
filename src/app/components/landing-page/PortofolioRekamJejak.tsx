@@ -40,7 +40,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/app/components/ui/pagination";
-import { Search, MapPin, Calendar, Briefcase } from "lucide-react";
+import { Search, MapPin, Calendar, Briefcase, Filter, FilterIcon } from "lucide-react";
 import { Skeleton } from "@/app/components/ui/skeleton";
 import { Badge } from "@/app/components/ui/badge";
 import {
@@ -52,6 +52,7 @@ import {
       EmptyTitle,
     } from "@/app/components/ui/empty"
 import { SearchX } from "lucide-react";
+import Link from "next/link";
 
 // --- Tipe Data ---
 interface PortfolioCategory {
@@ -62,6 +63,7 @@ interface PortfolioCategory {
 interface Portfolio {
   id: string;
   title: string;
+  slug: string;
   klien: string;
   lokasi: string;
   tahun: string; // Bisa string atau number
@@ -83,6 +85,7 @@ export default function PortofolioRekamJejak() {
   const [filterLokasi, setFilterLokasi] = useState("all");
   const [filterTahun, setFilterTahun] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
+  const [filterCategory, setfilterCategory] = useState("all");
 
   // State Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -156,8 +159,9 @@ export default function PortofolioRekamJejak() {
       const statusMatch = filterStatus === "all" || item.status === filterStatus;
 
       return categoryMatch && searchMatch && lokasiMatch && tahunMatch && statusMatch;
+      
     });
-  }, [portfolios, selectedCategory, searchQuery, filterLokasi, filterTahun, filterStatus]);
+  }, [portfolios, searchQuery, selectedCategory, filterLokasi, filterTahun, filterStatus, filterCategory]);
 
   // 4. Pagination Logic
   const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
@@ -176,6 +180,7 @@ export default function PortofolioRekamJejak() {
   const uniqueLocations = Array.from(new Set(portfolios.map(p => p.lokasi))).sort();
   const uniqueYears = Array.from(new Set(portfolios.map(p => p.tahun))).sort((a, b) => Number(b) - Number(a));
   const uniqueStatuses = Array.from(new Set(portfolios.map(p => p.status))).sort();
+  const uniqueCategories = Array.from(new Set(portfolios.map(p => p.portofolioCategoryId))).sort();
 
   const renderTable = () => (
       <div className="rounded-xl border border-gray-200 overflow-hidden mt-6">
@@ -204,7 +209,11 @@ export default function PortofolioRekamJejak() {
                   <TableCell className="text-center font-medium">
                     {(currentPage - 1) * ITEMS_PER_PAGE + index + 1}
                   </TableCell>
-                  <TableCell className="font-semibold text-gray-900">{item.title}</TableCell>
+                  <TableCell className="font-semibold text-gray-900">
+                    <Link href={`/portofolio/${item.slug}`}>
+                    {item.title}
+                    </Link>
+                    </TableCell>
                   <TableCell>{item.klien}</TableCell>
                   <TableCell>{item.lokasi}</TableCell>
                   <TableCell>
@@ -268,7 +277,7 @@ export default function PortofolioRekamJejak() {
             >
               Semua Proyek
             </TabsTrigger>
-            {activeCategories.map((cat) => (
+            {/* {activeCategories.map((cat) => (
               <TabsTrigger 
                 key={cat.id} 
                 value={cat.id}
@@ -276,7 +285,7 @@ export default function PortofolioRekamJejak() {
               >
                 {cat.name}
               </TabsTrigger>
-            ))}
+            ))} */}
           </TabsList>
         {/* --- SECTION 2: SEARCH & FILTER --- */}
         <div className="flex flex-col lg:flex-row gap-4 bg-gray-50 p-4 rounded-xl border border-gray-100">
@@ -293,6 +302,22 @@ export default function PortofolioRekamJejak() {
 
           {/* Filters Group */}
           <div className="flex flex-col sm:flex-row gap-4">
+            {/* 1. Filter Kategori (Sekarang Dropdown) */}
+            <Select value={selectedCategory} onValueChange={(val) => { setSelectedCategory(val); setCurrentPage(1); }}>
+                  <SelectTrigger className="w-full bg-white border-gray-200">
+                    <div className="flex items-center gap-2 text-gray-600 truncate">
+                      <FilterIcon className="w-4 h-4 shrink-0" />
+                      <span className="truncate">{selectedCategory === 'all' ? 'Semua Kategori' : getCategoryName(selectedCategory)}</span>
+                    </div>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Semua Kategori</SelectItem>
+                    {activeCategories.map((cat) => (
+                      <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
             {/* Filter Lokasi */}
             <Select value={filterLokasi} onValueChange={(val) => { setFilterLokasi(val); setCurrentPage(1); }}>
               <SelectTrigger className="w-full sm:w-[180px] bg-white border-gray-200">
@@ -334,6 +359,7 @@ export default function PortofolioRekamJejak() {
                 {uniqueStatuses.map((stat, index) => <SelectItem key={index} value={stat}>{stat}</SelectItem>)}
               </SelectContent>
             </Select>
+            
           </div>
         </div>
         {/* Tab Content untuk "all" */}
@@ -342,11 +368,11 @@ export default function PortofolioRekamJejak() {
           </TabsContent>
 
           {/* Tab Content untuk setiap kategori dinamis */}
-          {activeCategories.map((cat) => (
+          {/* {activeCategories.map((cat) => (
             <TabsContent key={cat.id} value={cat.id}  className="bg-white rounded-xl p-4">
                {renderTable()}
             </TabsContent>
-          ))}
+          ))} */}
         </Tabs>
 
         {/* --- PAGINATION --- */}

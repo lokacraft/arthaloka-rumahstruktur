@@ -42,6 +42,8 @@ export default function Home() {
         ]}
         whatsappLink="https://wa.me/6281234567890"
       />
+      {/* team */}
+      <TimSection layananId="Soil Investigation" />
       <InfoSection
         title={
           <>
@@ -113,8 +115,6 @@ export default function Home() {
           "Laporan Hasil Pengujian Laboratorium",
         ]}
       />
-      {/* team */}
-      <TimSection layananId="Soil Investigation" />
       <MengapaMemilihSection
         title={
           <>

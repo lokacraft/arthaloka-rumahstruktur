@@ -41,6 +41,8 @@ export default function Home() {
         ]}
         whatsappLink="https://wa.me/6281234567890"
       />
+      {/* team */}
+      <TimSection layananId="Geometrik Jalan Raya" />
       <InfoSection
         title={
           <>
@@ -108,8 +110,7 @@ export default function Home() {
           "Desain Perkerasan Kaku (Rigid Pavement)",
         ]}
       />
-       {/* team */}
-       <TimSection layananId="Geometrik Jalan Raya" />
+       
       <MengapaMemilihSection
         title={
           <>

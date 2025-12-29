@@ -242,9 +242,9 @@ const HomeTeamLegalitas = ({ layananId = "show-landing" }: HomeTeamLegalitasProp
                                     <h4 className="font-medium text-gray-900 text-lg group-hover:text-[#008080] transition-colors">
                                         {doc.title}
                                     </h4>
-                                    <p className="text-sm font-mono text-gray-500 mt-1 mb-2 bg-white px-2 py-0.5 rounded inline-block border">
+                                    {/* <p className="text-sm font-mono text-gray-500 mt-1 mb-2 bg-white px-2 py-0.5 rounded inline-block border">
                                         {doc.number}
-                                    </p>
+                                    </p> */}
                                     <p className="text-sm text-gray-500">
                                         {doc.description}
                                     </p>

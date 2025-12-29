@@ -41,6 +41,8 @@ export default function Home() {
         ]}
         // whatsappLink="https://wa.me/6281234567890"
       />
+       {/* team */}
+       <TimSection layananId="Analisis Geoteknik" />
       <InfoSection
         title={
           <>
@@ -113,8 +115,7 @@ export default function Home() {
           "Rekomendasi Perbaikan Tanah (jika diperlukan)",
         ]}
       />
-       {/* team */}
-       <TimSection layananId="Analisis Geoteknik" />
+      
       <MengapaMemilihSection
         title={
           <>

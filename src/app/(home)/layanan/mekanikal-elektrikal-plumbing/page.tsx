@@ -42,6 +42,8 @@ export default function Home() {
         ]}
         whatsappLink="https://wa.me/6281234567890"
       />
+      {/* team */}
+      <TimSection layananId="Mekanikal Elekrikal Plumbing" />
       <InfoSection
         title={
           <>
@@ -112,8 +114,7 @@ export default function Home() {
           "Merancang sistem perpipaan untuk distribusi air bersih dan pembuangan air kotor yang higienis.",
         ]}
       />
-      {/* team */}
-      <TimSection layananId="Mekanikal Elekrikal Plumbing" />
+      
       <MengapaMemilihSection
         title={
           <>

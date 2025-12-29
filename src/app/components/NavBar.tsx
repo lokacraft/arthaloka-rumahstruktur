@@ -83,7 +83,7 @@ export default function NavBar() {
           text-md  xl:text-lg"
         >
           {/* Logo */}
-          <div className="text-xl font-bold">
+          <Link href="/" className="text-xl font-bold cursor-pointer">
             <Image
             src={Logo}
             alt="logo"
@@ -91,7 +91,7 @@ export default function NavBar() {
             height={900}
             className="w-[140px]"
             />
-          </div>
+          </Link>
 
           {/* Menu */}
           <ul className="flex items-center space-x-8 lg:space-x-12 xl:space-x-14">
@@ -111,8 +111,8 @@ export default function NavBar() {
             <li className="relative">
               <button
                 onClick={() => setOpen(!open)}
-                onBlur={() => setTimeout(() => setOpen(false), 150)}
-                className="flex items-center hover:text-[#008080]"
+                onBlur={() => setTimeout(() => setOpen(false), 500)}
+                className="flex items-center hover:text-[#008080] cursor-pointer"
                 aria-label="Layanan"
               >
                 Layanan
@@ -138,18 +138,16 @@ export default function NavBar() {
                       <li key={i}>
                         <Link href={item.href} 
                           onClick={() => handleNavigation(item.href)}
-                        className="z-50">
-                          <span
-                            // aria-label={item.title}
-                            className={`flex w-full cursor-pointer items-center justify-between rounded-md px-2 py-2 transition-all duration-300 ${
-                              pathname === item.href
-                                ? "text-[#008080] bg-[#008080]/10"
-                                : "text-black/70 hover:bg-[#008080]/20"
-                            }`}
-                          >
+                         // aria-label={item.title}
+                         className={`flex w-full cursor-pointer items-center justify-between rounded-md px-2 py-2 transition-all duration-300 ${
+                          pathname === item.href
+                            ? "text-[#008080] bg-[#008080]/10"
+                            : "text-black/70 hover:bg-[#008080]/20"
+                        }`}
+                        >
+                         
                             {item.title}
                             <ChevronRight size={18} />
-                          </span>
                         </Link>
                       </li>
                     ))}
