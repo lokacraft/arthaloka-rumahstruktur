@@ -105,7 +105,7 @@ const HomeJelajahiProyek = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Link href="/portofolio">
-              <Button variant="outline" className="rounded-full px-6 border-[#008080] text-[#008080] hover:bg-[#008080] hover:text-white transition-all duration-300">
+              <Button variant="outline" className="rounded-full px-6 border-[#008080] text-[#008080] hover:bg-[#008080] hover:text-white transition-all duration-300 cursor-pointer">
                 Lihat Semua Proyek <ArrowUpRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>

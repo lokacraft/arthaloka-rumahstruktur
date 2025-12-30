@@ -9,6 +9,7 @@ import { db } from "@/lib/firebase";
 
 export default function CTAWhatsAppButton() {
   const [whatsappNumber, setWhatsappNumber] = useState<string>("");
+  const [ctawhatsappMessage, setctaWhatsappMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
@@ -24,6 +25,7 @@ export default function CTAWhatsAppButton() {
         if (!querySnapshot.empty) {
           const docData = querySnapshot.docs[0].data();
           let number = docData.whatsAppNumber;
+          const message = docData.ctaWhatsAppMessage;
           
           // Sanitasi nomor
           number = number.replace(/\D/g, "");
@@ -32,6 +34,7 @@ export default function CTAWhatsAppButton() {
           }
           
           setWhatsappNumber(number);
+          setctaWhatsappMessage(message);
         }
       } catch (error) {
         console.error("Error fetching WhatsApp number:", error);
@@ -46,7 +49,7 @@ export default function CTAWhatsAppButton() {
   const handleClick = () => {
     if (!whatsappNumber) return;
     
-    const message = "Halo! Saya ingin bertanya tentang layanan Rumah Struktur.";
+    const message = ctawhatsappMessage || "Halo! Saya ingin bertanya tentang layanan Rumah Struktur.";
     const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, "_blank");
   };

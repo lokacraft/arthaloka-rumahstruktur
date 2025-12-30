@@ -7,6 +7,7 @@ import { db } from "@/lib/firebase";
 // Interface untuk Contact Data
 export interface ContactData {
   whatsAppNumber: string;
+  ctaWhatsAppMessage: string | "Halo! Saya ingin bertanya tentang layanan Rumah Struktur.";
   emailAddress: string;
   instagramAccount?: string;
   facebookAccount?: string;

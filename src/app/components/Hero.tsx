@@ -118,7 +118,8 @@ const Hero: React.FC<HeroProps> = ({
             >
               {contactData && !isLoading ? (
               <a
-                href={`https://wa.me/${contactData.whatsAppNumber}`}
+              href={`https://wa.me/${contactData.whatsAppNumber}?text=${encodeURIComponent(contactData.ctaWhatsAppMessage)}`}
+              target="_blank"
                 className="
                   font-instrument font-normal text-center
                   text-lg md:text-xl 2xl:text-2xl

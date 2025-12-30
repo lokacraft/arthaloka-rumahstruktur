@@ -78,7 +78,8 @@ const Hero = () => {
         <div className="px-6 py-1 w-fit md:justify-self-center border border-[#FAFAFA] md:rounded-2xl rounded-lg mt-10">
           {contactData && !isLoading ? (
           <Link
-            href={`https://wa.me/${contactData.whatsAppNumber}`}
+            href={`https://wa.me/${contactData.whatsAppNumber}?text=${encodeURIComponent(contactData.ctaWhatsAppMessage)}`}
+            target="_blank"
             className="
             font-instrument font-normal text-center
             text-lg md:text-xl 2xl:text-2xl

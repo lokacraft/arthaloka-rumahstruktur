@@ -152,7 +152,7 @@ export default function HeroSection({
             </p>
             {contactData && !isLoading ? (
             <a
-              href={`https://wa.me/${contactData.whatsAppNumber}`}
+            href={`https://wa.me/${contactData.whatsAppNumber}?text=${encodeURIComponent(contactData.ctaWhatsAppMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block border text-lg md:text-xl 2xl:text-2xl border-black rounded-2xl px-6 py-1 transition font-instrument"

@@ -35,7 +35,7 @@ const HomeSecondBanner = () => {
           alt="banner"
           width={1950}
       height={800}
-          className="object-cover"
+          className="w-full h-full object-cover"
           priority={false}
         />
         {/* Gradient Overlay untuk keterbacaan teks */}

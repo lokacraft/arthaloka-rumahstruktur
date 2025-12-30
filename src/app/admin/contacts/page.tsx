@@ -102,6 +102,7 @@ export default function ManageContactPage() {
           <TableRow>
             <TableHead>Email</TableHead>
             <TableHead>WhatsApp</TableHead>
+            <TableHead>Pesan CTA WhatsApp</TableHead>
             <TableHead>Instagram</TableHead>
             <TableHead>Facebook</TableHead>
             <TableHead>X Platform(Twitter)</TableHead>
@@ -117,6 +118,7 @@ export default function ManageContactPage() {
               <TableRow key={item.id}>
                 <TableCell className="font-medium">{item.emailAddress}</TableCell>
                 <TableCell>{item.whatsAppNumber}</TableCell>
+                <TableCell>{item.ctaWhatsAppMessage}</TableCell>
                 <TableCell className="max-w-[150px] truncate">{item.instagramAccount}</TableCell>
                 <TableCell className="max-w-[150px] truncate">{item.facebookAccount}</TableCell>
                 <TableCell className="max-w-[150px] truncate">{item.xAccount}</TableCell>
@@ -192,6 +194,10 @@ export default function ManageContactPage() {
                           <div className="flex justify-between border-b pb-2">
                              <span className="text-gray-500">WhatsApp:</span>
                              <span className="font-medium">{activeContact.whatsAppNumber}</span>
+                          </div>
+                          <div className="flex justify-between border-b pb-2">
+                             <span className="text-gray-500">Pesan WhatsApp:</span>
+                             <span className="font-medium line-clamp-3">{activeContact.ctaWhatsAppMessage}</span>
                           </div>
                           <div className="flex justify-between border-b pb-2">
                              <span className="text-gray-500">Facebook:</span>

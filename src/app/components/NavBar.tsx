@@ -87,8 +87,8 @@ export default function NavBar() {
             <Image
             src={Logo}
             alt="logo"
-            width={1200}
-            height={900}
+            width={2000}
+            height={1400}
             className="w-[140px]"
             />
           </Link>
@@ -206,7 +206,7 @@ export default function NavBar() {
             src={Logo}
             alt="logo"
             width={2000}
-            height={1200}
+            height={1400}
             quality={100}
             priority
             className="w-[120px]"

@@ -16,6 +16,7 @@ import { Switch } from "@/app/components/ui/switch"; // Pastikan Anda sudah inst
 import { toast } from "sonner";
 import { AtSign, Instagram, Phone, Youtube, Smartphone, Mail } from "lucide-react";
 import { BsFacebook, BsTwitterX } from "react-icons/bs";
+import { Textarea } from "../ui/textarea";
 
 // Tipe Data Kontak
 export interface ContactData {
@@ -23,6 +24,7 @@ export interface ContactData {
   emailAddress: string;
   instagramAccount: string; // URL atau Username
   whatsAppNumber: string; // Nomor (e.g., 62812...)
+  ctaWhatsAppMessage?: string; // whatsapp Message
   facebookAccount?: string; // URL Channel
   xAccount?: string; // Opsional
   isActive: boolean;
@@ -47,6 +49,7 @@ export function ContactDialog({
     emailAddress: "",
     instagramAccount: "",
     whatsAppNumber: "",
+    ctaWhatsAppMessage: "",
     facebookAccount: "",
     xAccount: "",
     isActive: false,
@@ -62,6 +65,7 @@ export function ContactDialog({
         emailAddress: "",
         instagramAccount: "",
         whatsAppNumber: "",
+        ctaWhatsAppMessage: "",
         facebookAccount: "",
         xAccount: "",
         isActive: false,
@@ -69,7 +73,7 @@ export function ContactDialog({
     }
   }, [initialData, open]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -118,10 +122,16 @@ export function ContactDialog({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
              {/* WhatsApp */}
-            <div className="space-y-2">
+            <div className="space-y-2 col-span-1 md:col-span-2">
                 <Label className="flex items-center gap-2"><Smartphone className="w-4 h-4" /> No. WhatsApp</Label>
                 <Input name="whatsAppNumber" type="tel" value={formData.whatsAppNumber} onChange={handleChange} placeholder="628xx..." />
                 <p className="text-[10px] text-muted-foreground">Gunakan format internasional (62...)</p>
+            </div>
+             {/* WhatsApp */}
+             <div className="space-y-2 col-span-1 md:col-span-2">
+                <Label className="flex items-center gap-2"><Smartphone className="w-4 h-4" />Pesan CTA WhatsApp</Label>
+                <Textarea name="ctaWhatsAppMessage" value={formData.ctaWhatsAppMessage} onChange={handleChange} placeholder="Masukkan pesan untuk CTA Whatsapp..." />
+                <p className="text-[10px] text-muted-foreground">contoh: Hi, Selamat datang di Rumah Struktur</p>
             </div>
 
             {/* Telepon Kantor (Opsional) */}
