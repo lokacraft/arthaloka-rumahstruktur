@@ -35,14 +35,16 @@ const keunggulanData = [
     icon: UserRound,
     color: "text-[#008080]",
   },
-  {
-    id: 3,
-    title: "Tepat Waktu & Anggaran",
-    description:
-      "Berpengalaman Dengan lebih dari 300 Proyek diselesaikan selama lebih dari 7 Tahun",
-    icon: ClipboardList,
-    color: "text-[#008080]",
-  },
+  // {
+  //   id: 3,
+  //   title: "Tepat Waktu & Anggaran",
+  //   // description:
+  //   //   "Berpengalaman Dengan lebih dari 300 Proyek diselesaikan selama lebih dari 7 Tahun",
+  //   description:
+  //     "Berpengalaman Dengan lebih dari 300 Proyek diselesaikan selama lebih dari 7 Tahun",
+  //   icon: ClipboardList,
+  //   color: "text-[#008080]",
+  // },
   {
     id: 4,
     title: "Tim Ahli Bersertifikat",

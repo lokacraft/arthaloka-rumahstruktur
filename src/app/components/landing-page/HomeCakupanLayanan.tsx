@@ -22,7 +22,7 @@ const layananData = [
   {
     id: 1,
     url: "/layanan/jasa-hitung-struktur",
-    title: "Jasa audit struktur dan penyelidikan tanah",
+    title: "Jasa Perencanaan struktur dan Geoteknik",
     description:
       "",
     icon: PencilLine,
@@ -31,7 +31,7 @@ const layananData = [
   {
     id: 2,
     url: "/layanan/jasa-hitung-struktur",
-    title: "Jasa perencanaan struktur pendukung konstruksi dan struktur sementara",
+    title: "Jasa Pengawasan Sipil dan Struktur",
     description:
       "",
     icon: ChartNetwork,
@@ -40,57 +40,84 @@ const layananData = [
   {
     id: 3,
     url: "/layanan/jasa-hitung-struktur",
-    title: "Jasa perencanaan struktur hunian",
+    title: "Jasa Audit Struktur",
     description:
       "Supervisi ketat di lapangan untuk memastikan pelaksanaan konstruksi sesuai dengan gambar desain dan spesifikasi teknis.",
     icon: Sprout,
     color: "text-[#008080]",
   },
-  {
-    id: 4,
-    url: "/layanan/jasa-hitung-struktur",
-    title: "Jasa perencanaan struktur fasilitas umum",
-    description:
-      "Solusi teknis (retrofitting) untuk memperbaiki kerusakan struktur atau meningkatkan kapasitas beban bangunan lama.",
-    icon: Sprout,
-    color: "text-[#008080]",
-  },
-  {
-    id: 5,
-    url: "/layanan/jasa-hitung-struktur",
-    title: "Jasa perencanaan struktur industri",
-    description:
-      "Layanan konsultasi ahli untuk memecahkan masalah sipil, sengketa konstruksi, atau kajian kelayakan proyek.",
-    icon: FileChartColumnIncreasing,
-    color: "text-[#008080]",
-  },
-  {
-    id: 6,
-    url: "/layanan/geometrik-jalan-raya",
-    title: "Jasa perencanaan infrastruktur",
-    description:
-      "Pemodelan Informasi Bangunan (3D) untuk visualisasi yang akurat, deteksi konflik, dan efisiensi estimasi material.",
-    icon: Settings,
-    color: "text-[#008080]",
-  },
-  {
-    id: 7,
-    url: "/layanan/analisis-geoteknik",
-    title: "Jasa perencanaan geoteknik",
-    description:
-      "Pemodelan Informasi Bangunan (3D) untuk visualisasi yang akurat, deteksi konflik, dan efisiensi estimasi material.",
-    icon: TbRoad,
-    color: "text-[#008080]",
-  },
-  {
-    id: 8,
-    url: "/layanan/soil-investigation",
-    title: "Jasa perencanaan struktur kawasan industri pertambangan",
-    description:
-      "Pemodelan Informasi Bangunan (3D) untuk visualisasi yang akurat, deteksi konflik, dan efisiensi estimasi material.",
-    icon: TbRoad,
-    color: "text-[#008080]",
-  },
+  // {
+  //   id: 1,
+  //   url: "/layanan/jasa-hitung-struktur",
+  //   title: "Jasa audit struktur dan penyelidikan tanah",
+  //   description:
+  //     "",
+  //   icon: PencilLine,
+  //   color: "text-[#008080]",
+  // },
+  // {
+  //   id: 2,
+  //   url: "/layanan/jasa-hitung-struktur",
+  //   title: "Jasa perencanaan struktur pendukung konstruksi dan struktur sementara",
+  //   description:
+  //     "",
+  //   icon: ChartNetwork,
+  //   color: "text-[#008080]",
+  // },
+  // {
+  //   id: 3,
+  //   url: "/layanan/jasa-hitung-struktur",
+  //   title: "Jasa perencanaan struktur hunian",
+  //   description:
+  //     "Supervisi ketat di lapangan untuk memastikan pelaksanaan konstruksi sesuai dengan gambar desain dan spesifikasi teknis.",
+  //   icon: Sprout,
+  //   color: "text-[#008080]",
+  // },
+  // {
+  //   id: 4,
+  //   url: "/layanan/jasa-hitung-struktur",
+  //   title: "Jasa perencanaan struktur fasilitas umum",
+  //   description:
+  //     "Solusi teknis (retrofitting) untuk memperbaiki kerusakan struktur atau meningkatkan kapasitas beban bangunan lama.",
+  //   icon: Sprout,
+  //   color: "text-[#008080]",
+  // },
+  // {
+  //   id: 5,
+  //   url: "/layanan/jasa-hitung-struktur",
+  //   title: "Jasa perencanaan struktur industri",
+  //   description:
+  //     "Layanan konsultasi ahli untuk memecahkan masalah sipil, sengketa konstruksi, atau kajian kelayakan proyek.",
+  //   icon: FileChartColumnIncreasing,
+  //   color: "text-[#008080]",
+  // },
+  // {
+  //   id: 6,
+  //   url: "/layanan/geometrik-jalan-raya",
+  //   title: "Jasa perencanaan infrastruktur",
+  //   description:
+  //     "Pemodelan Informasi Bangunan (3D) untuk visualisasi yang akurat, deteksi konflik, dan efisiensi estimasi material.",
+  //   icon: Settings,
+  //   color: "text-[#008080]",
+  // },
+  // {
+  //   id: 7,
+  //   url: "/layanan/analisis-geoteknik",
+  //   title: "Jasa perencanaan geoteknik",
+  //   description:
+  //     "Pemodelan Informasi Bangunan (3D) untuk visualisasi yang akurat, deteksi konflik, dan efisiensi estimasi material.",
+  //   icon: TbRoad,
+  //   color: "text-[#008080]",
+  // },
+  // {
+  //   id: 8,
+  //   url: "/layanan/soil-investigation",
+  //   title: "Jasa perencanaan struktur kawasan industri pertambangan",
+  //   description:
+  //     "Pemodelan Informasi Bangunan (3D) untuk visualisasi yang akurat, deteksi konflik, dan efisiensi estimasi material.",
+  //   icon: TbRoad,
+  //   color: "text-[#008080]",
+  // },
 ];
 
 // --- Variabel Animasi ---
@@ -133,7 +160,7 @@ const HomeCakupanLayanan = () => {
             transition={{ duration: 0.6 }}
             className="text-3xl sm:text-4xl md:text-5xl font-medium text-gray-900 tracking-tight"
           >
-            Cakupan <span className="text-[#008080]">Layanan{" "}</span>Kami
+            Produk  <span className="text-[#008080]">Jasa{" "}</span>Kami
           </motion.h2>
           <motion.div
             initial={{ width: 0 }}
@@ -150,7 +177,7 @@ const HomeCakupanLayanan = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {layananData.map((item) => (
             <motion.div

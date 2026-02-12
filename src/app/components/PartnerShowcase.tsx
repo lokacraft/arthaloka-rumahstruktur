@@ -4,6 +4,9 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import Link from "next/link";
+import { Button } from "./ui/button";
+import { ArrowUpRight } from "lucide-react";
 
 type Partnership = {
   logoPartner: string;
@@ -42,9 +45,9 @@ export default function PartnerShowcase() {
       {/* Heading */}
       <div className="text-center mb-10 md:mb-16">
         <h2 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[54px] font-medium text-black leading-tight">
-          Nama-Nama <span className="text-[#008080]">Besar</span> yang Telah{" "}
+          Beberapa <span className="text-[#008080]">Klien</span> yang Sudah{" "}
           <br className="hidden sm:block" />
-          Memilih <span className="text-[#008080]">Jasa</span> Kami
+          Memakai <span className="text-[#008080]">Jasa</span> Kami
         </h2>
       </div>
 
@@ -53,6 +56,14 @@ export default function PartnerShowcase() {
         {loading
           ? Array.from({ length: 4 }).map((_, i) => <LogoSkeleton key={i} />)
           : logos.map((logo, index) => <LogoCard key={index} logo={logo} />)}
+      </div>
+      <div className="mt-5 lg:mt-12 w-fit mx-auto">
+        <Link href="/portofolio">
+                <Button variant="outline" className="lg:text-xl rounded-full px-6 border-[#008080] text-[#008080] hover:bg-[#008080] hover:text-white transition-all duration-300 cursor-pointer">
+                  Daftar Lengkap Klien Kami <ArrowUpRight className="ml-2 w-4 h-4" />
+                </Button>
+        </Link>
+
       </div>
     </section>
   );

@@ -90,8 +90,11 @@ const HomeProject = () => {
                 Sukses <br className="hidden sm:block" />
                 Telah Kami Kerjakan
               </h2>
-              <p className="mt-6 text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              {/* <p className="mt-6 text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
                 Pengalaman bertahun-tahun dalam membangun struktur yang kokoh dan estetis untuk masa depan.
+              </p> */}
+              <p className="mt-6 text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+              pelayanan maksimal, berpengalaman membantu meloloskan klien sampai PBG
               </p>
             </motion.div>
           </div>

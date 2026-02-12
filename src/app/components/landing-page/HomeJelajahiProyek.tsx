@@ -94,7 +94,7 @@ const HomeJelajahiProyek = () => {
               <span className="text-xs font-bold text-gray-600 uppercase tracking-wider">Portofolio Unggulan</span>
             </div>
             <h2 className="text-3xl md:text-5xl font-medium text-gray-900 leading-tight">
-              Jelajahi <span className="">Karya Terbaik</span>
+            Beberapa Proyek{" "}<span className="">Pilihan Kami</span>
             </h2>
           </motion.div>
           

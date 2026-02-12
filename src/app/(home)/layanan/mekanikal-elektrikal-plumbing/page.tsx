@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import TimSection from "@/app/components/TimSection";
 import LayananDiskusiPesan from "@/app/components/landing-page/LayananDiskusiPesan";
 import BottomBanner from "@/app/components/BottomBanner";
+import SertifikatTenagaAhli from "@/app/components/landing-page/SertifikatTenagaAhli";
 
 export const metadata: Metadata = {
   title: {
@@ -43,7 +44,8 @@ export default function Home() {
         whatsappLink="https://wa.me/6281234567890"
       />
       {/* team */}
-      <TimSection layananId="Mekanikal Elekrikal Plumbing" />
+      <SertifikatTenagaAhli />
+      {/* <TimSection layananId="Mekanikal Elekrikal Plumbing" /> */}
       <InfoSection
         title={
           <>

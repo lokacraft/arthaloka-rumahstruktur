@@ -14,6 +14,9 @@ import HomeJelajahiProyek from "@/app/components/landing-page/HomeJelajahiProyek
 import HomeSecondBanner from "@/app/components/landing-page/HomeSecondBanner";
 import HomeDiskusiPesan from "@/app/components/landing-page/HomeDiskusiPesan";
 
+import { useContact } from "@/contexts/ContactContext";
+import ClientBannerComponent from "@/app/components/landing-page/ClientBannerComponent";
+
 export const metadata: Metadata = {
   title: "Home",
   description:
@@ -21,15 +24,17 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  
   return (
     <div className="relative">
       <Hero />
-      <HomeProject />
+      {/* <HomeProject /> */}
       <HomeKeunggulanKami />
+      <ClientBannerComponent />
       <HomeTeamLegalitas />
       <HomeCakupanLayanan />
-      <HomeJelajahiProyek />
       <PartnerShowcase />
+      <HomeJelajahiProyek />
       {/* <TestimonialCarousel /> */}
       <HomeSecondBanner />
       <HomeDiskusiPesan />

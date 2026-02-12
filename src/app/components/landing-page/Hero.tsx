@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import hero from "/public/landing/hero.png";
+import hero from "/public/landing/heror1.jpeg";
 import { useContact } from "@/contexts/ContactContext";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ const Hero = () => {
         src={hero}
         alt="background"
         fill
-        className="object-cover object-center justify-center items-center -z-10"
+        className="object-cover object-center justify-center items-center -z-10 filter grayscale-50"
         onLoad={() => setIsLoaded(true)}
       />
 
@@ -56,11 +56,16 @@ const Hero = () => {
           Rumah Struktur Engineering: <br />
           Konsultan{" "}
           <span className="text-[#008080]">
-            Perencana
-            <br />
-            Perhitungan{" "}
+          Struktur Engineering
           </span>
-          Struktur
+            <br />
+            &{" "}
+          <span className="text-[#008080]">
+          Geoteknik {" "}
+          </span>
+          berlisensi tenaga ahli dan <br/>
+          memiliki legalitas badan hukum lengkap
+
         </h1>
 
         {/* Paragraph */}

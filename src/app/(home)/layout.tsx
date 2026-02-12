@@ -13,11 +13,11 @@ import { ContactProvider } from "@/contexts/ContactContext";
 
 export const metadata: Metadata = {
   title: {
-    default : "Rumah Struktur",
-    template : "Rumah Struktur - %s"
+    default : "konsultanstrukturengineering",
+    template : "konsultanstrukturengineering - %s"
   },
   description:
-    "Rumah Struktur menyediakan layanan konstruksi, arsitektur, dan desain bangunan dengan kualitas terbaik. Solusi pembangunan rumah, renovasi, hingga perencanaan struktur untuk hunian dan komersial.",
+    "konsultanstrukturengineering menyediakan layanan konstruksi, arsitektur, dan desain bangunan dengan kualitas terbaik. Solusi pembangunan rumah, renovasi, hingga perencanaan struktur untuk hunian dan komersial.",
   twitter : {
     card: "summary_large_image"
   }
