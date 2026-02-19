@@ -12,7 +12,8 @@ import {
   CornerUpLeft,
 } from "lucide-react";
 import Image from "next/image";
-import Logo from "../../../public/images/logoMain.png"
+// import Logo from "../../../public/images/logoMain.png"
+import Logo from "../../../public/images/logoMainr1.jpeg"
 
 export default function NavBar() {
   const [open, setOpen] = useState(false); // dropdown desktop
@@ -89,7 +90,8 @@ export default function NavBar() {
             alt="logo"
             width={2000}
             height={1400}
-            className="w-[140px]"
+            // className="w-[140px]"
+            className="w-[80px]"
             />
           </Link>
 
@@ -209,7 +211,8 @@ export default function NavBar() {
             height={1400}
             quality={100}
             priority
-            className="w-[120px]"
+            // className="w-[120px]"
+            className="w-[70px]"
             />
             </div>
             {/* Hamburger */}

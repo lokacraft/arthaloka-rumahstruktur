@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import hero from "/public/landing/heror1.jpeg";
+import hero from "/public/landing/heror2.jpeg";
 import { useContact } from "@/contexts/ContactContext";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ const Hero = () => {
         src={hero}
         alt="background"
         fill
-        className="object-cover object-center justify-center items-center -z-10 filter grayscale-50"
+        className="object-cover object-center justify-center items-center -z-10 filter grayscale-55"
         onLoad={() => setIsLoaded(true)}
       />
 
@@ -105,6 +105,31 @@ const Hero = () => {
           </Link>
           )}
         </div>
+      </div>
+      {/* new */}
+      <div className={`absolute left-0 bottom-0 w-screen`}>
+          <div className="flex flex-col w-[80%] lg:w-[60%] gap-y-3 px-4 lg:px-6 pb-2 lg:pb-4 ">
+            <div className="w-full flex items-center justify-between text-sm md:text-md lg:text-lg font-semibold ">
+              <span className="w-[30%] ">Proyek</span>
+              <span className="w-[70%]">: Dry Mortar Plant Nagorog</span>
+            </div>
+            <div className="w-full flex items-center justify-between text-sm md:text-md lg:text-lg font-semibold ">
+              <span className="w-[30%] ">Klien</span>
+              <span className="w-[70%]">: Semen Indonesia Group</span>
+            </div>
+            <div className="w-full flex items-center justify-between text-sm md:text-md lg:text-lg font-semibold ">
+              <span className="w-[30%] ">Konsultan</span>
+              <span className="w-[70%]">: konsultan struktur engineering</span>
+            </div>
+            <div className="w-full flex items-center justify-between text-sm md:text-md lg:text-lg font-semibold ">
+              <span className="w-[30%] ">Lingkup Pekerjaan</span>
+              <span className="w-[70%]">: Detailed Engineering Design (DED) dan Support Engineering</span>
+            </div>
+            <div className="w-full flex items-center justify-between text-sm md:text-md lg:text-lg font-semibold ">
+              <span className="w-[30%] ">Status</span>
+              <span className="w-[70%]">: Selesai</span>
+            </div>
+          </div>
       </div>
     </div>
   );
